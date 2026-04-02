@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 const clientLogos = [
   'Accel',
   'Accenture',
@@ -214,99 +216,287 @@ function TestimonialCard({ item }) {
   )
 }
 
-function App() {
+function TickerSection({ words }) {
+  const sectionRef = useRef(null)
+  const trackRef = useRef(null)
+  const wordRefs = useRef([])
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [trackOffset, setTrackOffset] = useState(0)
+
+  useEffect(() => {
+    let frameId = 0
+
+    const updateTicker = () => {
+      const section = sectionRef.current
+      const track = trackRef.current
+      if (!section || !track || wordRefs.current.length === 0) {
+        return
+      }
+
+      const sectionRect = section.getBoundingClientRect()
+      const viewportHeight = window.innerHeight
+      const scrollableDistance = Math.max(sectionRect.height - viewportHeight, 1)
+      const nextProgress = Math.min(
+        Math.max(-sectionRect.top / scrollableDistance, 0),
+        1,
+      )
+
+      const viewportWidth = window.innerWidth
+      const viewportCenter = viewportWidth / 2
+      const firstWord = wordRefs.current[0]
+      const lastWord = wordRefs.current[wordRefs.current.length - 1]
+
+      if (!firstWord || !lastWord) {
+        return
+      }
+
+      const startOffset =
+        firstWord.offsetLeft + firstWord.offsetWidth / 2 - viewportCenter
+      const endOffset =
+        lastWord.offsetLeft + lastWord.offsetWidth / 2 - viewportCenter
+      const currentOffset =
+        startOffset + (endOffset - startOffset) * nextProgress
+
+      setTrackOffset(currentOffset)
+
+      let closestIndex = 0
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      wordRefs.current.forEach((node, index) => {
+        if (!node) {
+          return
+        }
+
+        const wordCenter =
+          node.offsetLeft + node.offsetWidth / 2 - currentOffset
+        const distance = Math.abs(wordCenter - viewportCenter)
+
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
+
+      setActiveIndex(closestIndex)
+    }
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frameId)
+      frameId = window.requestAnimationFrame(updateTicker)
+    }
+
+    requestUpdate()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      cancelAnimationFrame(frameId)
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+    }
+  }, [words])
+
   return (
-    <main className="glimmer-page">
-      <section className="hero-section">
-        <div className="hero-media" aria-hidden="true">
-          <video
-            className="hero-video"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          >
-            <source src="/assets/video/banner-glimmer.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div className="hero-isotipo" aria-hidden="true">
-          <img
-            className="spin-loop hero-isotipo__image"
-            src="/assets/isotipo-blur.svg"
-            alt=""
-          />
-        </div>
-        <div className="page-shell">
-          <header className="hero-nav">
-            <a className="hero-brand" href="#top" aria-label="Glimmer">
-              <img src="/assets/isologotipo.svg" alt="Glimmer" />
-            </a>
-            <nav className="hero-links">
-              <a href="#casos">Casos</a>
-              <a href="#producto">Producto</a>
-              <a href="#impacto">Impacto</a>
-            </nav>
-            <a className="hero-nav-cta" href="mailto:hola@glimmer.ai">
+    <section
+      className="ticker-section"
+      ref={sectionRef}
+      style={{ '--ticker-steps': words.length }}
+    >
+      <div className="ticker-sticky">
+        <div className="page-shell ticker-shell">
+          <div className="ticker-top">
+            <img className="ticker-logo spin-loop" src="/assets/isotipo-dark.svg" alt="" />
+            <div className=''>
+              <p className="ticker-copy">
+              Sin busqueda. Sin ruido.</p>
+            <p className='type-button'>Sin cambiar de herramientas.</p>
+              
+            </div>
+            
+          </div>
+
+          <div className="ticker-stage">
+            <div
+              className="ticker-track"
+              ref={trackRef}
+              style={{ transform: `translate3d(${-trackOffset}px, 0, 0)` }}
+              aria-label="Senales"
+            >
+              {words.map((word, index) => (
+                <span
+                  key={word}
+                  ref={(node) => {
+                    wordRefs.current[index] = node
+                  }}
+                  className={`ticker-word ${index === activeIndex ? 'is-active' : ''}`}
+                >
+                  {word}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="ticker-bottom">
+            <a className="button button--primary" href="mailto:hola@glimmer.ai">
               Solicitar demo
             </a>
-          </header>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
-          <div className="hero-grid" id="top">
-            <div className="hero-copy">
-              <h1>Detecta lo que importa. Decide mejor.</h1>
-              <p>
-                Glimmer es una plataforma de inteligencia de mercado impulsada por
-                IA que transforma el ruido en senales estrategicas para la alta
-                direccion.
-              </p>
-            </div>
+function App() {
+  const heroRef = useRef(null)
+  const heroVideoRef = useRef(null)
+  const heroVideoDurationRef = useRef(0)
+  const [heroLogoScale, setHeroLogoScale] = useState(1)
 
-            <div className="hero-actions">
-              <div className="hero-trust">
-                <p>Empresas que ya confian en nosotros</p>
-                <div className="hero-logo-row">
-                  {clientLogos.map((logo) => (
-                    <span key={logo}>{logo}</span>
-                  ))}
+  useEffect(() => {
+    let frameId = 0
+
+    const updateHeroProgress = () => {
+      const hero = heroRef.current
+      if (!hero) {
+        return
+      }
+
+      const rect = hero.getBoundingClientRect()
+      const viewportHeight = window.innerHeight || 1
+      const scrollableDistance = Math.max(rect.height - viewportHeight, 1)
+      const progress = Math.min(Math.max(-rect.top / scrollableDistance, 0), 1)
+      const scale = 1 + progress
+
+      setHeroLogoScale(scale)
+
+      const heroVideo = heroVideoRef.current
+      const duration = heroVideoDurationRef.current
+      if (!heroVideo || duration <= 0) {
+        return
+      }
+
+      const targetTime = duration * progress
+      if (Math.abs(heroVideo.currentTime - targetTime) > 0.016) {
+        heroVideo.currentTime = targetTime
+      }
+    }
+
+    const requestUpdate = () => {
+      cancelAnimationFrame(frameId)
+      frameId = window.requestAnimationFrame(updateHeroProgress)
+    }
+
+    const handleVideoReady = () => {
+      const heroVideo = heroVideoRef.current
+      if (!heroVideo) {
+        return
+      }
+
+      heroVideoDurationRef.current = Number.isFinite(heroVideo.duration)
+        ? heroVideo.duration
+        : 0
+      heroVideo.pause()
+      heroVideo.currentTime = 0
+      requestUpdate()
+    }
+
+    const heroVideo = heroVideoRef.current
+    if (heroVideo) {
+      if (heroVideo.readyState >= 1) {
+        handleVideoReady()
+      }
+
+      heroVideo.addEventListener('loadedmetadata', handleVideoReady)
+    }
+
+    requestUpdate()
+    window.addEventListener('scroll', requestUpdate, { passive: true })
+    window.addEventListener('resize', requestUpdate)
+
+    return () => {
+      cancelAnimationFrame(frameId)
+      if (heroVideo) {
+        heroVideo.removeEventListener('loadedmetadata', handleVideoReady)
+      }
+      window.removeEventListener('scroll', requestUpdate)
+      window.removeEventListener('resize', requestUpdate)
+    }
+  }, [])
+
+  return (
+    <main className="glimmer-page">
+      <section className="hero-section" ref={heroRef}>
+        <div className="hero-sticky">
+          <div className="hero-media" aria-hidden="true">
+            <video
+              ref={heroVideoRef}
+              className="hero-video"
+              muted
+              playsInline
+              preload="auto"
+            >
+              <source src="/assets/video/video-hero.webm" type="video/webm" />
+            </video>
+          </div>
+          <div className="hero-isotipo" aria-hidden="true">
+            <img
+              className="spin-loop hero-isotipo__image"
+              src="/assets/isotipo-blur.svg"
+              alt=""
+              style={{ '--spin-scale': heroLogoScale }}
+            />
+          </div>
+          <div className="page-shell">
+            <header className="hero-nav">
+              <a className="hero-brand" href="#top" aria-label="Glimmer">
+                <img src="/assets/isologotipo.svg" alt="Glimmer" />
+              </a>
+              <nav className="hero-links">
+                <a href="#casos">Casos</a>
+                <a href="#producto">Producto</a>
+                <a href="#impacto">Impacto</a>
+              </nav>
+              <a className="hero-nav-cta" href="mailto:hola@glimmer.ai">
+                Solicitar demo
+              </a>
+            </header>
+
+            <div className="hero-grid" id="top">
+              <div className="hero-copy">
+                <h1>Detecta lo que importa. Decide mejor.</h1>
+                <p>
+                  Glimmer es una plataforma de inteligencia de mercado impulsada por
+                  IA que transforma el ruido en senales estrategicas para la alta
+                  direccion.
+                </p>
+              </div>
+
+              <div className="hero-actions">
+                <div className="hero-trust">
+                  <p>Empresas que ya confian en nosotros</p>
+                  <div className="hero-logo-row">
+                    {clientLogos.map((logo) => (
+                      <span key={logo}>{logo}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="hero-button-row">
+                  <a className="button button--light" href="mailto:hola@glimmer.ai">
+                    Solicitar demo
+                  </a>
+                  <a className="button button--glass" href="#producto">
+                    Ver como funciona
+                  </a>
                 </div>
               </div>
-
-              <div className="hero-button-row">
-                <a className="button button--light" href="mailto:hola@glimmer.ai">
-                  Solicitar demo
-                </a>
-                <a className="button button--glass" href="#producto">
-                  Ver como funciona
-                </a>
-              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="ticker-section">
-        <div className="page-shell ticker-shell">
-          <p className="ticker-kicker">
-            Sin busqueda. Sin ruido. Sin cambiar de herramientas.
-          </p>
-          <div className="ticker-track" aria-label="Senales">
-            <div className="ticker-group">
-              {signalWords.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
-            </div>
-            <div className="ticker-group" aria-hidden="true">
-              {signalWords.map((item) => (
-                <span key={`${item}-duplicate`}>{item}</span>
-              ))}
-            </div>
-          </div>
-          <a className="button button--primary ticker-cta" href="mailto:hola@glimmer.ai">
-            Solicitar demo
-          </a>
-        </div>
-      </section>
+      <TickerSection words={signalWords} />
 
       <section className="stats-section" id="impacto">
         <div className="page-shell">
