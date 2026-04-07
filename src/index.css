@@ -283,6 +283,36 @@ select {
   --spin-duration: 18s;
 }
 
+.hero-ticker-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-ticker-stage__viewport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.hero-ticker-mask {
+  display: block;
+  overflow: clip;
+  text-align: center;
+}
+
+.hero-ticker-text {
+  display: block;
+  will-change: transform, opacity;
+  animation: hero-title-rise 560ms cubic-bezier(.625,.05,0,1);
+}
+
 .hero-noise {
   position: absolute;
   inset: 0;
@@ -661,16 +691,16 @@ select {
 }
 
 .ticker-word {
-  font-size: clamp(5rem, 10vw, var(--type-title-mega-size));
+  font-size: clamp(5rem, 10vw, var(--type-title-bigger-size));
   font-weight: 500;
-  line-height: var(--type-title-mega-line-height);
   letter-spacing: var(--type-title-mega-letter-spacing);
-  color: var(--title-gray);
-  transition: color 180ms ease;
+  color: #fff;
+  transition: opacity 180ms ease;
+  text-align: center;
 }
 
 .ticker-word.is-active {
-  color: var(--title-darker);
+  opacity: 1;
 }
 
 .ticker-bottom {
@@ -681,7 +711,7 @@ select {
 
 .stats-section {
   padding: 184px 0;
-  background: var(--bg-lighter)
+  background: var(--bg-light)
 }
 
 .section-header {
@@ -733,9 +763,21 @@ select {
   position: relative;
   overflow: hidden;
   min-height: 360px;
-  padding: 56px;
+  padding: 72px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
+  transform: scale(1);
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+  will-change: transform;
+}
+
+@media (hover: hover) {
+  .stat-card:hover,
+  .stat-card:focus-within {
+    transform: scale(1.03);
+  }
 }
 
 .stat-card--left {

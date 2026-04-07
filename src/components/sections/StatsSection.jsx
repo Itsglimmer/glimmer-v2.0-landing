@@ -25,11 +25,13 @@ function StatsSection({ stats }) {
         </div>
 
         <div className="stats-grid pb-10">
+       
           <article
             className="stat-card bg-background-white-surface"
             data-reveal
             style={{ '--reveal-delay': '120ms' }}
           >
+            <img className='absolute w-[480px] h-[480px] top-[-50%] right-[-25%]' src="assets/logo-outline-blue.svg" alt="" />
             <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo-dark.svg" alt="" />
             <strong className='text-title-darker'>{leftCard.value}</strong>
             <p className='text-description-light-surface'>{leftCard.description}</p>
@@ -40,6 +42,7 @@ function StatsSection({ stats }) {
             data-reveal
             style={{ '--reveal-delay': '200ms' }}
           >
+            <img className='absolute w-[480px] h-[480px] top-[-50%] right-[-25%]' src="assets/logo-outline-white.svg" alt="" />
             <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo.svg" alt="" />
             <strong>{rightCard.value}</strong>
             <p>{rightCard.description}</p>

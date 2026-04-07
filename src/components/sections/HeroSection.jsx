@@ -21,15 +21,103 @@ const clientLogos = [
 const getHeroFrameSrc = (index) =>
   `/assets/video-frames/hero-sequence/frame-${String(index + 1).padStart(4, '0')}.webp`
 
+const HERO_TITLE_START_FRAMES = [
+  0,
+  73,
+  147,
+]
+
 const getHeroTitleIndex = (frameIndex, titleCount) => {
   if (titleCount <= 1) {
     return 0
   }
 
+  const lastConfiguredIndex = Math.min(titleCount, HERO_TITLE_START_FRAMES.length) - 1
+
+  for (let index = lastConfiguredIndex; index >= 0; index -= 1) {
+    if (frameIndex >= HERO_TITLE_START_FRAMES[index]) {
+      return index
+    }
+  }
+
+  return 0
+}
+
+const HERO_TICKER_START_FRAME = 340
+const HERO_TICKER_FRAME_STEP = 66
+
+const getHeroTickerIndex = (frameIndex, tickerCount) => {
+  if (tickerCount <= 1 || frameIndex < HERO_TICKER_START_FRAME) {
+    return 0
+  }
+
   return Math.min(
-    titleCount - 1,
-    Math.floor((frameIndex / HERO_FRAME_COUNT) * titleCount),
+    Math.floor((frameIndex - HERO_TICKER_START_FRAME) / HERO_TICKER_FRAME_STEP),
+    tickerCount - 1,
   )
+}
+
+const getHeroLogoScale = (frameIndex) => {
+  const introEndFrame = 279
+  const outroStartFrame = 280
+  const outroEndFrame = 294
+  const introScale = 1.08
+
+  if (frameIndex <= introEndFrame) {
+    return 1 + (introScale - 1) * (frameIndex / introEndFrame)
+  }
+
+  if (frameIndex <= outroEndFrame) {
+    const outroProgress = (frameIndex - outroStartFrame) / (outroEndFrame - outroStartFrame)
+    return Math.max(introScale * (1 - outroProgress), 0)
+  }
+
+  return 0
+}
+
+const getHeroContentStyle = (frameIndex) => {
+  const fadeStartFrame = 280
+  const fadeEndFrame = 294
+
+  if (frameIndex < fadeStartFrame) {
+    return {
+      opacity: 1,
+      transform: 'translate3d(0, 0, 0)',
+    }
+  }
+
+  if (frameIndex > fadeEndFrame) {
+    return {
+      opacity: 0,
+      transform: 'translate3d(0, 32px, 0)',
+    }
+  }
+
+  const fadeProgress = (frameIndex - fadeStartFrame) / (fadeEndFrame - fadeStartFrame)
+
+  return {
+    opacity: Math.max(1 - fadeProgress, 0),
+    transform: `translate3d(0, ${Math.round(fadeProgress * 32)}px, 0)`,
+  }
+}
+
+const getHeroTickerStyle = (frameIndex) => {
+  const tickerStartFrame = 340
+  const tickerFadeSpan = 18
+
+  if (frameIndex < tickerStartFrame) {
+    return {
+      opacity: 0,
+      transform: 'translate3d(0, 32px, 0)',
+    }
+  }
+
+  const revealProgress = Math.min((frameIndex - tickerStartFrame) / tickerFadeSpan, 1)
+
+  return {
+    opacity: revealProgress,
+    transform: `translate3d(0, ${Math.round((1 - revealProgress) * 32)}px, 0)`,
+  }
 }
 
 function HeroSection() {
@@ -39,10 +127,15 @@ function HeroSection() {
   const heroFrameImagesRef = useRef([])
   const heroFrameIndexRef = useRef(0)
   const heroTitleIndexRef = useRef(0)
+  const heroTickerIndexRef = useRef(0)
   const [heroLogoScale, setHeroLogoScale] = useState(1)
   const [heroTitleIndex, setHeroTitleIndex] = useState(0)
+  const [heroContentStyle, setHeroContentStyle] = useState(() => getHeroContentStyle(0))
+  const [heroTickerStyle, setHeroTickerStyle] = useState(() => getHeroTickerStyle(0))
+  const [heroTickerIndex, setHeroTickerIndex] = useState(0)
 
   const heroTitles = t('hero.titles', { returnObjects: true })
+  const tickerWords = t('ticker.words', { returnObjects: true })
 
   useSectionReveal(heroRef, [heroTitles])
 
@@ -113,15 +206,20 @@ function HeroSection() {
       const scrollableDistance = Math.max(rect.height - viewportHeight, 1)
       const progress = Math.min(Math.max(-rect.top / scrollableDistance, 0), 1)
 
-      setHeroLogoScale(1 + progress)
-
       const frameIndex = Math.min(
         HERO_FRAME_COUNT - 1,
         Math.round(progress * (HERO_FRAME_COUNT - 1)),
       )
 
+      setHeroLogoScale(getHeroLogoScale(frameIndex))
+      setHeroContentStyle(getHeroContentStyle(frameIndex))
+      setHeroTickerStyle(getHeroTickerStyle(frameIndex))
+
       if (heroFrameIndexRef.current !== frameIndex) {
         heroFrameIndexRef.current = frameIndex
+        console.log(
+          `[HeroSection] active frame: frame-${String(frameIndex + 1).padStart(4, '0')}`,
+        )
         drawFrame(frameIndex)
       }
 
@@ -129,6 +227,12 @@ function HeroSection() {
       if (heroTitleIndexRef.current !== nextTitleIndex) {
         heroTitleIndexRef.current = nextTitleIndex
         setHeroTitleIndex(nextTitleIndex)
+      }
+
+      const nextTickerIndex = getHeroTickerIndex(frameIndex, tickerWords.length)
+      if (heroTickerIndexRef.current !== nextTickerIndex) {
+        heroTickerIndexRef.current = nextTickerIndex
+        setHeroTickerIndex(nextTickerIndex)
       }
     }
 
@@ -168,7 +272,7 @@ function HeroSection() {
       window.removeEventListener('scroll', requestUpdate)
       window.removeEventListener('resize', syncCanvasSize)
     }
-  }, [heroTitles])
+  }, [heroTitles, tickerWords.length])
 
   return (
     <section className="hero-section" ref={heroRef}>
@@ -183,6 +287,23 @@ function HeroSection() {
             alt=""
             style={{ '--spin-scale': heroLogoScale }}
           />
+        </div>
+        <div
+          className="hero-ticker-stage"
+          aria-hidden="true"
+          style={{
+            ...heroTickerStyle,
+            pointerEvents: 'none',
+            transition: 'opacity 140ms linear, transform 140ms linear',
+          }}
+        >
+          <div className="hero-ticker-stage__viewport">
+            <span className="hero-ticker-mask">
+              <span key={heroTickerIndex} className="hero-ticker-text ticker-word is-active">
+                {tickerWords[heroTickerIndex]}
+              </span>
+            </span>
+          </div>
         </div>
         <div className="page-shell">
           <header className="hero-nav" data-reveal style={{ '--reveal-delay': '60ms' }}>
@@ -204,7 +325,15 @@ function HeroSection() {
             </Button>
           </header>
 
-          <div className="hero-grid" id="top">
+          <div
+            className="hero-grid"
+            id="top"
+            style={{
+              ...heroContentStyle,
+              pointerEvents: heroContentStyle.opacity <= 0 ? 'none' : undefined,
+              transition: 'opacity 120ms linear, transform 120ms linear',
+            }}
+          >
             <div className="hero-copy" data-reveal style={{ '--reveal-delay': '140ms' }}>
               <h1 className="hero-title">
                 <span className="hero-title-mask">

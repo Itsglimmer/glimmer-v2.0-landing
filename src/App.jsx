@@ -29,7 +29,7 @@ function App() {
   return (
     <main className="glimmer-page">
       <HeroSection />
-      <TickerSection words={signalWords} />
+      {/* <TickerSection words={signalWords} /> */}
       <StatsSection stats={stats} />
       <ProblemSection painPoints={painPoints} />
       <WorkflowSection workflowItems={workflowItems} />
