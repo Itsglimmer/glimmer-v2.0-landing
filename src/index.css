@@ -226,7 +226,7 @@ select {
 
 .page-shell {
   margin: 0 auto;
-  width: min(1512px, calc(100vw - 40px));
+  width: min(1280px, calc(100vw - 40px));
   position: relative;
   z-index: 2;
 }
@@ -718,7 +718,6 @@ select {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  max-width: 805px;
 }
 
 .section-header--center {
@@ -844,6 +843,7 @@ select {
 }
 
 .pain-stack {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -852,18 +852,52 @@ select {
 }
 
 .pain-card {
-  position: relative;
+  position: sticky;
+  top: 96px;
+  z-index: var(--pain-z-index, 1);
+  isolation: isolate;
+  overflow: hidden;
   width: min(445px, calc(100vw - 64px));
   min-height: 445px;
   margin-top: -26px;
   padding: 64px;
-  border: 2px solid rgba(255, 255, 255, 0.08);
   border-radius: 48px;
+  background: var(--pain-background-image);
+  background-color: var(--bg-dark);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.22),
+    0 48px 120px rgba(0, 0, 0, 0.38);
+  transition:
+    transform 460ms cubic-bezier(0.34, 1.12, 0.64, 1),
+    box-shadow 460ms cubic-bezier(0.34, 1.12, 0.64, 1),
+    filter 460ms cubic-bezier(0.34, 1.12, 0.64, 1);
+  will-change: transform;
+}
+
+.pain-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
   background:
-    radial-gradient(circle at 50% 100%, var(--pain-glow), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
-    #18181b;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 24%),
+    linear-gradient(180deg, transparent 58%, rgba(0, 0, 0, 0.18));
+  opacity: 0.78;
+  pointer-events: none;
+  transition: opacity 460ms cubic-bezier(0.34, 1.12, 0.64, 1);
+}
+
+.pain-card:not(:last-child) {
+  filter: saturate(0.9) brightness(0.92);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.16),
+    0 24px 54px rgba(0, 0, 0, 0.22);
+}
+
+.pain-card + .pain-card {
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.28),
+    0 64px 140px rgba(0, 0, 0, 0.46);
 }
 
 .pain-card:nth-child(1) {
@@ -916,8 +950,9 @@ select {
 }
 
 .pain-card p {
-  margin: 156px 0 0;
-  max-width: 220px;
+  position: relative;
+  z-index: 1;
+  margin: 48px 0 0;
   color: #f8f9fc;
   font-size: 32px;
   font-weight: 500;
@@ -931,11 +966,39 @@ select {
   background: #010104;
 }
 
+.workflow-video-wrap {
+  width: 100vw;
+  height: 850px;
+  margin-bottom: -148px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.88) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+  mask-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.88) 60%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+.workflow-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .workflow-light {
   position: absolute;
   top: -120px;
   left: 50%;
-  width: 1512px;
+  width: 1164px;
   height: 850px;
   transform: translateX(-50%);
   background:
@@ -1537,6 +1600,7 @@ select {
 
   .pain-card {
     min-height: 320px;
+    top: 84px;
   }
 
   .pain-card p {
@@ -1546,6 +1610,10 @@ select {
 
   .workflow-stack {
     gap: 24px;
+  }
+
+  .workflow-video-wrap {
+    height: min(850px, 72vw);
   }
 
   .workflow-card {

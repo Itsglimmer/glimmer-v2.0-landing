@@ -75,6 +75,19 @@ function WorkflowSection({ workflowItems }) {
   return (
     <section className="workflow-section" id="producto" ref={sectionRef}>
       <div className="workflow-light" />
+      <div className="workflow-video-wrap" data-reveal style={{ '--reveal-delay': '0ms' }}>
+        <video
+          className="workflow-video"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+        >
+          <source src="/assets/video/how-it-works.webm" type="video/webm" />
+        </video>
+      </div>
+
       <div className="page-shell">
         <div data-reveal style={{ '--reveal-delay': '40ms' }}>
           <SectionHeader

@@ -1,8 +1,16 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import SectionHeader from './SectionHeader'
+import PainCard from '../PainCard'
 import useSectionReveal from '../../hooks/useSectionReveal'
+
+const painCardBackgrounds = [
+  '/assets/card-bg/01.svg',
+  '/assets/card-bg/02.svg',
+  '/assets/card-bg/03.svg',
+  '/assets/card-bg/04.svg',
+  '/assets/card-bg/05.svg',
+]
 
 function ProblemSection({ painPoints }) {
   const { t } = useTranslation()
@@ -14,20 +22,22 @@ function ProblemSection({ painPoints }) {
     <section className="problem-section" id="casos" ref={sectionRef}>
       <div className="page-shell problem-shell">
         <div data-reveal style={{ '--reveal-delay': '40ms' }}>
-          <SectionHeader eyebrow={t('problem.eyebrow')} title={t('problem.title')} centered />
+          <div className="section-header section-header--center w-full">
+            <span className="section-eyebrow">{t('problem.eyebrow')}</span>
+            <h2 className="section-title">{t('problem.title')}</h2>
+          </div>
         </div>
 
         <div className="pain-stack">
           {painPoints.map((item, index) => (
-            <article
-              className={`pain-card pain-card--${item.tone}`}
+            <PainCard
               key={item.title}
-              data-reveal
-              style={{ '--reveal-delay': `${120 + index * 70}ms` }}
-            >
-              <span className="pain-dot" />
-              <p>{item.title}</p>
-            </article>
+              copy={item.copy ?? item.title}
+              tone={item.tone}
+              background={item.background ?? painCardBackgrounds[index % painCardBackgrounds.length]}
+              revealDelay={`${120 + index * 70}ms`}
+              stackIndex={index + 1}
+            />
           ))}
         </div>
       </div>
@@ -38,6 +48,8 @@ function ProblemSection({ painPoints }) {
 ProblemSection.propTypes = {
   painPoints: PropTypes.arrayOf(
     PropTypes.shape({
+      background: PropTypes.string,
+      copy: PropTypes.string,
       title: PropTypes.string.isRequired,
       tone: PropTypes.string.isRequired,
     }),
