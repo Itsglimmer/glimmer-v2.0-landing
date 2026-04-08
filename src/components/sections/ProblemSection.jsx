@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import PainCard from '../PainCard'
+import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const painCardBackgrounds = [
@@ -21,14 +22,20 @@ function ProblemSection({ painPoints }) {
   return (
     <section className="problem-section" id="casos" ref={sectionRef}>
       <div className="page-shell problem-shell">
-        <div data-reveal style={{ '--reveal-delay': '40ms' }}>
-          <div className="section-header section-header--center w-full">
-            <span className="section-eyebrow">{t('problem.eyebrow')}</span>
-            <h2 className="section-title">{t('problem.title')}</h2>
-          </div>
-        </div>
-
         <div className="pain-stack">
+          <div
+            className="problem-header-shell"
+            data-reveal
+            style={{ '--reveal-delay': '40ms' }}
+          >
+            <SectionHeader
+              eyebrow={t('problem.eyebrow')}
+              title={t('problem.title')}
+              centered
+              theme="light"
+            />
+          </div>
+
           {painPoints.map((item, index) => (
             <PainCard
               key={item.title}

@@ -46,7 +46,8 @@ const es = {
   },
   problem: {
     eyebrow: 'El problema',
-    title:
+    title: 'Las empresas no tienen un sistema de inteligencia de mercado centralizado',
+    description:
       'Las empresas no tienen un sistema de inteligencia de mercado centralizado para entender lo que ocurre en su industria.',
     painPoints: [
       { title: 'Decenas de fuentes dispersas.', tone: 'red' },

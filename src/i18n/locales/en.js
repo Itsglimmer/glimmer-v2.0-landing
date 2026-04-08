@@ -46,7 +46,8 @@ const en = {
   },
   problem: {
     eyebrow: 'The problem',
-    title:
+    title: 'Companies lack a centralized market intelligence system',
+    description:
       'Companies lack a centralized market intelligence system to understand what is happening in their industry.',
     painPoints: [
       { title: 'Dozens of scattered sources.', tone: 'red' },

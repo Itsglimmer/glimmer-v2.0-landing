@@ -62,6 +62,8 @@
   --surface-light: var(--bg-light);
   --surface-card: var(--bg-lighter);
   --accent: var(--accent-500);
+
+  --padding-section: 128px;
 }
 
 * {
@@ -418,7 +420,7 @@ select {
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.9fr);
   align-items: end;
   gap: 44px;
-  min-height: calc(100vh - 184px);
+  min-height: calc(100vh - 120px);
   padding-bottom: 144px;
 }
 
@@ -710,7 +712,7 @@ select {
 }
 
 .stats-section {
-  padding: 184px 0;
+  padding: var(--padding-section) 0;
   background: var(--bg-light)
 }
 
@@ -843,15 +845,26 @@ select {
 }
 
 .problem-section {
+  --problem-sticky-top: 128px;
+  --problem-stack-gap: 32px;
+  --pain-card-top: 338px;
   padding: 0 0 184px;
   background: #010104;
 }
 
 .problem-shell {
   overflow: clip;
-  padding: 184px 0 40px;
+  padding: var(--padding-section) 0 40px;
   border-radius: 96px;
   background: #010104;
+}
+
+.problem-header-shell {
+  position: sticky;
+  top: var(--problem-sticky-top);
+  z-index: 7;
+  width: 100%;
+  padding-bottom: 88px;
 }
 
 .pain-stack {
@@ -860,12 +873,12 @@ select {
   flex-direction: column;
   align-items: center;
   gap: 0;
-  margin-top: 72px;
+  margin-top: 0;
 }
 
 .pain-card {
   position: sticky;
-  top: 96px;
+  top: var(--pain-card-top);
   z-index: var(--pain-z-index, 1);
   isolation: isolate;
   overflow: hidden;
@@ -973,7 +986,7 @@ select {
 
 .workflow-section {
   position: relative;
-  padding: 148px 0 184px;
+  padding: var(--padding-section) 0 var(--padding-section) ;
   overflow: clip;
   background: #010104;
 }
@@ -1242,7 +1255,7 @@ select {
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
-  padding: 184px 0 0;
+  padding: var(--padding-section) 0 0;
 }
 
 .use-cases-stage {
@@ -1588,6 +1601,12 @@ select {
   .problem-shell {
     padding-top: 96px;
     border-radius: 48px;
+  }
+
+  .problem-section {
+    --problem-sticky-top: 0px;
+    --problem-stack-gap: 24px;
+    --pain-card-top: 196px;
   }
 
   .hero-section {
