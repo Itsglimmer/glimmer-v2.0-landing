@@ -1378,7 +1378,7 @@ select {
   display: grid;
   grid-template-rows: auto 1fr;
   min-height: 100vh;
-  padding: var(--padding-section) 0 96px;
+  padding: var(--padding-section) 0 0;
 }
 
 .use-cases-stack-header-shell {
@@ -1917,7 +1917,6 @@ select {
 
   .use-cases-stack-shell {
     min-height: auto;
-    padding: 0 0 96px;
   }
 
   .use-cases-stack-header-shell {
