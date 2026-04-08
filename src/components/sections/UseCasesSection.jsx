@@ -117,7 +117,7 @@ function UseCasesSection({ useCases }) {
                       '--use-case-background-image': `url("${useCaseCardBackgrounds[index % useCaseCardBackgrounds.length]}")`,
                     }}
                   >
-                    <span className="use-case-card__index">{String(index + 1).padStart(2, '0')}</span>
+                    <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo.svg" alt="" />
                     <h3>{item.title}</h3>
                     <p>{item.copy}</p>
                   </article>

@@ -8,6 +8,7 @@ import StatsSection from './components/sections/StatsSection'
 import TestimonialsSection from './components/sections/TestimonialsSection'
 import TickerSection from './components/sections/TickerSection'
 import UseCasesSection from './components/sections/UseCasesSection'
+import UseCasesSectionStack from './components/sections/UseCasesSectionStack'
 import WorkflowSection from './components/sections/WorkflowSection'
 
 function App() {
@@ -34,7 +35,8 @@ function App() {
       <ProblemSection painPoints={painPoints} />
       <WorkflowSection workflowItems={workflowItems} />
       <OpportunitySection opportunityLines={opportunityLines} />
-      <UseCasesSection useCases={useCases} />
+      {/* <UseCasesSection useCases={useCases} /> */}
+      <UseCasesSectionStack useCases={useCases} />
       <DeliverySection deliveryModes={deliveryModes} />
       <TestimonialsSection testimonials={testimonials} />
     </main>
