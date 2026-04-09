@@ -386,9 +386,9 @@ select {
   gap: 20px;
   margin: 0 auto 96px;
   width: min(585px, 100%);
-  padding: 8px 8px 8px 14px;
+  padding: 8px 8px 8px 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
+  border-radius: 40px;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(12px);
 }
@@ -412,6 +412,7 @@ select {
 .hero-nav-cta {
   min-height: 44px;
   padding: 12px 20px;
+  border-radius: 999px;
 }
 
 .hero-grid {
@@ -1573,12 +1574,29 @@ select {
   color: inherit;
 }
 
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.testimonials-columns {
+  display: flex;
   gap: 16px;
   margin-top: 72px;
   align-items: start;
+}
+
+.testimonials-column {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 320ms ease;
+  will-change: transform;
+}
+
+.testimonials-column--left,
+.testimonials-column--right {
+  transform: translateY(calc(var(--testimonial-scroll-direction, 0) * -8px));
+}
+
+.testimonials-column--center {
+  transform: translateY(calc(var(--testimonial-scroll-direction, 0) * 8px));
 }
 
 .testimonial-card {
@@ -1696,6 +1714,11 @@ select {
   .delivery-orbit-layer {
     animation: none;
   }
+
+  .testimonials-column {
+    transform: none;
+    transition: none;
+  }
 }
 
 @media (max-width: 1100px) {
@@ -1703,7 +1726,6 @@ select {
   .workflow-card,
   .opportunity-shell,
   .delivery-shell,
-  .testimonials-grid,
   .stats-grid {
     grid-template-columns: 1fr;
   }
@@ -1738,8 +1760,12 @@ select {
     width: min(100%, calc(520px * var(--delivery-orbit-scale)));
   }
 
-  .testimonials-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .testimonials-columns {
+    flex-wrap: wrap;
+  }
+
+  .testimonials-column {
+    flex-basis: calc(50% - 8px);
   }
 }
 
@@ -2004,8 +2030,12 @@ select {
     width: min(100%, calc(360px * var(--delivery-orbit-scale)));
   }
 
-  .testimonials-grid {
-    grid-template-columns: 1fr;
+  .testimonials-columns {
+    flex-direction: column;
+  }
+
+  .testimonials-column {
+    flex-basis: 100%;
   }
 }
 

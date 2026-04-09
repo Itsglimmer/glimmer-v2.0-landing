@@ -314,7 +314,7 @@ function HeroSection() {
             <Button
               href="mailto:hola@glimmer.ai"
               className="hero-nav-cta"
-              radius="sharp"
+              radius="full"
               background="transparentBlack"
             >
               {t('nav.cta')}
