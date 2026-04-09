@@ -33,7 +33,23 @@ function DeliverySection({ deliveryModes }) {
         </div>
 
         <div className="delivery-visual" data-reveal style={{ '--reveal-delay': '180ms' }}>
-          <img className="delivery-animation" src="/assets/card-bg/animacion.svg" alt="" />
+          <div className="delivery-orbit w-[1200px]" aria-hidden="true">
+            <img
+              className="delivery-orbit-layer delivery-orbit-layer--outer"
+              src="/assets/orbit/ultimo.svg"
+              alt=""
+            />
+            <img
+              className="delivery-orbit-layer delivery-orbit-layer--middle"
+              src="/assets/orbit/medio.svg"
+              alt=""
+            />
+            <img
+              className="delivery-orbit-layer delivery-orbit-layer--center"
+              src="/assets/orbit/centro.svg"
+              alt=""
+            />
+          </div>
         </div>
       </div>
     </section>

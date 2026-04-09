@@ -226,7 +226,7 @@ function UseCasesSectionStack({ useCases }) {
           >
             {cards.map((item) => (
               <article
-                className={`use-case-stack-card ${item.isActive ? 'is-active' : ''}`}
+                className={`use-case-stack-card flex flex-col justify-between ${item.isActive ? 'is-active' : ''}`}
                 key={`${item.title}-${item.index}`}
                 ref={(node) => {
                   cardRefs.current[item.index] = node
@@ -240,21 +240,25 @@ function UseCasesSectionStack({ useCases }) {
                 }}
               >
                 <img
-                  className="ticker-logo spin-loop h-12 w-12 mb-12"
+                  className="ticker-logo spin-loop h-12 w-12"
                   draggable={false}
                   onDragStart={preventNativeDrag}
                   src="/assets/isotipo.svg"
                   alt=""
                 />
-                <h3>{item.title}</h3>
-                <p>{item.copy}</p>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.copy}</p>
+                </div>
+                
               </article>
             ))}
           </div>
-              {/* <div className="use-cases-stack-count" aria-live="polite">
+              <div className="text-description-light-surface text-center flex gap-3 justify-center" aria-live="polite">
                 <strong>{String(activeIndex + 1).padStart(2, '0')}</strong>
-                <span>/{String(useCases.length).padStart(2, '0')}</span>
-              </div> */}
+                <span>/</span>
+                <span>{String(useCases.length).padStart(2, '0')}</span>
+              </div>
         </div>
       </div>
     </section>
