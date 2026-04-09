@@ -1578,18 +1578,19 @@ select {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   margin-top: 72px;
+  align-items: start;
 }
 
 .testimonial-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 80px;
-  min-height: 392px;
+  gap: 196px;
+  align-self: start;
   padding: 40px;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 40px;
+  background: #ffffff url('/assets/card-bg/testimonial.svg') center / cover no-repeat;
   overflow: hidden;
 }
 
@@ -1598,7 +1599,6 @@ select {
   position: absolute;
   inset: -25% -10% auto;
   height: 180px;
-  background: radial-gradient(circle at center, rgba(37, 74, 246, 0.24), transparent 60%);
   pointer-events: none;
 }
 
