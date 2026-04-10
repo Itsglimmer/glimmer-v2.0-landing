@@ -223,6 +223,10 @@ const es = {
       },
     ],
   },
+  faqCta: {
+    title: 'Empieza con Glimmer, donde las señales del mercado se convierten en acción',
+    description: 'Empieza con Glimmer, donde las señales del mercado se convierten en acción',
+  },
   testimonials: {
     eyebrow: 'Testimonios',
     title: 'Lo que dicen nuestros clientes',

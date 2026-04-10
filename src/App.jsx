@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import DeliverySection from './components/sections/DeliverySection'
+import FaqCtaSection from './components/sections/FaqCtaSection'
 import FaqSection from './components/sections/FaqSection'
 import HeroSection from './components/sections/HeroSection'
 import LogoFooterSection from './components/sections/LogoFooterSection'
@@ -45,6 +46,7 @@ function App() {
         <DeliverySection deliveryModes={deliveryModes} />
         <TestimonialsSection testimonials={testimonials} />
         <FaqSection faqs={faqs} />
+        <FaqCtaSection />
       </main>
       <LogoFooterSection />
     </>
