@@ -2,9 +2,16 @@ import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import PainCard from '../PainCard'
-import { problemCardBackgroundComponents } from '../card-backgrounds/problemBackgrounds'
 import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
+
+const painCardBackgrounds = [
+  '/assets/card-bg/01.svg',
+  '/assets/card-bg/02.svg',
+  '/assets/card-bg/03.svg',
+  '/assets/card-bg/04.svg',
+  '/assets/card-bg/05.svg',
+]
 
 const painCardLogos = [
   '/assets/isotipo-red.svg',
@@ -41,10 +48,9 @@ function ProblemSection({ painPoints }) {
             {painPoints.map((item, index) => (
               <PainCard
                 key={item.title}
-                BackgroundComponent={problemCardBackgroundComponents[index % problemCardBackgroundComponents.length]}
                 copy={item.copy ?? item.title}
                 tone={item.tone}
-                background={item.background}
+                background={item.background ?? painCardBackgrounds[index % painCardBackgrounds.length]}
                 logoSrc={item.logoSrc ?? painCardLogos[index % painCardLogos.length]}
                 revealDelay={`${120 + index * 70}ms`}
                 stackIndex={index + 1}

@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { useCaseCardBackgroundComponents } from '../card-backgrounds/useCaseBackgrounds'
 import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const useCaseCardBackgrounds = [
+  '/assets/card-bg/use-01.svg',
+  '/assets/card-bg/use-02.svg',
+  '/assets/card-bg/use-03.svg',
+  '/assets/card-bg/use-04.svg',
+  '/assets/card-bg/use-05.svg',
   '/assets/card-bg/use-06.svg',
 ]
 
@@ -95,7 +99,6 @@ function UseCasesSection({ useCases }) {
 
             <div className="use-cases-wheel" style={{ '--wheel-rotate': `${wheelRotation}deg` }}>
               {useCases.map((item, index) => {
-                const BackgroundComponent = useCaseCardBackgroundComponents[index]
                 const angle = (index * 360) / useCases.length - 90
                 const angleInRadians = (angle * Math.PI) / 180
                 const translateX = Math.cos(angleInRadians) * 520
@@ -111,12 +114,9 @@ function UseCasesSection({ useCases }) {
                       '--card-translate-y': `${translateY}px`,
                       '--card-rotate': `${angle + 90}deg`,
                       '--card-z-index': isActive ? '20' : '10',
-                      '--use-case-background-image': BackgroundComponent
-                        ? 'none'
-                        : `url("${useCaseCardBackgrounds[(index - useCaseCardBackgroundComponents.length) % useCaseCardBackgrounds.length]}")`,
+                      '--use-case-background-image': `url("${useCaseCardBackgrounds[index % useCaseCardBackgrounds.length]}")`,
                     }}
                   >
-                    {BackgroundComponent ? <BackgroundComponent /> : null}
                     <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo.svg" alt="" />
                     <h3>{item.title}</h3>
                     <p>{item.copy}</p>

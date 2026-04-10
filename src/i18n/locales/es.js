@@ -172,6 +172,57 @@ const es = {
       },
     ],
   },
+  faqs: {
+    eyebrow: 'Preguntas frecuentes',
+    titleLines: ['¿Tienes', 'preguntas?', 'Tenemos las', 'respuestas'],
+    items: [
+      {
+        question: '¿En qué se diferencia Glimmer de herramientas como newsletters, RSS o ChatGPT?',
+        answer:
+          'Glimmer no se limita a recopilar información. Detecta señales relevantes, las interpreta en el contexto de tu empresa y las activa como decisiones accionables para el equipo.',
+      },
+      {
+        question: '¿Cómo personaliza Glimmer las señales para cada empresa?',
+        answer:
+          'El sistema se configura según tu sector, competidores, prioridades estratégicas, mercados y riesgos. Así, cada alerta llega filtrada y contextualizada para tu realidad operativa.',
+      },
+      {
+        question: '¿Qué personas dentro de la empresa suelen utilizar Glimmer?',
+        answer:
+          'Normalmente lo utilizan dirección general, estrategia, desarrollo de negocio, innovación, compliance, marketing y producto. Cualquier equipo que necesite detectar cambios antes de que impacten.',
+      },
+      {
+        question: '¿Cómo garantiza Glimmer la calidad de la información?',
+        answer:
+          'Combinamos monitorización continua de fuentes relevantes con capas de validación, interpretación y priorización para reducir ruido y elevar la calidad de cada señal que llega al equipo.',
+      },
+      {
+        question: '¿Cuánto tiempo necesita mi equipo para usar Glimmer?',
+        answer:
+          'Muy poco. La plataforma está diseñada para integrarse en el flujo habitual del equipo, con señales listas para revisar, entender y accionar sin procesos manuales largos.',
+      },
+      {
+        question: '¿Cuánto tiempo tarda la implementación?',
+        answer:
+          'Depende del alcance, pero el despliegue inicial suele ser ágil. La puesta en marcha incluye definición de foco, configuración de señales y adaptación a los canales de entrega.',
+      },
+      {
+        question: '¿Qué pricing tiene la plataforma?',
+        answer:
+          'El pricing depende del número de señales, áreas monitorizadas, usuarios y nivel de integración requerido. Se ajusta al caso de uso y al nivel de profundidad que necesita cada empresa.',
+      },
+      {
+        question: '¿Qué nivel de soporte ofrece Glimmer?',
+        answer:
+          'Ofrecemos acompañamiento durante la puesta en marcha, soporte operativo continuo y evolución de la configuración para que la plataforma siga alineada con tus prioridades.',
+      },
+      {
+        question: '¿Cómo mide Glimmer el impacto de la información en la empresa?',
+        answer:
+          'Cada señal puede conectarse con decisiones, responsables y seguimiento. Eso permite ver qué información genera movimiento real, qué oportunidades se activan y qué riesgos se anticipan a tiempo.',
+      },
+    ],
+  },
   testimonials: {
     eyebrow: 'Testimonios',
     title: 'Lo que dicen nuestros clientes',

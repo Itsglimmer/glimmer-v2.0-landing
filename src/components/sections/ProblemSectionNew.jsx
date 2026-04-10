@@ -1,9 +1,16 @@
 import { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import { problemCardBackgroundComponents } from '../card-backgrounds/problemBackgrounds'
 import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
+
+const painCardBackgrounds = [
+  '/assets/card-bg/01.svg',
+  '/assets/card-bg/02.svg',
+  '/assets/card-bg/03.svg',
+  '/assets/card-bg/04.svg',
+  '/assets/card-bg/05.svg',
+]
 
 const painCardLogos = [
   '/assets/isotipo-red.svg',
@@ -111,8 +118,6 @@ function ProblemSectionNew({ painPoints }) {
 
             <div className="problem-new-cards">
               {painPoints.map((item, index) => {
-                const BackgroundComponent =
-                  problemCardBackgroundComponents[index % problemCardBackgroundComponents.length]
                 const localProgress = Math.max(0, Math.min(1, motionState.stackProgress - index))
                 const initialOffset = index * 168
                 const stackedOffset = index * 18
@@ -125,9 +130,9 @@ function ProblemSectionNew({ painPoints }) {
                     data-reveal
                     key={item.title}
                     style={{
-                      '--problem-new-card-background': item.background
-                        ? `url("${item.background}")`
-                        : 'none',
+                      '--problem-new-card-background': `url("${
+                        item.background ?? painCardBackgrounds[index % painCardBackgrounds.length]
+                      }")`,
                       '--problem-new-card-rotate':
                         painCardRotations[index % painCardRotations.length],
                       '--problem-new-card-translate-y': `${translateY}px`,
@@ -135,7 +140,6 @@ function ProblemSectionNew({ painPoints }) {
                       '--reveal-delay': `${120 + index * 70}ms`,
                     }}
                   >
-                    {!item.background && BackgroundComponent ? <BackgroundComponent /> : null}
                     <img
                       className="ticker-logo spin-loop h-12 w-12 mb-12"
                       src={item.logoSrc ?? painCardLogos[index % painCardLogos.length]}

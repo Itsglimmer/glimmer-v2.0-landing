@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import DeliverySection from './components/sections/DeliverySection'
+import FaqSection from './components/sections/FaqSection'
 import HeroSection from './components/sections/HeroSection'
+import LogoFooterSection from './components/sections/LogoFooterSection'
 import OpportunitySection from './components/sections/OpportunitySection'
 import ProblemSection from './components/sections/ProblemSection'
 import ProblemSectionNew from './components/sections/ProblemSectionNew'
@@ -21,6 +23,7 @@ function App() {
   const opportunityLines = t('opportunity.lines', { returnObjects: true })
   const useCases = t('useCases.items', { returnObjects: true })
   const deliveryModes = t('delivery.items', { returnObjects: true })
+  const faqs = t('faqs.items', { returnObjects: true })
   const testimonials = t('testimonials.items', { returnObjects: true })
 
   useEffect(() => {
@@ -29,18 +32,22 @@ function App() {
   }, [i18n.resolvedLanguage, t])
 
   return (
-    <main className="glimmer-page">
-      <HeroSection />
-      {/* <TickerSection words={signalWords} /> */}
-      <StatsSection stats={stats} />
-      <ProblemSection painPoints={painPoints} />
-      <WorkflowSection workflowItems={workflowItems} />
-      <OpportunitySection opportunityLines={opportunityLines} />
-      {/* <UseCasesSection useCases={useCases} /> */}
-      <UseCasesSectionStack useCases={useCases} />
-      <DeliverySection deliveryModes={deliveryModes} />
-      <TestimonialsSection testimonials={testimonials} />
-    </main>
+    <>
+      <main className="glimmer-page">
+        <HeroSection />
+        {/* <TickerSection words={signalWords} /> */}
+        <StatsSection stats={stats} />
+        <ProblemSection painPoints={painPoints} />
+        <WorkflowSection workflowItems={workflowItems} />
+        <OpportunitySection opportunityLines={opportunityLines} />
+        {/* <UseCasesSection useCases={useCases} /> */}
+        <UseCasesSectionStack useCases={useCases} />
+        <DeliverySection deliveryModes={deliveryModes} />
+        <TestimonialsSection testimonials={testimonials} />
+        <FaqSection faqs={faqs} />
+      </main>
+      <LogoFooterSection />
+    </>
   )
 }
 
