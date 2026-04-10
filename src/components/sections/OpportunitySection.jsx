@@ -2,19 +2,18 @@ import { useEffect, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import useSectionReveal from '../../hooks/useSectionReveal'
-import { OPPORTUNITY_FRAME_COUNT, getOpportunityFrameSrc } from '../../lib/opportunityFrames'
 
 const getOpportunityScrollSpan = (lineCount) => `${Math.max(lineCount * 55, 220)}vh`
 
-const getOpportunityLineProgress = (frameIndex, lineIndex, lineCount) => {
+const getOpportunityLineProgress = (scrollProgress, lineIndex, lineCount) => {
   if (lineCount <= 0) {
     return { opacity: 0, translateY: 56 }
   }
 
-  const segmentSize = OPPORTUNITY_FRAME_COUNT / lineCount
+  const segmentSize = 1 / lineCount
   const segmentStart = lineIndex * segmentSize
   const localProgress = Math.min(
-    Math.max((frameIndex - segmentStart) / Math.max(segmentSize, 1), 0),
+    Math.max((scrollProgress - segmentStart) / Math.max(segmentSize, 0.0001), 0),
     1,
   )
 
@@ -37,71 +36,36 @@ const getOpportunityLineProgress = (frameIndex, lineIndex, lineCount) => {
   return { opacity, translateY }
 }
 
+const getActiveOpportunityLine = (scrollProgress, opportunityLines) => {
+  if (opportunityLines.length === 0) {
+    return null
+  }
+
+  return opportunityLines.reduce((active, line, index) => {
+    const state = getOpportunityLineProgress(scrollProgress, index, opportunityLines.length)
+
+    if (!active || state.opacity > active.state.opacity) {
+      return {
+        index,
+        line,
+        state,
+      }
+    }
+
+    return active
+  }, null)
+}
+
 function OpportunitySection({ opportunityLines }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
-  const canvasRef = useRef(null)
-  const frameImagesRef = useRef([])
-  const frameIndexRef = useRef(0)
-  const [frameIndex, setFrameIndex] = useState(0)
+  const progressRef = useRef(0)
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   useSectionReveal(sectionRef, [opportunityLines])
 
   useEffect(() => {
     let animationFrameId = 0
-    let isDisposed = false
-
-    const drawFrame = (nextFrameIndex) => {
-      const canvas = canvasRef.current
-      const image = frameImagesRef.current[nextFrameIndex]
-      if (!canvas || !image || !image.complete) {
-        return
-      }
-
-      const context = canvas.getContext('2d')
-      if (!context) {
-        return
-      }
-
-      const canvasWidth = canvas.width
-      const canvasHeight = canvas.height
-      if (!canvasWidth || !canvasHeight) {
-        return
-      }
-
-      const imageWidth = image.naturalWidth || image.width
-      const imageHeight = image.naturalHeight || image.height
-      if (!imageWidth || !imageHeight) {
-        return
-      }
-
-      const scale = Math.max(canvasWidth / imageWidth, canvasHeight / imageHeight)
-      const drawWidth = imageWidth * scale
-      const drawHeight = imageHeight * scale
-      const offsetX = (canvasWidth - drawWidth) * 0.5
-      const offsetY = (canvasHeight - drawHeight) * 0.5
-
-      context.clearRect(0, 0, canvasWidth, canvasHeight)
-      context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight)
-    }
-
-    const syncCanvasSize = () => {
-      const canvas = canvasRef.current
-      if (!canvas) {
-        return
-      }
-
-      const viewportWidth = window.innerWidth || 1
-      const viewportHeight = window.innerHeight || 1
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2)
-
-      canvas.width = Math.round(viewportWidth * pixelRatio)
-      canvas.height = Math.round(viewportHeight * pixelRatio)
-      canvas.style.width = `${viewportWidth}px`
-      canvas.style.height = `${viewportHeight}px`
-
-      drawFrame(frameIndexRef.current)
-    }
 
     const updateOpportunityProgress = () => {
       const section = sectionRef.current
@@ -112,16 +76,11 @@ function OpportunitySection({ opportunityLines }) {
       const rect = section.getBoundingClientRect()
       const viewportHeight = window.innerHeight || 1
       const scrollableDistance = Math.max(rect.height - viewportHeight, 1)
-      const progress = Math.min(Math.max(-rect.top / scrollableDistance, 0), 1)
-      const nextFrameIndex = Math.min(
-        OPPORTUNITY_FRAME_COUNT - 1,
-        Math.round(progress * (OPPORTUNITY_FRAME_COUNT - 1)),
-      )
+      const nextProgress = Math.min(Math.max(-rect.top / scrollableDistance, 0), 1)
 
-      if (frameIndexRef.current !== nextFrameIndex) {
-        frameIndexRef.current = nextFrameIndex
-        setFrameIndex(nextFrameIndex)
-        drawFrame(nextFrameIndex)
+      if (progressRef.current !== nextProgress) {
+        progressRef.current = nextProgress
+        setScrollProgress(nextProgress)
       }
     }
 
@@ -130,38 +89,18 @@ function OpportunitySection({ opportunityLines }) {
       animationFrameId = window.requestAnimationFrame(updateOpportunityProgress)
     }
 
-    frameImagesRef.current = Array.from({ length: OPPORTUNITY_FRAME_COUNT }, (_, index) => {
-      const image = new Image()
-      image.decoding = 'async'
-      image.src = getOpportunityFrameSrc(index)
-      image.onload = () => {
-        if (isDisposed) {
-          return
-        }
-
-        if (index === 0 || index === frameIndexRef.current) {
-          drawFrame(frameIndexRef.current)
-        }
-      }
-      return image
-    })
-
-    syncCanvasSize()
     requestUpdate()
     window.addEventListener('scroll', requestUpdate, { passive: true })
-    window.addEventListener('resize', syncCanvasSize)
+    window.addEventListener('resize', requestUpdate)
 
     return () => {
-      isDisposed = true
       cancelAnimationFrame(animationFrameId)
-      frameImagesRef.current.forEach((image) => {
-        image.onload = null
-      })
-      frameImagesRef.current = []
       window.removeEventListener('scroll', requestUpdate)
-      window.removeEventListener('resize', syncCanvasSize)
+      window.removeEventListener('resize', requestUpdate)
     }
   }, [])
+
+  const activeLine = getActiveOpportunityLine(scrollProgress, opportunityLines)
 
   return (
     <section
@@ -171,7 +110,16 @@ function OpportunitySection({ opportunityLines }) {
     >
       <div className="opportunity-sticky">
         <div className="opportunity-media" aria-hidden="true">
-          <canvas ref={canvasRef} className="opportunity-canvas" />
+          <video
+            className="opportunity-video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          >
+            <source src="/oportunity-section.mp4" type="video/mp4" />
+          </video>
           <div className="opportunity-media-wash" />
         </div>
 
@@ -183,26 +131,26 @@ function OpportunitySection({ opportunityLines }) {
           </div>
 
           <div className="opportunity-lines">
-            {opportunityLines.map((line, index) => {
-              const lineState = getOpportunityLineProgress(
-                frameIndex,
-                index,
-                opportunityLines.length,
-              )
-
-              return (
-                <p
-                  key={line}
-                  className={index === 0 ? 'opportunity-lines__lead' : ''}
-                  style={{
-                    '--line-opacity': lineState.opacity,
-                    '--line-translate-y': `${lineState.translateY}px`,
-                  }}
-                >
-                  {line}
-                </p>
-              )
-            })}
+            {activeLine ? (
+              <div
+                className="opportunity-line-stage"
+                style={{
+                  '--line-opacity': activeLine.state.opacity,
+                  '--line-translate-y': `${activeLine.state.translateY}px`,
+                }}
+              >
+                <div className="opportunity-line-stage__viewport">
+                  <span className="opportunity-line-mask">
+                    <span
+                      key={activeLine.index}
+                      className={`opportunity-line-text ${activeLine.index === 0 ? 'opportunity-line-text--lead' : ''}`}
+                    >
+                      {activeLine.line}
+                    </span>
+                  </span>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

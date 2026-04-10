@@ -1,15 +1,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
+import { useCaseCardBackgroundComponents } from '../card-backgrounds/useCaseBackgrounds'
 import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const useCaseCardBackgrounds = [
-  '/assets/card-bg/use-01.svg',
-  '/assets/card-bg/use-02.svg',
-  '/assets/card-bg/use-03.svg',
-  '/assets/card-bg/use-04.svg',
-  '/assets/card-bg/use-05.svg',
   '/assets/card-bg/use-06.svg',
 ]
 
@@ -77,6 +73,15 @@ function UseCasesSectionStack({ useCases }) {
   const preventNativeDrag = (event) => {
     event.preventDefault()
   }
+  const shiftStack = (direction) => {
+    setActiveIndex((currentIndex) => wrapIndex(currentIndex + direction, useCases.length))
+  }
+  const showPreviousCase = () => {
+    shiftStack(-1)
+  }
+  const showNextCase = () => {
+    shiftStack(1)
+  }
 
   useEffect(() => {
     const handleWindowPointerMove = (event) => {
@@ -93,7 +98,7 @@ function UseCasesSectionStack({ useCases }) {
       const deltaX = event.clientX - dragStateRef.current.startX
 
       if (Math.abs(deltaX) >= DRAG_SWIPE_THRESHOLD_PX) {
-        setActiveIndex((currentIndex) => wrapIndex(currentIndex + (deltaX < 0 ? 1 : -1), useCases.length))
+        shiftStack(deltaX < 0 ? 1 : -1)
       }
 
       dragStateRef.current = {
@@ -168,7 +173,10 @@ function UseCasesSectionStack({ useCases }) {
 
       return {
         ...item,
-        backgroundImage: useCaseCardBackgrounds[index % useCaseCardBackgrounds.length],
+        BackgroundComponent: useCaseCardBackgroundComponents[index],
+        backgroundImage: useCaseCardBackgroundComponents[index]
+          ? null
+          : useCaseCardBackgrounds[(index - useCaseCardBackgroundComponents.length) % useCaseCardBackgrounds.length],
         index,
         isActive,
         style: {
@@ -236,9 +244,12 @@ function UseCasesSectionStack({ useCases }) {
                 style={{
                   ...item.style,
                   height: cardHeight ? `${cardHeight}px` : undefined,
-                  '--use-case-background-image': `url("${item.backgroundImage}")`,
+                  '--use-case-background-image': item.backgroundImage
+                    ? `url("${item.backgroundImage}")`
+                    : 'none',
                 }}
               >
+                {item.BackgroundComponent ? <item.BackgroundComponent /> : null}
                 <img
                   className="ticker-logo spin-loop h-12 w-12"
                   draggable={false}
@@ -254,10 +265,41 @@ function UseCasesSectionStack({ useCases }) {
               </article>
             ))}
           </div>
-              <div className="text-description-light-surface text-center flex gap-3 justify-center" aria-live="polite">
+              <div
+                className="use-cases-stack-controls text-description-light-surface text-center flex items-center gap-3 justify-center"
+                aria-live="polite"
+              >
+                <button
+                  type="button"
+                  className="use-cases-stack-arrow"
+                  aria-label="Caso anterior"
+                  onPointerDown={(event) => {
+                    event.stopPropagation()
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    showPreviousCase()
+                  }}
+                >
+                  &#8592;
+                </button>
                 <strong>{String(activeIndex + 1).padStart(2, '0')}</strong>
                 <span>/</span>
                 <span>{String(useCases.length).padStart(2, '0')}</span>
+                <button
+                  type="button"
+                  className="use-cases-stack-arrow"
+                  aria-label="Siguiente caso"
+                  onPointerDown={(event) => {
+                    event.stopPropagation()
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    showNextCase()
+                  }}
+                >
+                  &#8594;
+                </button>
               </div>
         </div>
       </div>

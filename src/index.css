@@ -850,15 +850,19 @@ select {
   --problem-sticky-top: 128px;
   --problem-stack-gap: 32px;
   --pain-card-top: 338px;
-  padding: 0 0 184px;
   background: #010104;
+  overflow: visible;
+  padding-top: var(--problem-sticky-top);
 }
 
 .problem-shell {
+  position: sticky;
+  top: 0;
   overflow: clip;
-  padding: var(--padding-section) 0 40px;
-  border-radius: 96px;
-  background: #010104;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .problem-header-shell {
@@ -866,16 +870,18 @@ select {
   top: var(--problem-sticky-top);
   z-index: 7;
   width: 100%;
-  padding-bottom: 88px;
+  /* padding-bottom: 88px;
+   */
+  height: 100vh;
 }
 
 .pain-stack {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
-  margin-top: 0;
+  width: 100%;
+  margin-bottom: 25%;
 }
 
 .pain-card {
@@ -899,6 +905,31 @@ select {
     box-shadow 460ms cubic-bezier(0.34, 1.12, 0.64, 1),
     filter 460ms cubic-bezier(0.34, 1.12, 0.64, 1);
   will-change: transform;
+}
+
+.card-background-svg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.card-background-svg > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.pain-card > img,
+.problem-new-card > img,
+.use-case-card > img,
+.use-case-stack-card > img,
+.use-case-stack-card > div {
+  position: relative;
+  z-index: 1;
 }
 
 .pain-card::before {
@@ -988,7 +1019,7 @@ select {
 
 .workflow-section {
   position: relative;
-  padding: var(--padding-section) 0 var(--padding-section) ;
+  padding-bottom: var(--padding-section);
   overflow: clip;
   background: #010104;
 }
@@ -1049,11 +1080,42 @@ select {
   gap: 32px;
 }
 
+.workflow-card[data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.workflow-card[data-reveal] > * {
+  opacity: 0;
+  transition:
+    opacity 760ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay);
+  will-change: opacity, transform;
+}
+
+.workflow-card[data-reveal] > :first-child {
+  transform: translate3d(-88px, 0, 0);
+}
+
+.workflow-card[data-reveal] > :last-child {
+  transform: translate3d(88px, 0, 0);
+}
+
+.workflow-card[data-reveal].is-visible > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
 .workflow-panel {
   min-height: 566px;
   padding: 48px;
   border-radius: 48px;
   background: rgba(255, 255, 255, 0.015);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .workflow-title {
@@ -1103,8 +1165,6 @@ select {
 
 .workflow-media {
   overflow: hidden;
-  border-radius: 48px;
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .workflow-media img {
@@ -1119,7 +1179,7 @@ select {
   z-index: 1;
   overflow: clip;
   min-height: var(--opportunity-scroll-span);
-  background: #060708;
+  background: #010104;
 }
 
 .opportunity-sticky {
@@ -1135,20 +1195,19 @@ select {
   z-index: 0;
 }
 
-.opportunity-canvas {
+.opportunity-video {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
   pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
 }
 
 .opportunity-media-wash {
   position: absolute;
   inset: 0;
-  /* background:
-    linear-gradient(180deg, rgba(5, 7, 10, 0.28) 0%, rgba(5, 7, 10, 0.74) 100%),
-    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.1), transparent 34%),
-    radial-gradient(circle at 76% 34%, rgba(47, 106, 255, 0.18), transparent 36%); */
   pointer-events: none;
 }
 
@@ -1182,27 +1241,41 @@ select {
   min-height: clamp(220px, 28vh, 320px);
 }
 
-.opportunity-lines p {
+.opportunity-line-stage {
   position: absolute;
-  top: 50%;
-  left: 0;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  opacity: var(--line-opacity, 0);
+  transform: translate3d(0, var(--line-translate-y, 56px), 0);
+  transition:
+    opacity 180ms linear,
+    transform 220ms cubic-bezier(.22,1,.36,1);
+  will-change: opacity, transform;
+}
+
+.opportunity-line-stage__viewport {
   width: 100%;
-  margin: 0;
-  color: rgba(248, 249, 252, calc(var(--line-opacity, 0) * 0.92));
+  overflow: hidden;
+}
+
+.opportunity-line-mask {
+  display: block;
+  overflow: clip;
+}
+
+.opportunity-line-text {
+  display: block;
+  color: rgba(248, 249, 252, 0.92);
   font-size: clamp(2.25rem, 5vw, 4rem);
   font-weight: 500;
   line-height: 1;
   letter-spacing: -0.03em;
-  opacity: var(--line-opacity, 0);
-  transform: translate3d(0, calc(-50% + var(--line-translate-y, 56px)), 0);
-  transition:
-    opacity 180ms linear,
-    transform 220ms cubic-bezier(.22,1,.36,1),
-    color 180ms linear;
-  will-change: opacity, transform;
+  will-change: transform, opacity;
+  animation: hero-title-rise 560ms cubic-bezier(.625,.05,0,1);
 }
 
-.opportunity-lines__lead {
+.opportunity-line-text--lead {
   color: #fff;
 }
 
@@ -1246,6 +1319,12 @@ select {
     transform 540ms cubic-bezier(0.22, 1, 0.36, 1),
     filter 420ms ease;
   will-change: transform;
+}
+
+.use-case-card > .card-background-svg,
+.use-case-stack-card > .card-background-svg,
+.problem-new-card > .card-background-svg {
+  border-radius: inherit;
 }
 
 .use-cases-header-shell {
@@ -1426,6 +1505,41 @@ select {
 
 .use-cases-stack-stage.is-dragging .use-cases-stack-deck {
   cursor: grabbing;
+}
+
+.use-cases-stack-controls {
+  position: relative;
+  z-index: 8;
+  pointer-events: auto;
+}
+
+.use-cases-stack-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(12, 22, 42, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: rgba(12, 22, 42, 0.7);
+  font-size: 14px;
+  line-height: 1;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.use-cases-stack-arrow:hover {
+  background: #fff;
+  color: #0c162a;
+  border-color: rgba(12, 22, 42, 0.18);
+}
+
+.use-cases-stack-arrow:active {
+  transform: scale(0.96);
 }
 
 .use-case-stack-card {
@@ -1787,14 +1901,19 @@ select {
   }
 
   .problem-shell {
+    height: 100vh;
     padding-top: 96px;
-    border-radius: 48px;
+  }
+
+  .problem-section {
+    min-height: 280vh;
   }
 
   .problem-section {
     --problem-sticky-top: 0px;
     --problem-stack-gap: 24px;
     --pain-card-top: 196px;
+    position: relative;
   }
 
   .hero-section {
@@ -2036,6 +2155,129 @@ select {
 
   .testimonials-column {
     flex-basis: 100%;
+  }
+}
+
+.problem-new-section {
+  --problem-new-sticky-top: 0px;
+  --problem-new-text-top: 128px;
+  --problem-new-card-top: 338px;
+  --problem-new-scroll-span: 320vh;
+  min-height: var(--problem-new-scroll-span);
+  background: #010104;
+  overflow: visible;
+}
+
+.problem-new-shell {
+  position: sticky;
+  top: var(--problem-new-sticky-top);
+  height: 100vh;
+  padding: var(--padding-section) 0 40px;
+  border-radius: 96px;
+  background: #010104;
+  overflow: clip;
+}
+
+.problem-new-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translateY(calc(var(--problem-new-release-offset, 0px) * -1));
+  will-change: transform;
+}
+
+.problem-new-text {
+  position: relative;
+  z-index: 7;
+  width: 100%;
+  padding-bottom: 88px;
+}
+
+.problem-new-cards {
+  position: relative;
+  width: 100%;
+  margin-top: 96px;
+  min-height: 760px;
+}
+
+.problem-new-card {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: var(--problem-new-card-z, 1);
+  isolation: isolate;
+  overflow: hidden;
+  width: min(445px, calc(100vw - 64px));
+  min-height: 445px;
+  padding: 64px;
+  border-radius: 48px;
+  background: var(--problem-new-card-background) center / cover no-repeat;
+  background-color: var(--bg-dark);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.22),
+    0 48px 120px rgba(0, 0, 0, 0.38);
+  transition:
+    transform 460ms cubic-bezier(0.34, 1.12, 0.64, 1),
+    box-shadow 460ms cubic-bezier(0.34, 1.12, 0.64, 1),
+    filter 460ms cubic-bezier(0.34, 1.12, 0.64, 1);
+  will-change: transform;
+  transform: translateX(-50%) translateY(var(--problem-new-card-translate-y, 0px))
+    rotate(var(--problem-new-card-rotate, 0deg));
+}
+
+.problem-new-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 24%),
+    linear-gradient(180deg, transparent 58%, rgba(0, 0, 0, 0.18));
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.problem-new-card:not(:last-child) {
+  filter: saturate(0.9) brightness(0.92);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.16),
+    0 24px 54px rgba(0, 0, 0, 0.22);
+}
+
+.problem-new-card p {
+  position: relative;
+  z-index: 1;
+  margin: 48px 0 0;
+  color: #f8f9fc;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .problem-new-section {
+    min-height: max(260vh, var(--problem-new-scroll-span));
+  }
+
+  .problem-new-shell {
+    padding-top: 96px;
+    border-radius: 48px;
+  }
+
+  .problem-new-cards {
+    margin-top: 64px;
+    min-height: 620px;
+  }
+
+  .problem-new-card {
+    min-height: 320px;
+    padding: 28px;
+    border-radius: 28px;
+  }
+
+  .problem-new-card p {
+    margin-top: 92px;
+    font-size: 28px;
   }
 }
 
