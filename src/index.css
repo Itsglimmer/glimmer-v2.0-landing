@@ -1125,10 +1125,9 @@ select {
 }
 
 .workflow-panel {
-  min-height: 566px;
   padding: 48px;
   border-radius: 48px;
-  background: rgba(255, 255, 255, 0.015);
+  background: var(--bg-dark);
   display: flex;
   flex-direction: column;
   justify-content: center;
