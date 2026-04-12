@@ -119,7 +119,7 @@ function TickerSection({ words }) {
                   ref={(node) => {
                     wordRefs.current[index] = node
                   }}
-                  className={`ticker-word ${index === activeIndex ? 'is-active' : ''}`}
+                  className={`ticker-word type-title-bigger-size type-title-light ${index === activeIndex ? 'is-active' : ''}`}
                 >
                   {word}
                 </span>

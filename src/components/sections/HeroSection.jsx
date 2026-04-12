@@ -295,7 +295,10 @@ function HeroSection() {
         >
           <div className="hero-ticker-stage__viewport">
             <span className="hero-ticker-mask">
-              <span key={heroTickerIndex} className="hero-ticker-text ticker-word is-active">
+              <span
+                key={heroTickerIndex}
+                className="hero-ticker-text ticker-word type-title-bigger-size type-title-light is-active"
+              >
                 {tickerWords[heroTickerIndex]}
               </span>
             </span>
@@ -331,7 +334,7 @@ function HeroSection() {
             }}
           >
             <div className="hero-copy" data-reveal style={{ '--reveal-delay': '140ms' }}>
-              <h1 className="hero-title">
+              <h1 className="hero-title type-title-bigger-size type-title-light">
                 <span className="hero-title-mask">
                   <span key={heroTitleIndex} className="hero-title-text">
                     {heroTitles[heroTitleIndex].map((line) => (

@@ -7,7 +7,7 @@ function FaqItem({ item, isOpen, onToggle }) {
   return (
     <article className={`faq-item ${isOpen ? 'is-open' : ''}`}>
       <button className="faq-trigger" type="button" onClick={onToggle} aria-expanded={isOpen}>
-        <span className="faq-question">{item.question}</span>
+        <span className="type-title-small-size type-title-light">{item.question}</span>
         <span className="faq-icon" aria-hidden="true">
           +
         </span>
@@ -42,8 +42,8 @@ function FaqSection({ faqs }) {
     <section className="faq-section" ref={sectionRef}>
       <div className="page-shell faq-shell">
         <div className="faq-copy" data-reveal style={{ '--reveal-delay': '40ms' }}>
-          <span className="faq-eyebrow">{t('faqs.eyebrow')}</span>
-          <h2 className="faq-title">
+          <span className="type-subheadline-size type-subheadline-gray">{t('faqs.eyebrow')}</span>
+          <h2 className="type-title-big-size type-title-light pt-6">
             {titleLines.map((line) => (
               <span key={line} className="faq-title-line">
                 {line}

@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 function DeliverySection({ deliveryModes }) {
@@ -15,7 +14,12 @@ function DeliverySection({ deliveryModes }) {
       <div className="page-shell delivery-shell">
         <div className="delivery-copy">
           <div data-reveal style={{ '--reveal-delay': '40ms' }}>
-            <SectionHeader eyebrow={t('delivery.eyebrow')} title={t('delivery.title')} />
+            <div className="section-header">
+              <span className="type-subheadline-size type-subheadline-gray">
+                {t('delivery.eyebrow')}
+              </span>
+              <h2 className="type-title-big-size type-title-light">{t('delivery.title')}</h2>
+            </div>
           </div>
 
           <div className="delivery-list">
@@ -25,7 +29,7 @@ function DeliverySection({ deliveryModes }) {
                 data-reveal
                 style={{ '--reveal-delay': `${120 + index * 70}ms` }}
               >
-                <h3>{item.title}</h3>
+                <h3 className="type-title-smaller-size type-title-light">{item.title}</h3>
                 <p>{item.copy}</p>
               </article>
             ))}

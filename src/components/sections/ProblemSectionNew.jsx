@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const painCardBackgrounds = [
@@ -108,12 +107,12 @@ function ProblemSectionNew({ painPoints }) {
               data-reveal
               style={{ '--reveal-delay': '40ms' }}
             >
-              <SectionHeader
-                eyebrow={t('problem.eyebrow')}
-                title={t('problem.title')}
-                centered
-                theme="light"
-              />
+              <div className="section-header section-header--center">
+                <span className="type-subheadline-size type-subheadline-gray">
+                  {t('problem.eyebrow')}
+                </span>
+                <h2 className="type-title-big-size type-title-light">{t('problem.title')}</h2>
+              </div>
             </div>
 
             <div className="problem-new-cards">

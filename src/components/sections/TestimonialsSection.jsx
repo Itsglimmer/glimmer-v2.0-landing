@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 function TestimonialCard({ item, delay }) {
@@ -84,11 +83,12 @@ function TestimonialsSection({ testimonials }) {
     >
       <div className="page-shell">
         <div data-reveal style={{ '--reveal-delay': '40ms' }}>
-          <SectionHeader
-            eyebrow={t('testimonials.eyebrow')}
-            title={t('testimonials.title')}
-            centered
-          />
+          <div className="section-header section-header--center">
+            <span className="type-subheadline-size type-subheadline-blue">
+              {t('testimonials.eyebrow')}
+            </span>
+            <h2 className="type-title-big-size type-title-dark">{t('testimonials.title')}</h2>
+          </div>
         </div>
 
         <div className="testimonials-columns">

@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const useCaseCardBackgrounds = [
@@ -212,13 +211,15 @@ function UseCasesSectionStack({ useCases }) {
     <section className="use-cases-stack-section" ref={sectionRef}>
       <div className="page-shell use-cases-stack-shell">
         <div className="use-cases-stack-header-shell" data-reveal style={{ '--reveal-delay': '40ms' }}>
-          <SectionHeader
-            eyebrow={t('useCases.eyebrow')}
-            title={t('useCases.title')}
-            description={t('useCases.description')}
-            centered
-            theme="dark"
-          />
+          <div className="section-header section-header--center">
+            <span className="type-subheadline-size type-subheadline-blue">
+              {t('useCases.eyebrow')}
+            </span>
+            <h2 className="type-title-big-size type-title-dark">{t('useCases.title')}</h2>
+            <p className="type-description-size max-w-[655px] text-[rgba(12,22,42,0.68)]">
+              {t('useCases.description')}
+            </p>
+          </div>
         </div>
 
         <div
@@ -256,7 +257,7 @@ function UseCasesSectionStack({ useCases }) {
                   alt=""
                 />
                 <div>
-                  <h3>{item.title}</h3>
+                  <h3 className="type-title-regular-size type-title-dark">{item.title}</h3>
                   <p>{item.copy}</p>
                 </div>
                 

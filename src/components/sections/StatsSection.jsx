@@ -19,8 +19,10 @@ function StatsSection({ stats }) {
           data-reveal
           style={{ '--reveal-delay': '40ms' }}
         >
-          <span className="section-eyebrow text-accent">{t('stats.eyebrow')}</span>
-          <h2 className="section-title text-title-darker">{t('stats.title')}</h2>
+          <span className="type-subheadline-size type-subheadline-blue">{t('stats.eyebrow')}</span>
+          <h2 className="type-title-big-size type-title-dark">
+            {t('stats.title')}
+          </h2>
           
         </div>
 
@@ -33,8 +35,8 @@ function StatsSection({ stats }) {
           >
             <img className='absolute w-[480px] h-[480px] top-[-50%] right-[-25%]' src="assets/logo-outline-blue.svg" alt="" />
             <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo-dark.svg" alt="" />
-            <strong className='text-title-darker'>{leftCard.value}</strong>
-            <p className='text-description-light-surface'>{leftCard.description}</p>
+            <strong className='type-title-big-size type-title-dark'>{leftCard.value}</strong>
+            <p className='type-description-size text-description-light'>{leftCard.description}</p>
           </article>
 
           <article
@@ -44,8 +46,8 @@ function StatsSection({ stats }) {
           >
             <img className='absolute w-[480px] h-[480px] top-[-50%] right-[-25%]' src="assets/logo-outline-white.svg" alt="" />
             <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo.svg" alt="" />
-            <strong>{rightCard.value}</strong>
-            <p>{rightCard.description}</p>
+            <strong className='type-title-big-size'>{rightCard.value}</strong>
+            <p className='type-description-size'>{rightCard.description}</p>
           </article>
         </div>
         <div
@@ -53,7 +55,9 @@ function StatsSection({ stats }) {
           data-reveal
           style={{ '--reveal-delay': '260ms' }}
         >
-          <p className="section-copy text-title-darker text-center">{t('stats.description')}</p>
+          <p className="type-description-size max-w-[655px] text-title-darker text-center">
+            {t('stats.description')}
+          </p>
         </div>
        
       </div>

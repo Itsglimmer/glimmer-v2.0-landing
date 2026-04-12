@@ -28,7 +28,7 @@ function FaqCtaSection() {
           </div>
 
           <div className="faq-cta-content">
-            <h2 className="faq-cta-title text-center">{t('faqCta.title')}</h2>
+            <h2 className="faq-cta-title type-title-big-size type-title-light text-center">{t('faqCta.title')}</h2>
             <p className="faq-cta-description text-center">{t('faqCta.description')}</p>
             <Button href="mailto:hola@glimmer.ai" radius="full" background="white">
               {t('nav.cta')}

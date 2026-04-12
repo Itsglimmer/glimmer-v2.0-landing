@@ -114,7 +114,7 @@ function OpportunitySection({ opportunityLines }) {
 
         <div className="page-shell opportunity-shell">
           <div className="opportunity-meta" data-reveal style={{ '--reveal-delay': '40ms' }}>
-            <span className="section-eyebrow">{t('opportunity.eyebrow')}</span>
+            <span className="type-subheadline-size">{t('opportunity.eyebrow')}</span>
             <p>{t('opportunity.lead')}</p>
             <img className="ticker-logo spin-loop h-12 w-12" src="/assets/isotipo.svg" alt="" />
           </div>
@@ -127,7 +127,7 @@ function OpportunitySection({ opportunityLines }) {
                     <span
                       key={activeLine.index}
                       ref={activeLineRef}
-                      className={`opportunity-line-text text ${activeLine.index === 0 ? 'opportunity-line-text--lead' : ''}`}
+                      className={`opportunity-line-text text type-title-big-size type-title-light ${activeLine.index === 0 ? 'opportunity-line-text--lead' : ''}`}
                     >
                       {activeLine.line}
                     </span>

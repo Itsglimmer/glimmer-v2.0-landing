@@ -1,7 +1,6 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
-import SectionHeader from './SectionHeader'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const workflowMedia = [
@@ -90,12 +89,15 @@ function WorkflowSection({ workflowItems }) {
 
       <div className="page-shell">
         <div data-reveal style={{ '--reveal-delay': '40ms' }}>
-          <SectionHeader
-            eyebrow={t('workflow.eyebrow')}
-            title={t('workflow.title')}
-            description={t('workflow.description')}
-            centered
-          />
+          <div className="section-header section-header--center">
+            <span className="type-subheadline-size type-subheadline-gray">
+              {t('workflow.eyebrow')}
+            </span>
+            <h2 className="type-title-big-size type-title-light">{t('workflow.title')}</h2>
+            <p className="type-description-size max-w-[655px] text-[#d3d8e2]">
+              {t('workflow.description')}
+            </p>
+          </div>
         </div>
 
         <div className="workflow-stack">
