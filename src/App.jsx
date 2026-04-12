@@ -6,18 +6,15 @@ import FaqSection from './components/sections/FaqSection'
 import HeroSection from './components/sections/HeroSection'
 import LogoFooterSection from './components/sections/LogoFooterSection'
 import OpportunitySection from './components/sections/OpportunitySection'
-import ProblemSection from './components/sections/ProblemSection'
 import ProblemSectionNew from './components/sections/ProblemSectionNew'
+import ProblemSection from './components/sections/ProblemSection'
 import StatsSection from './components/sections/StatsSection'
 import TestimonialsSection from './components/sections/TestimonialsSection'
-import TickerSection from './components/sections/TickerSection'
-import UseCasesSection from './components/sections/UseCasesSection'
 import UseCasesSectionStack from './components/sections/UseCasesSectionStack'
 import WorkflowSection from './components/sections/WorkflowSection'
 
 function App() {
   const { t, i18n } = useTranslation()
-  const signalWords = t('ticker.words', { returnObjects: true })
   const stats = t('stats.items', { returnObjects: true })
   const painPoints = t('problem.painPoints', { returnObjects: true })
   const workflowItems = t('workflow.items', { returnObjects: true })
@@ -36,12 +33,11 @@ function App() {
     <>
       <main className="glimmer-page">
         <HeroSection />
-        {/* <TickerSection words={signalWords} /> */}
         <StatsSection stats={stats} />
+        <ProblemSectionNew painPoints={painPoints} />
         <ProblemSection painPoints={painPoints} />
         <WorkflowSection workflowItems={workflowItems} />
         <OpportunitySection opportunityLines={opportunityLines} />
-        {/* <UseCasesSection useCases={useCases} /> */}
         <UseCasesSectionStack useCases={useCases} />
         <DeliverySection deliveryModes={deliveryModes} />
         <TestimonialsSection testimonials={testimonials} />
