@@ -93,7 +93,7 @@ function Button({
       <span className="ui-button__sizer" aria-hidden="true">
         {children}
       </span>
-      <span className="ui-button__text-window">
+      <span className="ui-button__text-window type-button-size ">
       <span
         className="ui-button__text-track"
         onTransitionEnd={(event) => {

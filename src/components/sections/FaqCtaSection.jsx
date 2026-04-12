@@ -1,7 +1,16 @@
 import { useTranslation } from 'react-i18next'
 import Button from '../Button'
+import HeroNavLink from '../HeroNavLink'
 import useSectionReveal from '../../hooks/useSectionReveal'
 import { useRef } from 'react'
+
+const footerLinks = [
+  { href: 'https://www.linkedin.com', label: 'Linkedin' },
+  { href: '/aviso-legal', label: 'Aviso legal' },
+  { href: '/privacidad-y-politica-de-cookies', label: 'Privacidad y política de cookies' },
+  { href: '/politica-de-privacidad', label: 'Política de privacidad' },
+  { href: '/terminos-y-condiciones', label: 'Términos y condiciones' },
+]
 
 function FaqCtaSection() {
   const { t } = useTranslation()
@@ -33,6 +42,18 @@ function FaqCtaSection() {
             <Button href="mailto:hola@glimmer.ai" radius="full" background="white">
               {t('nav.cta')}
             </Button>
+            <div className="faq-cta-links" aria-label="Enlaces legales y redes">
+              {footerLinks.map((link) => (
+                <HeroNavLink
+                  key={link.label}
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                >
+                  {link.label}
+                </HeroNavLink>
+              ))}
+            </div>
           </div>
         </div>
       </div>

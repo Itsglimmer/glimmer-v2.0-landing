@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Button from '../Button'
+import HeroNavLink from '../HeroNavLink'
 import useSectionReveal from '../../hooks/useSectionReveal'
 import { HERO_FRAME_COUNT, getHeroFrameSrc } from '../../lib/heroFrames'
 
@@ -310,9 +311,9 @@ function HeroSection() {
               <img src="/assets/isologotipo.svg" alt="Glimmer" />
             </a>
             <nav className="hero-links">
-              <a href="#casos">{t('nav.casos')}</a>
-              <a href="#producto">{t('nav.producto')}</a>
-              <a href="#impacto">{t('nav.impacto')}</a>
+              <HeroNavLink href="#casos">{t('nav.casos')}</HeroNavLink>
+              <HeroNavLink href="#producto">{t('nav.producto')}</HeroNavLink>
+              <HeroNavLink href="#impacto">{t('nav.impacto')}</HeroNavLink>
             </nav>
             <Button
               href="mailto:hola@glimmer.ai"
@@ -333,8 +334,8 @@ function HeroSection() {
               transition: 'opacity 120ms linear, transform 120ms linear',
             }}
           >
-            <div className="hero-copy" data-reveal style={{ '--reveal-delay': '140ms' }}>
-              <h1 className="hero-title type-title-bigger-size type-title-light">
+            <div data-reveal style={{ '--reveal-delay': '140ms' }}>
+              <h1 className="hero-title type-title-bigger-size type-title-light pb-6">
                 <span className="hero-title-mask">
                   <span key={heroTitleIndex} className="hero-title-text">
                     {heroTitles[heroTitleIndex].map((line) => (
@@ -376,13 +377,13 @@ function HeroSection() {
                   {t('nav.cta')}
                 </Button>
                 <Button
-                  href="#producto"
-                  radius="sharp"
-                  background="transparentWhite"
-                  fullWidth
-                >
-                  {t('hero.secondaryCta')}
-                </Button>
+              href="#producto"
+              className="hero-nav-cta w-full"
+              radius="full"
+              background="transparentBlack"
+            >
+              {t('hero.secondaryCta')}
+            </Button>
               </div>
             </div>
           </div>
