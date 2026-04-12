@@ -1512,7 +1512,7 @@ select {
 
 .workflow-list li {
   position: relative;
-  padding-left: 34px;
+  padding-left: 32px;
   color: #d3d8e2;
   font-size: 16px;
   line-height: 1.5;
@@ -1521,14 +1521,11 @@ select {
 .workflow-list li::before {
   content: '';
   position: absolute;
-  top: 10px;
+  top: 4px;
   left: 0;
-  width: 18px;
-  height: 18px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at center, #fff 0 34%, transparent 36%),
-    radial-gradient(circle at center, rgba(255, 255, 255, 0.3) 0 62%, transparent 64%);
+  width: 16px;
+  height: 16px;
+  background: url('/assets/isotipo.svg') center / contain no-repeat;
 }
 
 .workflow-media {
