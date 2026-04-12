@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PainCard from '../PainCard'
+import useInViewport from '../../hooks/useInViewport'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 const painCardBackgrounds = [
@@ -36,6 +37,7 @@ function ProblemSection({ painPoints }) {
   const sectionRef = useRef(null)
   const titleShellRef = useRef(null)
   const titleRef = useRef(null)
+  const isSectionInViewport = useInViewport(sectionRef, { threshold: 0.15 })
 
   useSectionReveal(sectionRef, [painPoints])
 
@@ -79,7 +81,7 @@ function ProblemSection({ painPoints }) {
   return (
     <section className="relative problem-section-new" id="casos" ref={sectionRef}>
       <div className='fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center pointer-events-none z-0 opacity-40'>
-        <img className='max-w-none spin-loop-slow w-[1500px] h-[1500px] md:w-[2500px] md:h-[2500px]' src="assets/logo-outline-white-bigger.svg" alt="" />
+        <img className={`max-w-none spin-loop-slow w-[1500px] h-[1500px] md:w-[2500px] md:h-[2500px] ${isSectionInViewport ? 'is-motion-active' : ''}`} src="assets/logo-outline-white-bigger.svg" alt="" />
 
       </div>
       <div className="page-shell page-shell--problem-intro" ref={titleShellRef}>

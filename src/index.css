@@ -345,6 +345,7 @@ select {
   --spin-duration: 18s;
   --spin-scale: 1;
   animation: spin-loop var(--spin-duration) linear infinite;
+  animation-play-state: paused;
   transform-origin: center;
   will-change: transform;
 }
@@ -353,8 +354,14 @@ select {
   --spin-duration: 35s;
   --spin-scale: 1;
   animation: spin-loop var(--spin-duration) linear infinite;
+  animation-play-state: paused;
   transform-origin: center;
   will-change: transform;
+}
+
+.spin-loop.is-motion-active,
+.spin-loop-slow.is-motion-active {
+  animation-play-state: running;
 }
 
 [data-reveal] {
@@ -437,6 +444,14 @@ select {
   pointer-events: none;
 }
 
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+  pointer-events: none;
+}
+
 .hero-isotipo {
   position: absolute;
   top: 50%;
@@ -473,12 +488,12 @@ select {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .hero-ticker-mask {
   display: block;
-  overflow: clip;
+  /* overflow: clip; */
   text-align: center;
 }
 
@@ -748,6 +763,11 @@ select {
   gap: 32px;
   white-space: nowrap;
   animation: hero-logo-marquee 24s linear infinite;
+  animation-play-state: paused;
+}
+
+.hero-logo-track.is-motion-active {
+  animation-play-state: running;
 }
 
 .hero-logo-item {
@@ -1960,16 +1980,23 @@ select {
 .delivery-orbit-layer--outer {
   width: 100%;
   animation: orbit-spin-cw 36s linear infinite;
+  animation-play-state: paused;
 }
 
 .delivery-orbit-layer--middle {
   width: 76.864%;
   animation: orbit-spin-ccw 28s linear infinite;
+  animation-play-state: paused;
 }
 
 .delivery-orbit-layer--center {
   width: 46.81%;
   animation: orbit-spin-cw 20s linear infinite;
+  animation-play-state: paused;
+}
+
+.delivery-orbit-layer.is-motion-active {
+  animation-play-state: running;
 }
 
 .faq-section {
@@ -2429,6 +2456,16 @@ select {
   .faq-cta-card,
   .faq-cta-content {
     min-height: 480px;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-canvas {
+    display: none;
+  }
+
+  .hero-video {
+    display: block;
   }
 }
 

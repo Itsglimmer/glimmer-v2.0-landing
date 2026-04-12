@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next'
 import { Menu } from 'lucide-react'
 import Button from '../Button'
 import HeroNavLink from '../HeroNavLink'
+import useInViewport from '../../hooks/useInViewport'
 import useSectionReveal from '../../hooks/useSectionReveal'
+import useViewportVideo from '../../hooks/useViewportVideo'
 import { HERO_FRAME_COUNT, getHeroFrameSrc } from '../../lib/heroFrames'
 
 const clientLogos = [
@@ -43,6 +45,8 @@ const getHeroTitleIndex = (frameIndex, titleCount) => {
 
 const HERO_TICKER_START_FRAME = 340
 const HERO_TICKER_FRAME_STEP = 66
+const HERO_FRAME_PRELOAD_RADIUS = 10
+const HERO_FRAME_CACHE_RADIUS = 18
 
 const getHeroTickerIndex = (frameIndex, tickerCount) => {
   if (tickerCount <= 1 || frameIndex < HERO_TICKER_START_FRAME) {
@@ -126,10 +130,13 @@ function HeroSection() {
   const spanishHref = '/'
   const heroRef = useRef(null)
   const heroCanvasRef = useRef(null)
-  const heroFrameImagesRef = useRef([])
+  const heroVideoRef = useRef(null)
+  const heroFrameImagesRef = useRef(new Map())
+  const heroPendingFramesRef = useRef(new Set())
   const heroFrameIndexRef = useRef(0)
   const heroTitleIndexRef = useRef(0)
   const heroTickerIndexRef = useRef(0)
+  const isMobileRef = useRef(false)
   const [heroLogoScale, setHeroLogoScale] = useState(1)
   const [heroTitleIndex, setHeroTitleIndex] = useState(0)
   const [heroContentStyle, setHeroContentStyle] = useState(() => getHeroContentStyle(0))
@@ -141,22 +148,33 @@ function HeroSection() {
   const tickerWords = t('ticker.words', { returnObjects: true })
 
   useSectionReveal(heroRef, [heroTitles])
+  useViewportVideo(heroVideoRef)
+  const isHeroInViewport = useInViewport(heroRef, { threshold: 0.15 })
 
   useEffect(() => {
     let frameId = 0
     let isDisposed = false
+    const canvasContextRef = { current: null }
+    const loadedFrames = heroFrameImagesRef.current
+    const pendingFrames = heroPendingFramesRef.current
 
     const drawFrame = (frameIndex) => {
+      if (isMobileRef.current) {
+        return
+      }
+
       const canvas = heroCanvasRef.current
-      const image = heroFrameImagesRef.current[frameIndex]
+      const image = loadedFrames.get(frameIndex)
       if (!canvas || !image || !image.complete) {
         return
       }
 
-      const context = canvas.getContext('2d')
+      const context = canvasContextRef.current ?? canvas.getContext('2d')
       if (!context) {
         return
       }
+
+      canvasContextRef.current = context
 
       const canvasWidth = canvas.width
       const canvasHeight = canvas.height
@@ -180,9 +198,74 @@ function HeroSection() {
       context.drawImage(image, offsetX, offsetY, drawWidth, drawHeight)
     }
 
+    const unloadFrame = (frameIndex) => {
+      const image = loadedFrames.get(frameIndex)
+      if (!image) {
+        return
+      }
+
+      image.onload = null
+      image.src = ''
+      loadedFrames.delete(frameIndex)
+      pendingFrames.delete(frameIndex)
+    }
+
+    const ensureFrameLoaded = (frameIndex) => {
+      if (frameIndex < 0 || frameIndex >= HERO_FRAME_COUNT) {
+        return
+      }
+
+      if (
+        loadedFrames.has(frameIndex) ||
+        pendingFrames.has(frameIndex)
+      ) {
+        return
+      }
+
+      const image = new Image()
+      pendingFrames.add(frameIndex)
+      image.decoding = 'async'
+      image.src = getHeroFrameSrc(frameIndex)
+      image.onload = () => {
+        pendingFrames.delete(frameIndex)
+
+        if (isDisposed) {
+          return
+        }
+
+        loadedFrames.set(frameIndex, image)
+
+        if (frameIndex === heroFrameIndexRef.current || frameIndex === 0) {
+          drawFrame(heroFrameIndexRef.current)
+        }
+      }
+    }
+
+    const syncFrameWindow = (frameIndex) => {
+      for (
+        let preloadIndex = frameIndex - HERO_FRAME_PRELOAD_RADIUS;
+        preloadIndex <= frameIndex + HERO_FRAME_PRELOAD_RADIUS;
+        preloadIndex += 1
+      ) {
+        ensureFrameLoaded(preloadIndex)
+      }
+
+      loadedFrames.forEach((_, loadedFrameIndex) => {
+        if (Math.abs(loadedFrameIndex - frameIndex) > HERO_FRAME_CACHE_RADIUS) {
+          unloadFrame(loadedFrameIndex)
+        }
+      })
+    }
+
     const syncCanvasSize = () => {
       const canvas = heroCanvasRef.current
+      isMobileRef.current = window.matchMedia('(max-width: 767px)').matches
+
       if (!canvas) {
+        return
+      }
+
+      if (isMobileRef.current) {
         return
       }
 
@@ -195,6 +278,8 @@ function HeroSection() {
       canvas.style.width = `${viewportWidth}px`
       canvas.style.height = `${viewportHeight}px`
 
+      ensureFrameLoaded(heroFrameIndexRef.current)
+      syncFrameWindow(heroFrameIndexRef.current)
       drawFrame(heroFrameIndexRef.current)
     }
 
@@ -220,9 +305,7 @@ function HeroSection() {
 
       if (heroFrameIndexRef.current !== frameIndex) {
         heroFrameIndexRef.current = frameIndex
-        console.log(
-          `[HeroSection] active frame: frame-${String(frameIndex + 1).padStart(4, '0')}`,
-        )
+        syncFrameWindow(frameIndex)
         drawFrame(frameIndex)
       }
 
@@ -244,36 +327,24 @@ function HeroSection() {
       frameId = window.requestAnimationFrame(updateHeroProgress)
     }
 
-    heroFrameImagesRef.current = Array.from({ length: HERO_FRAME_COUNT }, (_, index) => {
-      const image = new Image()
-      image.decoding = 'async'
-      image.src = getHeroFrameSrc(index)
-      image.onload = () => {
-        if (isDisposed) {
-          return
-        }
-
-        if (index === 0 || index === heroFrameIndexRef.current) {
-          drawFrame(heroFrameIndexRef.current)
-        }
-      }
-      return image
-    })
-
     syncCanvasSize()
     requestUpdate()
     window.addEventListener('scroll', requestUpdate, { passive: true })
     window.addEventListener('resize', syncCanvasSize)
+    window.addEventListener('resize', requestUpdate)
 
     return () => {
       isDisposed = true
       cancelAnimationFrame(frameId)
-      heroFrameImagesRef.current.forEach((image) => {
+      loadedFrames.forEach((image) => {
         image.onload = null
+        image.src = ''
       })
-      heroFrameImagesRef.current = []
+      loadedFrames.clear()
+      pendingFrames.clear()
       window.removeEventListener('scroll', requestUpdate)
       window.removeEventListener('resize', syncCanvasSize)
+      window.removeEventListener('resize', requestUpdate)
     }
   }, [heroTitles, tickerWords.length])
 
@@ -282,10 +353,20 @@ function HeroSection() {
       <div className="hero-sticky">
         <div className="hero-media" aria-hidden="true">
           <canvas ref={heroCanvasRef} className="hero-canvas" />
+          <video
+            ref={heroVideoRef}
+            className="hero-video"
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          >
+            <source src="/assets/video/video-glimmer-extended.webm" type="video/webm" />
+          </video>
         </div>
         <div className="hero-isotipo" aria-hidden="true">
           <img
-            className="spin-loop hero-isotipo__image"
+            className={`hero-isotipo__image ${isHeroInViewport ? 'spin-loop is-motion-active' : 'spin-loop'}`}
             src="/assets/isotipo-blur.svg"
             alt=""
             style={{ '--spin-scale': heroLogoScale }}
@@ -400,7 +481,7 @@ function HeroSection() {
               <div className="hero-trust">
                 <p>{t('hero.trust')}</p>
                 <div className="hero-logo-row">
-                  <div className="hero-logo-track">
+                  <div className={`hero-logo-track ${isHeroInViewport ? 'is-motion-active' : ''}`}>
                     {[...clientLogos, ...clientLogos].map((logo, index) => (
                       <span
                         key={`${logo.name}-${index}`}

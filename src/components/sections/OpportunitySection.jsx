@@ -3,6 +3,7 @@ import gsap from 'gsap'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import useSectionReveal from '../../hooks/useSectionReveal'
+import useViewportVideo from '../../hooks/useViewportVideo'
 
 const getOpportunityScrollSpan = (lineCount) => `${Math.max(lineCount * 55, 220)}vh`
 
@@ -25,11 +26,13 @@ const getActiveOpportunityLine = (scrollProgress, opportunityLines) => {
 function OpportunitySection({ opportunityLines }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
+  const videoRef = useRef(null)
   const progressRef = useRef(0)
   const activeLineRef = useRef(null)
   const [scrollProgress, setScrollProgress] = useState(0)
 
   useSectionReveal(sectionRef, [opportunityLines])
+  useViewportVideo(videoRef)
 
   useEffect(() => {
     let animationFrameId = 0
@@ -68,9 +71,10 @@ function OpportunitySection({ opportunityLines }) {
   }, [])
 
   const activeLine = getActiveOpportunityLine(scrollProgress, opportunityLines)
+  const activeLineIndex = activeLine?.index ?? -1
 
   useLayoutEffect(() => {
-    if (!activeLineRef.current || !activeLine) {
+    if (!activeLineRef.current || activeLineIndex < 0) {
       return
     }
 
@@ -89,7 +93,7 @@ function OpportunitySection({ opportunityLines }) {
     return () => {
       animation.kill()
     }
-  }, [activeLine?.index])
+  }, [activeLineIndex])
 
   return (
     <section
@@ -100,12 +104,12 @@ function OpportunitySection({ opportunityLines }) {
       <div className="opportunity-sticky">
         <div className="opportunity-media" aria-hidden="true">
           <video
+            ref={videoRef}
             className="opportunity-video"
-            autoPlay
             loop
             muted
             playsInline
-            preload="auto"
+            preload="metadata"
           >
             <source src="/assets/video/opportunity-section.webm" type="video/webm" />
           </video>

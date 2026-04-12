@@ -1,11 +1,13 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
+import useInViewport from '../../hooks/useInViewport'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 function DeliverySection({ deliveryModes }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
+  const isSectionInViewport = useInViewport(sectionRef, { threshold: 0.2 })
 
   useSectionReveal(sectionRef, [deliveryModes])
 
@@ -39,17 +41,17 @@ function DeliverySection({ deliveryModes }) {
         <div className="delivery-visual" data-reveal style={{ '--reveal-delay': '180ms' }}>
           <div className="absolute aspect-square top-0 left-0 right-0 w-100% md:left-0 md:top-1/2 md:-translate-y-1/2 md:w-[1200px]" aria-hidden="true">
             <img
-              className="delivery-orbit-layer delivery-orbit-layer--outer"
+              className={`delivery-orbit-layer delivery-orbit-layer--outer ${isSectionInViewport ? 'is-motion-active' : ''}`}
               src="/assets/orbit/ultimo.svg"
               alt=""
             />
             <img
-              className="delivery-orbit-layer delivery-orbit-layer--middle"
+              className={`delivery-orbit-layer delivery-orbit-layer--middle ${isSectionInViewport ? 'is-motion-active' : ''}`}
               src="/assets/orbit/medio.svg"
               alt=""
             />
             <img
-              className="delivery-orbit-layer delivery-orbit-layer--center"
+              className={`delivery-orbit-layer delivery-orbit-layer--center ${isSectionInViewport ? 'is-motion-active' : ''}`}
               src="/assets/orbit/centro.svg"
               alt=""
             />

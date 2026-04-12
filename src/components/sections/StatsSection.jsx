@@ -1,11 +1,13 @@
 import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
+import useInViewport from '../../hooks/useInViewport'
 import useSectionReveal from '../../hooks/useSectionReveal'
 
 function StatsSection({ stats }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
+  const isSectionInViewport = useInViewport(sectionRef, { threshold: 0.2 })
   const leftCard = stats[0]
   const rightCard = stats[1]
 
@@ -34,7 +36,7 @@ function StatsSection({ stats }) {
             style={{ '--reveal-delay': '120ms' }}
           >
             <img className='absolute w-[480px] h-[480px] top-[-50%] right-[-25%]' src="assets/logo-outline-blue.svg" alt="" />
-            <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo-dark.svg" alt="" />
+            <img className={`ticker-logo spin-loop h-12 w-12 mb-12 ${isSectionInViewport ? 'is-motion-active' : ''}`} src="/assets/isotipo-dark.svg" alt="" />
             <strong className='type-title-big-size type-title-dark'>{leftCard.value}</strong>
             <p className='type-description-size text-description-light'>{leftCard.description}</p>
           </article>
@@ -45,7 +47,7 @@ function StatsSection({ stats }) {
             style={{ '--reveal-delay': '200ms' }}
           >
             <img className='absolute w-[480px] h-[480px] top-[-50%] right-[-25%]' src="assets/logo-outline-white.svg" alt="" />
-            <img className="ticker-logo spin-loop h-12 w-12 mb-12" src="/assets/isotipo.svg" alt="" />
+            <img className={`ticker-logo spin-loop h-12 w-12 mb-12 ${isSectionInViewport ? 'is-motion-active' : ''}`} src="/assets/isotipo.svg" alt="" />
             <strong className='type-title-big-size'>{rightCard.value}</strong>
             <p className='type-description-size'>{rightCard.description}</p>
           </article>

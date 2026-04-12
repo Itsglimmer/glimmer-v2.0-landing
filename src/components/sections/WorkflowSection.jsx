@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import useSectionReveal from '../../hooks/useSectionReveal'
+import useViewportVideo from '../../hooks/useViewportVideo'
 
 const workflowMedia = [
   { image: '/glimmer/deteccion.png', imageSide: 'right' },
@@ -64,24 +65,26 @@ WorkflowCard.propTypes = {
 function WorkflowSection({ workflowItems }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
+  const videoRef = useRef(null)
   const workflow = workflowItems.map((item, index) => ({
     ...item,
     ...workflowMedia[index],
   }))
 
   useSectionReveal(sectionRef, [workflowItems])
+  useViewportVideo(videoRef)
 
   return (
     <section className="workflow-section" id="producto" ref={sectionRef}>
       <div className="workflow-light" />
       <div className="workflow-video-wrap" data-reveal style={{ '--reveal-delay': '0ms' }}>
         <video
+          ref={videoRef}
           className="workflow-video"
-          autoPlay
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
         >
           <source src="/assets/video/how-it-works.webm" type="video/webm" />
         </video>

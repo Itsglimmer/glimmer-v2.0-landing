@@ -3,6 +3,7 @@ import Button from '../Button'
 import HeroNavLink from '../HeroNavLink'
 import useSectionReveal from '../../hooks/useSectionReveal'
 import { useRef } from 'react'
+import useViewportVideo from '../../hooks/useViewportVideo'
 
 const footerLinks = [
   { href: 'https://www.linkedin.com', label: 'Linkedin' },
@@ -15,8 +16,10 @@ const footerLinks = [
 function FaqCtaSection() {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
+  const videoRef = useRef(null)
 
   useSectionReveal(sectionRef)
+  useViewportVideo(videoRef)
 
   return (
     <section className="faq-cta-section" ref={sectionRef}>
@@ -24,12 +27,12 @@ function FaqCtaSection() {
         <div className="faq-cta-card" data-reveal style={{ '--reveal-delay': '60ms' }}>
           <div className="faq-cta-media" aria-hidden="true">
             <video
+              ref={videoRef}
               className="faq-cta-video"
-              autoPlay
               loop
               muted
               playsInline
-              preload="auto"
+              preload="metadata"
             >
               <source src="/assets/video/video-glimmer-extended.webm" type="video/webm" />
             </video>
