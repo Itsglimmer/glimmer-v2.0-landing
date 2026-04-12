@@ -222,7 +222,44 @@ function UseCasesSectionStack({ useCases }) {
               {t('useCases.description')}
             </p>
           </div>
+          
         </div>
+         <div
+            className="use-cases-stack-controls text-description-light-surface text-center flex items-center gap-3 justify-center"
+            aria-live="polite"
+          >
+            <button
+              type="button"
+              className="use-cases-stack-arrow"
+              aria-label="Caso anterior"
+              onPointerDown={(event) => {
+                event.stopPropagation()
+              }}
+              onClick={(event) => {
+                event.stopPropagation()
+                showPreviousCase()
+              }}
+            >
+              &#8592;
+            </button>
+            <strong>{String(activeIndex + 1).padStart(2, '0')}</strong>
+            <span>/</span>
+            <span>{String(useCases.length).padStart(2, '0')}</span>
+            <button
+              type="button"
+              className="use-cases-stack-arrow"
+              aria-label="Siguiente caso"
+              onPointerDown={(event) => {
+                event.stopPropagation()
+              }}
+              onClick={(event) => {
+                event.stopPropagation()
+                showNextCase()
+              }}
+            >
+              &#8594;
+            </button>
+          </div>
 
         <div
           ref={stageRef}
@@ -266,42 +303,6 @@ function UseCasesSectionStack({ useCases }) {
               </article>
             ))}
           </div>
-              <div
-                className="use-cases-stack-controls text-description-light-surface text-center flex items-center gap-3 justify-center"
-                aria-live="polite"
-              >
-                <button
-                  type="button"
-                  className="use-cases-stack-arrow"
-                  aria-label="Caso anterior"
-                  onPointerDown={(event) => {
-                    event.stopPropagation()
-                  }}
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    showPreviousCase()
-                  }}
-                >
-                  &#8592;
-                </button>
-                <strong>{String(activeIndex + 1).padStart(2, '0')}</strong>
-                <span>/</span>
-                <span>{String(useCases.length).padStart(2, '0')}</span>
-                <button
-                  type="button"
-                  className="use-cases-stack-arrow"
-                  aria-label="Siguiente caso"
-                  onPointerDown={(event) => {
-                    event.stopPropagation()
-                  }}
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    showNextCase()
-                  }}
-                >
-                  &#8594;
-                </button>
-              </div>
         </div>
       </div>
     </section>
