@@ -4,6 +4,7 @@ import DeliverySection from './components/sections/DeliverySection'
 import FaqCtaSection from './components/sections/FaqCtaSection'
 import FaqSection from './components/sections/FaqSection'
 import HeroSection from './components/sections/HeroSection'
+import LegalPage from './components/LegalPage'
 import LogoFooterSection from './components/sections/LogoFooterSection'
 import OpportunitySection from './components/sections/OpportunitySection'
 import ProblemSectionNew from './components/sections/ProblemSectionNew'
@@ -12,9 +13,13 @@ import StatsSection from './components/sections/StatsSection'
 import TestimonialsSection from './components/sections/TestimonialsSection'
 import UseCasesSectionStack from './components/sections/UseCasesSectionStack'
 import WorkflowSection from './components/sections/WorkflowSection'
+import { getLegalDocumentByPath, getPathLanguage } from './legal/content'
 
 function App() {
   const { t, i18n } = useTranslation()
+  const pathname = window.location.pathname
+  const pathLanguage = getPathLanguage(pathname)
+  const legalDocument = getLegalDocumentByPath(pathname)
   const stats = t('stats.items', { returnObjects: true })
   const painPoints = t('problem.painPoints', { returnObjects: true })
   const workflowItems = t('workflow.items', { returnObjects: true })
@@ -25,9 +30,20 @@ function App() {
   const testimonials = t('testimonials.items', { returnObjects: true })
 
   useEffect(() => {
-    document.documentElement.lang = i18n.resolvedLanguage || 'es'
-    document.title = t('meta.title')
-  }, [i18n.resolvedLanguage, t])
+    if (i18n.resolvedLanguage !== pathLanguage) {
+      i18n.changeLanguage(pathLanguage)
+    }
+  }, [i18n, i18n.resolvedLanguage, pathLanguage])
+
+  useEffect(() => {
+    const resolvedLanguage = i18n.resolvedLanguage || pathLanguage
+    document.documentElement.lang = resolvedLanguage
+    document.title = legalDocument ? `Glimmer | ${legalDocument.title}` : t('meta.title')
+  }, [i18n.resolvedLanguage, legalDocument, pathLanguage, t])
+
+  if (legalDocument) {
+    return <LegalPage document={legalDocument} />
+  }
 
   return (
     <>

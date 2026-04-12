@@ -1,96 +1,106 @@
 const es = {
   meta: {
-    title: 'Glimmer | Inteligencia de mercado impulsada por IA',
+    title: 'Glimmer | Sistema de Inteligencia de Mercado impulsado por Inteligencia Artificial',
   },
   nav: {
-    casos: 'Casos',
-    producto: 'Producto',
+    casos: 'Casos de uso',
+    producto: 'Cómo funciona',
     impacto: 'Impacto',
     cta: 'Solicitar demo',
   },
   hero: {
     titles: [
       ['Detecta lo que importa.', 'Decide mejor.'],
-      ['Sin busqueda.', 'Sin ruido.'],
+      ['Sin búsqueda.', 'Sin ruido.'],
       ['Sin cambiar de', 'herramientas.'],
     ],
     description:
-      'Glimmer es una plataforma de inteligencia de mercado impulsada por IA que transforma el ruido en senales estrategicas para la alta direccion.',
-    trust: 'Empresas que ya confian en nosotros',
-    secondaryCta: 'Ver como funciona',
+      'Glimmer es una plataforma de inteligencia de mercado impulsada por IA que detecta señales críticas del mercado, las interpreta para tu empresa y las convierte en decisiones accionables.',
+    trust: 'Empresas que ya utilizan Glimmer',
+    secondaryCta: 'Ver cómo funciona',
   },
   ticker: {
-    copy: 'Glimmer nacio para ayudarte con...',
-    ariaLabel: 'Senales',
+    copy: '',
+    ariaLabel: 'Señales',
     cta: 'Solicitar demo',
-    words: ['Competidores', 'Regulacion', 'Tecnologia', 'Riesgos', 'Oportunidades'],
+    words: ['Competidores', 'Regulación', 'Tecnología', 'Riesgos', 'Oportunidades'],
   },
   stats: {
     eyebrow: 'El coste oculto',
-    title: 'Detecta lo que importa.',
+    title: 'Cada semana aparecen señales del mercado capaces de cambiar la dirección de tu empresa.',
     description:
-      'El coste real no es el software. Es la senal que nunca se detecta, la oportunidad perdida o el riesgo no mitigado.',
+      'El coste real no es el software. Es la señal que pasa desapercibida, la oportunidad perdida o el riesgo no mitigado.',
     chip: 'Impacto',
     items: [
       {
         value: '19%',
         description:
-          'del tiempo de perfiles con alta responsabilidad se dedica a buscar, supervisar e interpretar informacion de mercado. Casi un dia a la semana.',
+          'Los perfiles con alta responsabilidad dedican hasta un 19% de su tiempo a buscar, supervisar, interpretar y analizar información de mercado. Casi un día a la semana.',
       },
       {
-        value: '45k€',
+        value: '45.000 EUR',
         description:
-          'coste anual visible en procesos manuales de inteligencia de mercado por perfil directivo. Sin contar el coste de las senales no detectadas.',
+          'Coste anual visible en procesos manuales de inteligencia de mercado por perfil directivo. Sin incluir el coste de las señales no detectadas.',
       },
     ],
   },
   problem: {
     eyebrow: 'El problema',
-    title: 'Las empresas no tienen un sistema de inteligencia de mercado centralizado',
+    title:
+      'Las empresas no cuentan con un sistema centralizado de inteligencia de mercado para entender qué está ocurriendo en su industria.',
     description:
       'Las empresas no tienen un sistema de inteligencia de mercado centralizado para entender lo que ocurre en su industria.',
     painPoints: [
       { title: 'Decenas de fuentes dispersas.', tone: 'red' },
-      { title: 'Horas de busqueda manual', tone: 'blue' },
-      { title: 'Senales fragmentadas.', tone: 'cyan' },
-      { title: 'Informacion sin contexto', tone: 'yellow' },
-      { title: 'Nadie es responsable de actuar', tone: 'pink' },
+      { title: 'Horas de búsqueda manual.', tone: 'blue' },
+      { title: 'Señales fragmentadas.', tone: 'cyan' },
+      { title: 'Información sin contexto.', tone: 'yellow' },
+      { title: 'Nadie es responsable de actuar.', tone: 'pink' },
     ],
   },
   workflow: {
-    eyebrow: 'Como funciona',
-    title:
-      'El radar inteligente que transforma senales criticas en decisiones accionables y medibles',
-    description:
-      'Una unidad de inteligencia de mercado impulsada por agentes de IA que trabajan para tu equipo 24/7.',
+    eyebrow: 'Cómo funciona',
+    title: 'Monitorizamos continuamente fuentes, bases de datos y señales del mercado en tiempo real.',
+    description: '',
     items: [
       {
         id: '01',
-        title: 'Deteccion',
+        title: 'Detección',
         description:
-          'Monitorizamos continuamente fuentes, bases de datos y senales del mercado en tiempo real.',
+          'Monitorizamos continuamente fuentes, bases de datos y señales del mercado en tiempo real.',
         bullets: [
-          'Competidores, adquisiciones y cambios de posicionamiento.',
-          'Clientes, expansion y necesidades emergentes.',
-          'Regulacion, normativas y politicas que impactan la industria.',
-          'Tecnologia, innovaciones y nuevos modelos de negocio.',
-          'Financiacion, ayudas y nuevas oportunidades.',
-          'Ecosistema, startups, alianzas e inversiones.',
+          'Competidores: Movimientos estratégicos, adquisiciones, lanzamientos o cambios de posicionamiento.',
+          'Clientes: Cambios en estrategia, nuevos proyectos, expansión o necesidades emergentes.',
+          'Regulación: Cambios regulatorios, normativas o políticas que impactan tu industria.',
+          'Tecnología: Innovaciones que reducen costes, cambian procesos o redefinen modelos de negocio.',
+          'Financiación: Rondas de inversión, ayudas públicas, subvenciones u oportunidades de financiación.',
+          'Ecosistema: Startups, alianzas, inversiones y tendencias del mercado.',
+          'Licitaciones: Concursos públicos o privados relevantes para tu sector.',
+          'Detectamos las señales que afectan a la dirección de tu negocio.',
         ],
       },
       {
         id: '02',
-        title: 'Interpretacion',
-        description:
-          'Contextualizamos la senal del mercado en un caso de negocio para tu empresa.',
-        bullets: ['Que ha ocurrido', 'Por que importa', 'Que impacto puede tener'],
+        title: 'Interpretación',
+        description: 'Contextualizamos cada señal de mercado en un caso de negocio para tu empresa.',
+        bullets: [
+          'Qué ha ocurrido',
+          'Por qué importa',
+          'Qué impacto puede tener',
+          'Sin ruido.',
+          'Hecho a medida para tu negocio.',
+        ],
       },
       {
         id: '03',
-        title: 'Activacion',
-        description:
-          'Las senales dejan de ser informacion y se convierten en decisiones accionables desde la plataforma.',
-        bullets: ['Responsable asignado', 'Siguiente paso definido', 'Seguimiento activado'],
+        title: 'Activación',
+        description: 'Las señales dejan de ser información y se convierten en decisiones.',
+        bullets: [
+          'Utiliza nuestros agentes conversacionales para activar acciones directamente desde la plataforma.',
+          'Responsable asignado',
+          'Siguiente paso definido (redactar briefs, emails, estrategias de posicionamiento, posts, benchmarks, análisis)',
+          'Seguimiento de ejecución activado',
+        ],
       },
     ],
   },
@@ -98,134 +108,133 @@ const es = {
     eyebrow: 'Coste de oportunidad',
     lead: 'El mayor coste para una empresa no es el software.',
     lines: [
-      'Es la senal de mercado que no se detecta.',
-      'Una regulacion que cambia el mercado.',
-      'Un competidor que se posiciona antes.',
-      'Una tecnologia que reduce costes.',
-      'Una oportunidad que nadie vio.',
+      'Es la señal de mercado que nunca se detecta.',
+      'Una regulación que reconfigura el mercado',
+      'Un competidor que se posiciona antes',
+      'Una tecnología que reduce costes',
+      'Una oportunidad que nadie vio',
       'Las empresas que controlan lo que ocurre en su industria ganan.',
       'Las que no, pagan el precio.',
     ],
   },
   useCases: {
-    eyebrow: 'Donde aplica',
+    eyebrow: 'Dónde aplica',
     title: 'Casos de uso',
     description:
-      'Equipos que operan en entornos complejos utilizan Glimmer para monitorizar el mercado, competidores, detectar oportunidades y anticipar riesgos.',
-    core: 'Sectores y equipos que necesitan detectar movimientos del mercado antes que el resto.',
+      'Equipos que operan en entornos complejos utilizan Glimmer para monitorizar mercados, competidores, detectar oportunidades y anticipar riesgos.',
+    core: '',
     items: [
       {
-        title: 'Direccion general',
+        title: 'Industria y Manufactura',
         copy:
-          'Equipos directivos que necesitan contexto claro para priorizar decisiones, anticipar riesgos y reaccionar antes que el mercado.',
+          'Seguimiento de competidores, regulación técnica, materias primas y tecnologías industriales.',
       },
       {
-        title: 'Desarrollo de negocio',
+        title: 'Energía y Sostenibilidad',
         copy:
-          'Areas comerciales que monitorizan cuentas, competidores, ayudas, licitaciones y oportunidades para activar nuevas conversaciones.',
+          'Cambios regulatorios, transición energética, proyectos estratégicos y movimientos del mercado.',
       },
       {
-        title: 'Compliance',
+        title: 'Servicios Profesionales',
         copy:
-          'Equipos que necesitan detectar cambios regulatorios, nuevas obligaciones y movimientos del sector con tiempo de anticipacion.',
+          'Despachos, consultoras y firmas especializadas que anticipan cambios regulatorios y tendencias de mercado.',
       },
       {
-        title: 'Marketing',
+        title: 'Agencias de Marketing',
         copy:
-          'Responsables que siguen narrativas, campañas, posicionamientos y cambios competitivos para ajustar el mensaje con rapidez.',
+          'Cambios en plataformas, algoritmos, tendencias de consumo y movimientos del ecosistema digital.',
       },
       {
-        title: 'Innovacion',
-        copy:
-          'Areas que observan tecnologias, startups, alianzas y nuevos modelos para identificar palancas reales de ventaja.',
+        title: 'Real Estate',
+        copy: 'Evolución del mercado, regulación urbanística, inversión y dinámicas de demanda.',
       },
       {
-        title: 'Producto',
+        title: 'Sector Público',
         copy:
-          'Equipos que necesitan senales de mercado para detectar necesidades emergentes, cambios de demanda y espacios sin cubrir.',
+          'Administraciones que detectan innovación, cambios regulatorios y oportunidades estratégicas.',
+      },
+      {
+        title: 'Otros Sectores Regulados',
+        copy:
+          'Finanzas, seguros, gaming, salud y otros sectores donde anticiparse a los cambios del entorno es crítico.',
       },
     ],
   },
   delivery: {
-    eyebrow: 'Donde opera',
-    title: 'Donde lo necesitas, cuando lo necesitas.',
+    eyebrow: 'Dónde opera',
+    title: 'Donde lo necesitas. Cuando importa.',
     items: [
       {
         title: '01 - Web App',
         copy:
-          'Accede a la plataforma desde cualquier dispositivo y consulta las senales detectadas, su contexto y las acciones recomendadas.',
+          'Accede a la plataforma desde cualquier dispositivo y revisa las señales detectadas, su contexto y las acciones recomendadas.',
       },
       {
         title: '02 - Microsoft Teams & Slack',
         copy:
-          'Recibe alertas directamente en tus canales de trabajo para que el equipo pueda evaluar impacto y decidir sin salir de su workflow.',
+          'Recibe alertas directamente en los canales de trabajo para que los equipos evalúen el impacto y decidan sin salir de su workflow.',
       },
       {
         title: '03 - Gmail',
         copy:
-          'Notificaciones claras cuando aparece una senal relevante, para mantener visibilidad incluso fuera de la plataforma.',
+          'Notificaciones claras cuando aparece una señal relevante para mantener visibilidad incluso fuera de la plataforma.',
       },
       {
         title: '04 - Integraciones avanzadas',
         copy:
-          'En planes avanzados, Glimmer puede integrarse con el ecosistema tecnologico de la empresa para adaptar la entrega de alertas y senales a los flujos de trabajo existentes.',
+          'En los planes avanzados, Glimmer puede integrarse con el ecosistema tecnológico de la empresa para adaptar la entrega de alertas a los flujos de trabajo existentes.',
       },
     ],
   },
   faqs: {
     eyebrow: 'Preguntas frecuentes',
-    titleLines: ['¿Tienes', 'preguntas?', 'Tenemos las', 'respuestas'],
+    titleLines: '¿Preguntas? Tenemos respuestas',
     items: [
       {
-        question: '¿En qué se diferencia Glimmer de herramientas como newsletters, RSS o ChatGPT?',
+        question: '¿En qué se diferencia Glimmer de newsletters, RSS o ChatGPT?',
         answer:
-          'Glimmer no se limita a recopilar información. Detecta señales relevantes, las interpreta en el contexto de tu empresa y las activa como decisiones accionables para el equipo.',
+          'La mayoría de las herramientas ayudan a encontrar información de forma reactiva. Glimmer está diseñado para algo distinto. Detectar señales críticas del mercado, interpretarlas en el contexto de tu empresa y convertirlas en decisiones accionables dentro del equipo. No es una herramienta de consumo de información o de búsqueda. Es una infraestructura proactiva de decisión adaptada al contexto de tu empresa.',
       },
       {
         question: '¿Cómo personaliza Glimmer las señales para cada empresa?',
         answer:
-          'El sistema se configura según tu sector, competidores, prioridades estratégicas, mercados y riesgos. Así, cada alerta llega filtrada y contextualizada para tu realidad operativa.',
+          'Glimmer se adapta al contexto específico de cada organización. Durante la configuración inicial definimos el entorno de mercado de la empresa, incluyendo industria, mercados clave, competidores, clientes relevantes y prioridades estratégicas. A partir de ahí, el sistema detecta y prioriza automáticamente las señales que realmente pueden impactar tu negocio.',
       },
       {
-        question: '¿Qué personas dentro de la empresa suelen utilizar Glimmer?',
+        question: '¿Quién suele usar Glimmer dentro de una empresa?',
         answer:
-          'Normalmente lo utilizan dirección general, estrategia, desarrollo de negocio, innovación, compliance, marketing y producto. Cualquier equipo que necesite detectar cambios antes de que impacten.',
+          'Glimmer está diseñado para perfiles con responsabilidad estratégica o exposición directa al mercado. Dirección general, estrategia y desarrollo de negocio, innovación y transformación, equipos comerciales, marketing y análisis de mercado, y operaciones. El objetivo es que quienes toman decisiones tengan acceso directo a las señales que pueden impactar en su área.',
       },
       {
         question: '¿Cómo garantiza Glimmer la calidad de la información?',
         answer:
-          'Combinamos monitorización continua de fuentes relevantes con capas de validación, interpretación y priorización para reducir ruido y elevar la calidad de cada señal que llega al equipo.',
+          'Glimmer analiza continuamente fuentes abiertas relevantes y utiliza modelos de inteligencia artificial para detectar señales que realmente pueden tener impacto. Cada señal se estructura con contexto, impacto potencial y recomendaciones claras para facilitar la evaluación del equipo. El objetivo no es mostrar más información, sino filtrar el ruido y destacar únicamente lo que puede cambiar decisiones.',
       },
       {
         question: '¿Cuánto tiempo necesita mi equipo para usar Glimmer?',
         answer:
-          'Muy poco. La plataforma está diseñada para integrarse en el flujo habitual del equipo, con señales listas para revisar, entender y accionar sin procesos manuales largos.',
+          'Glimmer reduce hasta un 90% del tiempo dedicado a procesos tradicionales de investigación manual. Las señales aparecen ya interpretadas y contextualizadas, para que los equipos puedan centrarse directamente en evaluar el impacto y tomar decisiones.',
       },
       {
         question: '¿Cuánto tiempo tarda la implementación?',
         answer:
-          'Depende del alcance, pero el despliegue inicial suele ser ágil. La puesta en marcha incluye definición de foco, configuración de señales y adaptación a los canales de entrega.',
+          'Glimmer no es una herramienta plug and play. Para asegurar que el sistema detecte las señales que realmente importan, primero realizamos un proceso de configuración para entender el negocio, las áreas a monitorizar y el nivel de cobertura deseado. La tecnología y la IA ayudan a acelerar el proceso, garantizando al mismo tiempo una configuración rigurosa. El tiempo medio de implementación es de alrededor de un mes para empresas medianas y de entre uno y tres meses para organizaciones enterprise.',
       },
       {
-        question: '¿Qué pricing tiene la plataforma?',
+        question: '¿Qué modelo de pricing tiene la plataforma?',
         answer:
-          'El pricing depende del número de señales, áreas monitorizadas, usuarios y nivel de integración requerido. Se ajusta al caso de uso y al nivel de profundidad que necesita cada empresa.',
+          'Glimmer ofrece diferentes planes de suscripción que escalan principalmente según cobertura de señales, número de usuarios y nivel de integración. Esto permite a las empresas empezar con un alcance concreto y ampliarlo progresivamente a medida que el sistema genera valor para más equipos. Para recibir una propuesta adaptada a tu contexto, puedes solicitar una demo.',
       },
       {
         question: '¿Qué nivel de soporte ofrece Glimmer?',
         answer:
-          'Ofrecemos acompañamiento durante la puesta en marcha, soporte operativo continuo y evolución de la configuración para que la plataforma siga alineada con tus prioridades.',
-      },
-      {
-        question: '¿Cómo mide Glimmer el impacto de la información en la empresa?',
-        answer:
-          'Cada señal puede conectarse con decisiones, responsables y seguimiento. Eso permite ver qué información genera movimiento real, qué oportunidades se activan y qué riesgos se anticipan a tiempo.',
+          'Durante la implementación trabajamos estrechamente con cada cliente para adaptar el sistema a su contexto y asegurar que las señales detectadas sean relevantes. Después, proporcionamos soporte continuo para ajustar la cobertura de señales, incorporar nuevas áreas estratégicas y optimizar la adopción dentro del equipo. Nuestro objetivo es que Glimmer se convierta en una capa estable de inteligencia de mercado dentro de la organización.',
       },
     ],
   },
   faqCta: {
-    title: 'Empieza con Glimmer, donde las señales del mercado se convierten en acción',
-    description: 'Empieza con Glimmer, donde las señales del mercado se convierten en acción',
+    title: 'Donde las señales del mercado se convierten en acción',
+    description: '',
   },
   testimonials: {
     eyebrow: 'Testimonios',
@@ -233,32 +242,31 @@ const es = {
     items: [
       {
         quote:
-          'Glimmer nos permite detectar movimientos de competidores mucho antes y reaccionar con tiempo de cara a nuevas estrategias de posicionamiento.',
+          'Glimmer nos permite detectar movimientos de competidores mucho antes y reaccionar a tiempo con nuevas estrategias de posicionamiento.',
         role: 'Director de Estrategia',
       },
       {
         quote:
-          'Antes soliamos perseguir de forma constante las tendencias que afectan a nuestros clientes. Con Glimmer, hemos eliminado todo ese proceso manual.',
+          'Nos ayuda a identificar qué tecnologías pueden impactar realmente en nuestro negocio.',
+        role: 'Director de Tecnología',
+      },
+      {
+        quote:
+          'El valor está en el contexto y la personalización que antes solo podía aportar un consultor tradicional. Las señales ya llegan interpretadas para la toma de decisiones.',
+        role: 'Director de Operaciones e Innovación',
+      },
+      {
+        quote:
+          'Antes perseguíamos constantemente las tendencias que afectaban a nuestros clientes. Con Glimmer eliminamos ese proceso manual.',
         role: 'Director de Marketing',
       },
       {
         quote:
-          'Nos ayuda a identificar que tecnologias realmente pueden impactar nuestro negocio.',
-        role: 'Director de Tecnologia',
-      },
-      {
-        quote:
-          'Nos permite detectar cambios regulatorios relevantes con tiempo suficiente para anticipar impacto.',
+          'Nos permite detectar cambios regulatorios relevantes con suficiente antelación para anticipar su impacto.',
         role: 'Director de Compliance',
       },
       {
-        quote:
-          'El valor esta en el contexto y la personalizacion que antes solo te podia aportar un consultor tradicional. Las senales ya llegan interpretadas para tomar decisiones.',
-        role: 'Director de Operaciones e Innovacion',
-      },
-      {
-        quote:
-          'Detectamos licitaciones relevantes antes que muchos competidores.',
+        quote: 'Detectamos licitaciones relevantes antes que muchos competidores.',
         role: 'Director de Desarrollo de Negocio',
       },
     ],

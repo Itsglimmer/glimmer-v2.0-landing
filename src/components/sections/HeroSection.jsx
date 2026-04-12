@@ -120,6 +120,10 @@ const getHeroTickerStyle = (frameIndex) => {
 
 function HeroSection() {
   const { t } = useTranslation()
+  const currentPath = window.location.pathname
+  const isEnglishActive = currentPath.startsWith('/en')
+  const englishHref = '/en'
+  const spanishHref = '/'
   const heroRef = useRef(null)
   const heroCanvasRef = useRef(null)
   const heroFrameImagesRef = useRef([])
@@ -337,6 +341,25 @@ function HeroSection() {
                   {t('nav.impacto')}
                 </HeroNavLink>
               </nav>
+              <nav className="hero-language-links" aria-label="Language selector">
+                <HeroNavLink
+                  href={englishHref}
+                  className={isEnglishActive ? 'is-active-language' : ''}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  EN
+                </HeroNavLink>
+                <span className="hero-language-divider" aria-hidden="true">
+                  •
+                </span>
+                <HeroNavLink
+                  href={spanishHref}
+                  className={!isEnglishActive ? 'is-active-language' : ''}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  ES
+                </HeroNavLink>
+              </nav>
               <Button
                 href="mailto:hola@glimmer.ai"
                 className="hero-nav-cta"
@@ -392,22 +415,17 @@ function HeroSection() {
               </div>
 
               <div className="hero-button-row">
-                <Button
-                  href="mailto:hola@glimmer.ai"
-                  radius="full"
-                  background="white"
-                  fullWidth
-                >
+                <Button href="mailto:hola@glimmer.ai" radius="full" background="white">
                   {t('nav.cta')}
                 </Button>
                 <Button
-              href="#producto"
-              className="hero-nav-cta w-full"
-              radius="full"
-              background="transparentBlack"
-            >
-              {t('hero.secondaryCta')}
-            </Button>
+                  href="#producto"
+                  className="hero-nav-cta"
+                  radius="full"
+                  background="transparentBlack"
+                >
+                  {t('hero.secondaryCta')}
+                </Button>
               </div>
             </div>
           </div>

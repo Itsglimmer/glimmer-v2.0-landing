@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next'
 
 import en from './locales/en'
 import es from './locales/es'
+import { getPathLanguage } from '../legal/content'
 
 const resources = {
   en: {
@@ -16,6 +17,11 @@ const resources = {
 const getInitialLanguage = () => {
   if (typeof window === 'undefined') {
     return 'es'
+  }
+
+  const pathLanguage = getPathLanguage(window.location.pathname)
+  if (pathLanguage && resources[pathLanguage]) {
+    return pathLanguage
   }
 
   const language = window.navigator.language?.split('-')[0]
