@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import useSectionReveal from '../../hooks/useSectionReveal'
@@ -26,61 +26,12 @@ TestimonialCard.propTypes = {
 function TestimonialsSection({ testimonials }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
-  const [scrollDirection, setScrollDirection] = useState(0)
 
   useSectionReveal(sectionRef, [testimonials])
-
-  useEffect(() => {
-    let frameId = 0
-    let lastScrollY = window.scrollY
-
-    const updateDirection = () => {
-      frameId = 0
-
-      const currentScrollY = window.scrollY
-      const delta = currentScrollY - lastScrollY
-
-      if (Math.abs(delta) >= 2) {
-        setScrollDirection(delta > 0 ? 1 : -1)
-        lastScrollY = currentScrollY
-      }
-    }
-
-    const requestUpdate = () => {
-      if (!frameId) {
-        frameId = window.requestAnimationFrame(updateDirection)
-      }
-    }
-
-    window.addEventListener('scroll', requestUpdate, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', requestUpdate)
-
-      if (frameId) {
-        window.cancelAnimationFrame(frameId)
-      }
-    }
-  }, [])
-
-  const columns = useMemo(
-    () =>
-      testimonials.reduce(
-        (accumulator, item, index) => {
-          accumulator[index % 3].push({ item, index })
-          return accumulator
-        },
-        [[], [], []],
-      ),
-    [testimonials],
-  )
+  const marqueeItems = [...testimonials, ...testimonials]
 
   return (
-    <section
-      className="testimonials-section"
-      ref={sectionRef}
-      style={{ '--testimonial-scroll-direction': scrollDirection }}
-    >
+    <section className="testimonials-section" ref={sectionRef}>
       <div className="page-shell">
         <div data-reveal style={{ '--reveal-delay': '40ms' }}>
           <div className="section-header section-header--center">
@@ -91,17 +42,16 @@ function TestimonialsSection({ testimonials }) {
           </div>
         </div>
 
-        <div className="testimonials-columns">
-          {columns.map((column, columnIndex) => (
-            <div
-              className={`testimonials-column testimonials-column--${['left', 'center', 'right'][columnIndex]}`}
-              key={`testimonial-column-${columnIndex}`}
-            >
-              {column.map(({ item, index }) => (
-                <TestimonialCard item={item} key={item.quote} delay={`${120 + index * 70}ms`} />
-              ))}
-            </div>
-          ))}
+        <div className="testimonials-marquee" data-reveal style={{ '--reveal-delay': '120ms' }}>
+          <div className="testimonials-track">
+            {marqueeItems.map((item, index) => (
+              <TestimonialCard
+                item={item}
+                key={`${item.quote}-${index}`}
+                delay={`${120 + (index % testimonials.length) * 70}ms`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

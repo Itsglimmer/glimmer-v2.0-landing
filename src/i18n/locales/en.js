@@ -173,7 +173,7 @@ const en = {
   },
   faqs: {
     eyebrow: 'Frequently asked questions',
-    titleLines: ['Have', 'questions?', 'We have the', 'answers'],
+    titleLines: 'Have questions? We have the answers',
     items: [
       {
         question: 'How is Glimmer different from tools like newsletters, RSS, or ChatGPT?',

@@ -44,11 +44,7 @@ function FaqSection({ faqs }) {
         <div className="faq-copy" data-reveal style={{ '--reveal-delay': '40ms' }}>
           <span className="type-subheadline-size type-subheadline-gray">{t('faqs.eyebrow')}</span>
           <h2 className="type-title-big-size type-title-light pt-6">
-            {titleLines.map((line) => (
-              <span key={line} className="faq-title-line">
-                {line}
-              </span>
-            ))}
+            {t('faqs.titleLines')}
           </h2>
         </div>
 
