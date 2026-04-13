@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import HeroNav from './components/HeroNav'
 import DeliverySection from './components/sections/DeliverySection'
 import FaqCtaSection from './components/sections/FaqCtaSection'
+import FaqMiddleSection from './components/sections/FaqMiddleSection'
 import FaqSection from './components/sections/FaqSection'
 import HeroSection from './components/sections/HeroSection'
 import LegalPage from './components/LegalPage'
@@ -58,6 +59,7 @@ function App() {
         <DeliverySection deliveryModes={deliveryModes} />
         <TestimonialsSection testimonials={testimonials} />
         <FaqSection faqs={faqs} />
+        <FaqMiddleSection />
         <FaqCtaSection />
       </main>
       <LogoFooterSection />
