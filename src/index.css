@@ -66,6 +66,8 @@
 
   --padding-section: 128px;
   --delivery-orbit-scale: 1;
+
+  --logo-footer-height: min(34vh, 280px);
 }
 
 * {
@@ -426,7 +428,6 @@ select {
 }
 
 .logo-footer-section {
-  --logo-footer-height: min(34vh, 320px);
   position: fixed;
   right: 0;
   bottom: 0;
@@ -434,7 +435,6 @@ select {
   z-index: 0;
   height: var(--logo-footer-height);
   background: #ffffff;
-  /* border: 1px solid red; */
 }
 
 .logo-footer-shell {
@@ -2495,8 +2495,20 @@ select {
 
 @media (max-width: 640px) {
 
+  :root {
+    --logo-footer-height: min(24vh, 180px);
+  }
+
   .glimmer-page {
     margin-bottom: var(--logo-footer-height, 24vh);
+  }
+
+  .logo-footer-section {
+    height: var(--logo-footer-height);
+  }
+
+  .logo-footer-mark {
+    width: min(420px, 86vw);
   }
 
   .hero-section,
@@ -2813,14 +2825,6 @@ select {
     font-size: 13px;
   }
 
-  .logo-footer-section {
-    --logo-footer-height: min(24vh, 180px);
-  }
-
-  .logo-footer-mark {
-    width: min(420px, 86vw);
-  }
-
   .testimonials-marquee {
     overflow-x: auto;
     overflow-y: hidden;
@@ -2832,7 +2836,7 @@ select {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 640px) {
   .hero-nav-toggle {
     display: inline-flex;
     align-items: center;
