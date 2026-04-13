@@ -11,6 +11,7 @@ const useCaseCardBackgrounds = [
   '/assets/card-bg/use-04.svg',
   '/assets/card-bg/use-05.svg',
   '/assets/card-bg/use-06.svg',
+  '/assets/card-bg/use-07.svg',
 ]
 
 const stackSlots = [

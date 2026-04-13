@@ -38,7 +38,7 @@ const en = {
           'Senior profiles spend up to 19% of their time searching, monitoring, interpreting and analysing market information. Almost one day per week.',
       },
       {
-        value: 'EUR 45,000',
+        value: 'EUR 35,000',
         description:
           'Annual visible cost in manual market intelligence processes per management profile. Not including the cost of undetected signals.',
       },

@@ -2144,7 +2144,22 @@ select {
   transform: rotate(45deg);
 }
 
+.faq-answer-motion {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 220ms ease;
+}
+
+.faq-item.is-open .faq-answer-motion {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
 .faq-answer-wrap {
+  overflow: hidden;
   padding: 0 64px 28px 0;
 }
 
@@ -2246,6 +2261,16 @@ select {
 .faq-cta-content .ui-button {
   width: fit-content;
   min-width: 184px;
+}
+
+.faq-cta-logo-row {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.faq-cta-trust {
+  width: min(100%, 720px);
 }
 
 .faq-cta-links {
