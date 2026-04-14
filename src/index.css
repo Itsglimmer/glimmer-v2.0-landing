@@ -2516,8 +2516,16 @@ select {
     display: none;
   }
 
+  .hero-media {
+    transform: translate3d(0, -35%, 0);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.85) 28%, #000 52%);
+    mask-image: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.85) 28%, #000 52%);
+  }
+
   .hero-video {
     display: block;
+    height: 125%;
+    max-width: none;
   }
 
   .hero-isotipo {
