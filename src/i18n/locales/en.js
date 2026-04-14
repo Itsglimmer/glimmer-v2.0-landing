@@ -70,6 +70,7 @@ const en = {
         title: 'Detection',
         description:
           'We continuously monitor sources, databases and market signals in real time.',
+        highlight: 'We detect the signals that affect the direction of your business.',
         bullets: [
           'Competitors: Strategic moves, acquisitions, launches or positioning changes.',
           'Clients: Strategy changes, new projects, expansion or emerging needs.',
@@ -78,7 +79,6 @@ const en = {
           'Funding: Investment rounds, public funding, grants or financing opportunities.',
           'Ecosystem: Startups, partnerships, investments and market trends.',
           'Tenders: Public or private tenders relevant to your sector.',
-          'We detect the signals that affect the direction of your business.',
         ],
       },
       {

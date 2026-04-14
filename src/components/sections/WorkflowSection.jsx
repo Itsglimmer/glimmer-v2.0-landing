@@ -18,6 +18,7 @@ function WorkflowCard({ item, delay }) {
           {item.id} - {item.title}
         </p>
         <p className="workflow-description">{item.description}</p>
+        {item.highlight ? <p className="workflow-description mt-[16px]"><strong>{item.highlight}</strong></p> : null}
       </div>
       <ul className="workflow-list">
         {item.bullets.map((bullet) => (
@@ -55,6 +56,7 @@ WorkflowCard.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
+    highlight: PropTypes.string,
     bullets: PropTypes.arrayOf(PropTypes.string).isRequired,
     image: PropTypes.string.isRequired,
     imageSide: PropTypes.string.isRequired,
@@ -119,6 +121,7 @@ WorkflowSection.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
+      highlight: PropTypes.string,
       bullets: PropTypes.arrayOf(PropTypes.string).isRequired,
     }),
   ).isRequired,

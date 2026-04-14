@@ -70,6 +70,7 @@ const es = {
         title: 'Detección',
         description:
           'Monitorizamos continuamente fuentes, bases de datos y señales del mercado en tiempo real.',
+        highlight: 'Detectamos las señales que afectan a la dirección de tu negocio.',
         bullets: [
           'Competidores: Movimientos estratégicos, adquisiciones, lanzamientos o cambios de posicionamiento.',
           'Clientes: Cambios en estrategia, nuevos proyectos, expansión o necesidades emergentes.',
@@ -78,7 +79,6 @@ const es = {
           'Financiación: Rondas de inversión, ayudas públicas, subvenciones u oportunidades de financiación.',
           'Ecosistema: Startups, alianzas, inversiones y tendencias del mercado.',
           'Licitaciones: Concursos públicos o privados relevantes para tu sector.',
-          'Detectamos las señales que afectan a la dirección de tu negocio.',
         ],
       },
       {
