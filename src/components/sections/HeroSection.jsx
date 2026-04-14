@@ -21,8 +21,8 @@ const clientLogos = [
 
 const HERO_TITLE_START_FRAMES = [
   0,
-  73,
-  147,
+  35,
+  75,
 ]
 
 const getHeroTitleIndex = (frameIndex, titleCount) => {
@@ -41,10 +41,10 @@ const getHeroTitleIndex = (frameIndex, titleCount) => {
   return 0
 }
 
-const HERO_TICKER_START_FRAME = 340
-const HERO_TICKER_FRAME_STEP = 66
-const HERO_FRAME_PRELOAD_RADIUS = 300
-const HERO_FRAME_CACHE_RADIUS = 300
+const HERO_TICKER_START_FRAME = 170
+const HERO_TICKER_FRAME_STEP = 33
+const HERO_FRAME_PRELOAD_RADIUS = 150
+const HERO_FRAME_CACHE_RADIUS = 150
 
 const getHeroTickerIndex = (frameIndex, tickerCount) => {
   if (tickerCount <= 1 || frameIndex < HERO_TICKER_START_FRAME) {
@@ -58,9 +58,9 @@ const getHeroTickerIndex = (frameIndex, tickerCount) => {
 }
 
 const getHeroLogoScale = (frameIndex) => {
-  const introEndFrame = 279
-  const outroStartFrame = 280
-  const outroEndFrame = 294
+  const introEndFrame = 279/2
+  const outroStartFrame = 280/2
+  const outroEndFrame = 294/2
   const introScale = 1.08
 
   if (frameIndex <= introEndFrame) {
@@ -76,8 +76,8 @@ const getHeroLogoScale = (frameIndex) => {
 }
 
 const getHeroContentStyle = (frameIndex) => {
-  const fadeStartFrame = 280
-  const fadeEndFrame = 294
+  const fadeStartFrame = 280/2
+  const fadeEndFrame = 294/2
 
   if (frameIndex < fadeStartFrame) {
     return {
@@ -102,8 +102,8 @@ const getHeroContentStyle = (frameIndex) => {
 }
 
 const getHeroTickerStyle = (frameIndex) => {
-  const tickerStartFrame = 340
-  const tickerFadeSpan = 18
+  const tickerStartFrame = 170
+  const tickerFadeSpan = 9
 
   if (frameIndex < tickerStartFrame) {
     return {
