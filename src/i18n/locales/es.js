@@ -25,7 +25,7 @@ const es = {
     copy: '',
     ariaLabel: 'Señales',
     cta: 'Solicitar demo',
-    words: ['Competidores', 'Regulación', 'Tecnología', 'Riesgos', 'Oportunidades'],
+    words: ['Competidores', 'Regulación', 'Licitaciones', 'Riesgos', 'Oportunidades'],
   },
   stats: {
     eyebrow: 'El coste oculto',
@@ -37,7 +37,7 @@ const es = {
       {
         value: '19%',
         description:
-          'Los perfiles con alta responsabilidad dedican hasta un 19% de su tiempo a buscar, supervisar, interpretar y analizar información de mercado. Casi un día a la semana.',
+          'Los perfiles con alta responsabilidad dedican hasta un 19% de su tiempo a buscar, supervisar, interpretar y analizar información de mercado. Un día a la semana.',
       },
       {
         value: '125.000 EUR',
@@ -72,13 +72,13 @@ const es = {
           'Monitorizamos continuamente fuentes, bases de datos y señales del mercado en tiempo real.',
         highlight: 'Detectamos las señales que afectan a la dirección de tu negocio.',
         bullets: [
-          'Competidores: Movimientos estratégicos, adquisiciones, lanzamientos o cambios de posicionamiento.',
-          'Clientes: Cambios en estrategia, nuevos proyectos, expansión o necesidades emergentes.',
+          'Competidores y empresas a seguir: Movimientos estratégicos, adquisiciones, lanzamientos o cambios de posicionamiento.',
+          'Reputación de marca: Noticias, rankings o menciones que impactan en la percepción y posicionamiento de tu empresa.',
           'Regulación: Cambios regulatorios, normativas o políticas que impactan tu industria.',
-          'Tecnología: Innovaciones que reducen costes, cambian procesos o redefinen modelos de negocio.',
-          'Financiación: Rondas de inversión, ayudas públicas, subvenciones u oportunidades de financiación.',
-          'Ecosistema: Startups, alianzas, inversiones y tendencias del mercado.',
           'Licitaciones: Concursos públicos o privados relevantes para tu sector.',
+          'Financiación: Rondas de inversión, ayudas públicas, subvenciones u oportunidades de financiación.',
+          'Eventos: Eventos relevantes de tu sector o de tus clientes para detectar oportunidades y posicionarte.',
+          'Herramientas digitales: Nuevas funcionalidades, cambios o lanzamientos en herramientas clave para tu operativa.',
         ],
       },
       {
