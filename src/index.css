@@ -747,6 +747,11 @@ select {
   color: var(--hero-language-active);
 }
 
+.hero-language-switch--light-section .hero-language-switch__option:hover,
+.hero-language-switch--light-section .hero-language-switch__option:focus-visible {
+  color: var(--hero-language-active);
+}
+
 .hero-language-switch--desktop {
   position: absolute;
   top: 50%;
@@ -803,7 +808,6 @@ select {
   display: inline-flex;
   position: relative;
   overflow: hidden;
-  color: inherit;
   /* line-height: 1; */
   transition: color 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1975,6 +1979,7 @@ select {
 .use-cases-stack-stage {
   position: relative;
   /* min-height: 720px; */
+  padding-bottom: 32px;
 }
 
 .use-cases-stack-count {
@@ -2002,7 +2007,7 @@ select {
 
 .use-cases-stack-deck {
   position: relative;
-  min-height: 580px;
+  min-height: 480px;
   touch-action: pan-y;
   user-select: none;
   cursor: grab;
@@ -2940,7 +2945,7 @@ select {
   .use-cases-stack-stage,
   .use-cases-stack-deck {
     /* min-height: 540px; */
-    height: 540px;
+    min-height: 380px;
   }
 
   .use-cases-stack-count {

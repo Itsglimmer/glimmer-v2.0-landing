@@ -150,9 +150,10 @@ function OpportunitySection({ opportunityLines }) {
               </div>
             ) : null}
           </div>
-          <Button href="mailto:hola@glimmer.ai" radius="full" background="white">
-                                    {t('nav.cta')}
-                                  </Button>
+          <Button href="mailto:hola@glimmer.ai" radius="full" background="white" className='w-fit'>
+            {t('nav.cta')}
+            
+          </Button>
         </div>
       </div>
     </section>
