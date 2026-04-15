@@ -293,11 +293,11 @@ select {
   }
 
   .type-title-bigger-size {
-    @apply type-title text-[3rem] lg:text-[5rem] leading-[100%] tracking-[-0.02em];
+    @apply type-title text-[2.5rem] lg:text-[5rem] leading-[100%] tracking-[-0.02em];
   }
 
   .type-title-big-size {
-    @apply type-title text-[2.5rem] lg:text-[4rem] leading-[100%] tracking-[-0.02em];
+    @apply type-title text-[2rem] lg:text-[4rem] leading-[100%] tracking-[-0.02em];
   }
 
   .type-title-regular-size {
@@ -309,7 +309,7 @@ select {
   }
 
   .type-title-smaller-size {
-    @apply type-title text-[1rem] lg:text-[1rem] leading-[100%];
+    @apply type-title text-[14px] lg:text-[1rem] leading-[100%];
   }
 
   .type-subheadline-size {
@@ -1119,6 +1119,7 @@ select {
     radial-gradient(circle at 50% 8%, rgba(37, 74, 246, 0.24), transparent 36%),
     rgba(1, 1, 4, 0.82);
   backdrop-filter: blur(18px);
+  animation: demo-modal-backdrop-in 260ms ease-out both;
 }
 
 .demo-modal__dialog {
@@ -1136,6 +1137,7 @@ select {
     0 28px 90px rgba(0, 0, 0, 0.54),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
   padding: 32px;
+  animation: demo-modal-dialog-in 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .demo-modal__close {
@@ -1289,6 +1291,35 @@ select {
 
 .demo-modal__error {
   color: var(--demo-modal-danger);
+}
+
+@keyframes demo-modal-backdrop-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes demo-modal-dialog-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo-modal,
+  .demo-modal__dialog {
+    animation-duration: 1ms;
+  }
 }
 
 .ticker-section {
@@ -2921,7 +2952,7 @@ select {
   .hero-mobile-title-ticker {
     display: block;
     width: 100%;
-    padding-bottom: 24px;
+    padding-bottom: 8px;
     overflow: visible;
   }
 
@@ -3050,7 +3081,7 @@ select {
   }
 
   .ticker-word {
-    font-size: var(--type-title-small-size);
+    font-size: var(--type-title-smaller-size);
     line-height: var(--type-title-small-line-height);
     color: var(--bg-light);
   }

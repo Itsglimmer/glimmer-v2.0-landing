@@ -10,6 +10,7 @@ const initialFormState = {
 }
 
 const demoRequestEndpoint = import.meta.env.VITE_DEMO_REQUEST_ENDPOINT || '/api/demo-request'
+const modalExitAnimationMs = 320
 
 const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
 
@@ -17,17 +18,44 @@ function DemoRequestModal({ open, onOpenChange }) {
   const { t } = useTranslation()
   const dialogRef = useRef(null)
   const fullNameInputRef = useRef(null)
+  const [isRendered, setIsRendered] = useState(open)
   const [formValues, setFormValues] = useState(initialFormState)
   const [fieldErrors, setFieldErrors] = useState({})
   const [submitStatus, setSubmitStatus] = useState('idle')
+  const isClosing = isRendered && !open
 
   useEffect(() => {
-    if (!open) {
+    if (open) {
+      setIsRendered(true)
+      return undefined
+    }
+
+    const closeTimer = window.setTimeout(() => {
+      setIsRendered(false)
+    }, modalExitAnimationMs)
+
+    return () => {
+      window.clearTimeout(closeTimer)
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (!isRendered) {
       return undefined
     }
 
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [isRendered])
+
+  useEffect(() => {
+    if (!open) {
+      return undefined
+    }
 
     const focusTimer = window.setTimeout(() => {
       fullNameInputRef.current?.focus()
@@ -42,7 +70,6 @@ function DemoRequestModal({ open, onOpenChange }) {
     window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.overflow = previousOverflow
       window.clearTimeout(focusTimer)
       window.removeEventListener('keydown', handleKeyDown)
     }
@@ -56,7 +83,7 @@ function DemoRequestModal({ open, onOpenChange }) {
     }
   }, [open])
 
-  if (!open) {
+  if (!isRendered) {
     return null
   }
 
@@ -131,7 +158,7 @@ function DemoRequestModal({ open, onOpenChange }) {
   }
 
   const closeModal = () => {
-    if (submitStatus !== 'submitting') {
+    if (submitStatus !== 'submitting' && open) {
       onOpenChange(false)
     }
   }
@@ -143,12 +170,17 @@ function DemoRequestModal({ open, onOpenChange }) {
   }
 
   return (
-    <div className="demo-modal" role="presentation" onMouseDown={handleBackdropClick}>
+    <div
+      className={`demo-modal ${isClosing ? 'is-closing' : ''}`.trim()}
+      role="presentation"
+      onMouseDown={handleBackdropClick}
+    >
       <div
         ref={dialogRef}
         className="demo-modal__dialog"
         role="dialog"
         aria-modal="true"
+        aria-hidden={isClosing || undefined}
         aria-labelledby="demo-modal-title"
         aria-describedby="demo-modal-description"
       >

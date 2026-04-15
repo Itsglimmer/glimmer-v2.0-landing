@@ -546,7 +546,7 @@ function HeroSection({ onDemoRequest }) {
                     {[...tickerWords, ...tickerWords].map((word, index) => (
                       <span
                         key={`${word}-${index}`}
-                        className="hero-mobile-title-ticker__text ticker-word type-title-regular-size type-title-light"
+                        className="hero-mobile-title-ticker__text ticker-word type-title-small-size type-title-light"
                       >
                         {word}
                       </span>
@@ -559,7 +559,7 @@ function HeroSection({ onDemoRequest }) {
 
             <div className="hero-actions" data-reveal style={{ '--reveal-delay': '220ms' }}>
               <div className="hero-trust">
-                <p className='type-description-size text-description-dark pb-6 md:pb-4'>{t('hero.trust')}</p>
+                <p className='type-description-size text-description-dark pb-4 md:pb-4'>{t('hero.trust')}</p>
                 <div className="hero-logo-row">
                   <div className={`hero-logo-track ${isHeroInViewport ? 'is-motion-active' : ''}`}>
                     {[...clientLogos, ...clientLogos].map((logo, index) => (
