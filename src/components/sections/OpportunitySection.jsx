@@ -25,7 +25,7 @@ const getActiveOpportunityLine = (scrollProgress, opportunityLines) => {
   }
 }
 
-function OpportunitySection({ opportunityLines }) {
+function OpportunitySection({ opportunityLines, onDemoRequest }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
@@ -150,7 +150,7 @@ function OpportunitySection({ opportunityLines }) {
               </div>
             ) : null}
           </div>
-          <Button href="mailto:hola@glimmer.ai" radius="full" background="white" className='w-fit'>
+          <Button radius="full" background="white" className='w-fit' onClick={onDemoRequest}>
             {t('nav.cta')}
             
           </Button>
@@ -162,6 +162,7 @@ function OpportunitySection({ opportunityLines }) {
 
 OpportunitySection.propTypes = {
   opportunityLines: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onDemoRequest: PropTypes.func.isRequired,
 }
 
 export default OpportunitySection

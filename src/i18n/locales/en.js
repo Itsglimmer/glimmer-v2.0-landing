@@ -10,6 +10,26 @@ const en = {
     impacto: 'Impact',
     cta: 'Request demo',
   },
+  demoModal: {
+    eyebrow: 'Demo request',
+    title: 'Tell us about your context',
+    description:
+      'Leave your details and the Glimmer team will get in touch with you.',
+    close: 'Close modal',
+    submit: 'Send request',
+    submitting: 'Sending...',
+    success: 'Request sent. We will contact you soon.',
+    error: 'We could not send the request. Please try again.',
+    fields: {
+      fullName: 'Full name',
+      email: 'Email',
+      phone: 'Phone optional',
+    },
+    errors: {
+      fullName: 'Enter your full name.',
+      email: 'Enter a valid email.',
+    },
+  },
   hero: {
     titles: [
       ['Detect what matters.', 'Decide better.'],
@@ -25,7 +45,7 @@ const en = {
     copy: '',
     ariaLabel: 'Signals',
     cta: 'Request demo',
-    words: ['Competitors', 'Regulation', 'Technology', 'Risks', 'Opportunities'],
+    words: ['Competitors', 'Regulation', 'Technology', 'Risks', 'Opportunities', 'Trends', 'Events'],
   },
   stats: {
     eyebrow: 'The hidden cost',

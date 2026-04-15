@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import { Menu } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import Button from './Button'
@@ -30,7 +31,16 @@ function LanguageSwitch({ isEnglishActive, englishHref, spanishHref, isOnLightSe
   )
 }
 
-function HeroNav() {
+LanguageSwitch.propTypes = {
+  isEnglishActive: PropTypes.bool.isRequired,
+  englishHref: PropTypes.string.isRequired,
+  spanishHref: PropTypes.string.isRequired,
+  isOnLightSection: PropTypes.bool.isRequired,
+  onSelect: PropTypes.func,
+  className: PropTypes.string,
+}
+
+function HeroNav({ onDemoRequest }) {
   const { t } = useTranslation()
   const currentPath = window.location.pathname
   const isEnglishActive = currentPath.startsWith('/en')
@@ -117,11 +127,13 @@ function HeroNav() {
               onSelect={() => setIsMobileMenuOpen(false)}
             />
             <Button
-              href="mailto:hola@glimmer.ai"
               className="hero-nav-cta"
               radius="full"
               background="transparentBlack"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => {
+                setIsMobileMenuOpen(false)
+                onDemoRequest()
+              }}
             >
               {t('nav.cta')}
             </Button>
@@ -130,6 +142,10 @@ function HeroNav() {
       </div>
     </header>
   )
+}
+
+HeroNav.propTypes = {
+  onDemoRequest: PropTypes.func.isRequired,
 }
 
 export default HeroNav

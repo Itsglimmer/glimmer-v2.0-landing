@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import PropTypes from 'prop-types'
 import Button from '../Button'
 import HeroNavLink from '../HeroNavLink'
 import useInViewport from '../../hooks/useInViewport'
@@ -13,7 +14,7 @@ const clientLogos = [
   { name: 'Grupo wayra_logo', src: '/assets/logos-partners/wayra_logo.jpeg' },
 ]
 
-function FaqCtaSection() {
+function FaqCtaSection({ onDemoRequest }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
@@ -44,7 +45,7 @@ function FaqCtaSection() {
           <div className="faq-cta-content">
             <h2 className="faq-cta-title type-title-big-size type-title-light text-center">{t('faqCta.title')}</h2>
             <p className="faq-cta-description text-center">{t('faqCta.description')}</p>
-            <Button href="mailto:hola@glimmer.ai" radius="full" background="white">
+            <Button radius="full" background="white" onClick={onDemoRequest}>
               {t('nav.cta')}
             </Button>
             <div
@@ -83,6 +84,10 @@ function FaqCtaSection() {
       </div>
     </section>
   )
+}
+
+FaqCtaSection.propTypes = {
+  onDemoRequest: PropTypes.func.isRequired,
 }
 
 export default FaqCtaSection

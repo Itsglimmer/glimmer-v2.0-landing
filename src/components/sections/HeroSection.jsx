@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import Button from '../Button'
 import useInViewport from '../../hooks/useInViewport'
@@ -42,7 +43,7 @@ const getHeroTitleIndex = (frameIndex, titleCount) => {
 }
 
 const HERO_TICKER_START_FRAME = 170
-const HERO_TICKER_FRAME_STEP = 33
+const HERO_TICKER_FRAME_STEP = 22
 const HERO_FRAME_PRELOAD_RADIUS = 150
 const HERO_FRAME_CACHE_RADIUS = 150
 const MOBILE_BREAKPOINT_MEDIA_QUERY = '(max-width: 767px)'
@@ -125,7 +126,7 @@ const getHeroTickerStyle = (frameIndex) => {
   }
 }
 
-function HeroSection() {
+function HeroSection({ onDemoRequest }) {
   const { t } = useTranslation()
   const heroRef = useRef(null)
   const heroCanvasRef = useRef(null)
@@ -575,12 +576,12 @@ function HeroSection() {
               </div>
 
               <div className="hero-button-row">
-                <Button href="mailto:hola@glimmer.ai" radius="full" background="white">
+                <Button radius="full" background="white" onClick={onDemoRequest} className='w-fit'>
                   {t('nav.cta')}
                 </Button>
                 <Button
                   href="#producto"
-                  className="hero-nav-cta"
+                  className="hero-nav-cta w-fit"
                   radius="full"
                   background="transparentBlack"
                 >
@@ -593,6 +594,10 @@ function HeroSection() {
       </div>
     </section>
   )
+}
+
+HeroSection.propTypes = {
+  onDemoRequest: PropTypes.func.isRequired,
 }
 
 export default HeroSection

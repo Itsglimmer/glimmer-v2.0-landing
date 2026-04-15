@@ -10,6 +10,26 @@ const es = {
     impacto: 'Impacto',
     cta: 'Solicitar demo',
   },
+  demoModal: {
+    eyebrow: 'Solicitud de demo',
+    title: 'Hablemos de tu contexto',
+    description:
+      'Déjanos tus datos y el equipo de Glimmer se pondrá en contacto contigo.',
+    close: 'Cerrar modal',
+    submit: 'Enviar solicitud',
+    submitting: 'Enviando...',
+    success: 'Solicitud enviada. Te contactaremos pronto.',
+    error: 'No pudimos enviar la solicitud. Inténtalo de nuevo.',
+    fields: {
+      fullName: 'Nombre y apellido',
+      email: 'Mail',
+      phone: 'Teléfono opcional',
+    },
+    errors: {
+      fullName: 'Ingresa tu nombre y apellido.',
+      email: 'Ingresa un mail válido.',
+    },
+  },
   hero: {
     titles: [
       ['Detecta lo que importa.', 'Decide mejor.'],
@@ -25,7 +45,7 @@ const es = {
     copy: '',
     ariaLabel: 'Señales',
     cta: 'Solicitar demo',
-    words: ['Competidores', 'Regulación', 'Licitaciones', 'Riesgos', 'Oportunidades'],
+    words: ['Competidores', 'Regulación', 'Licitaciones', 'Riesgos', 'Oportunidades', 'Tendencias', 'Eventos'],
   },
   stats: {
     eyebrow: 'El coste oculto',
