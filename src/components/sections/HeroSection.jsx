@@ -520,7 +520,7 @@ function HeroSection({ onDemoRequest }) {
             }}
           >
             <div data-reveal style={{ '--reveal-delay': '140ms' }} className='w-full'>
-              <h1 className="hero-title type-title-bigger-size type-title-light pb-6 w-full">
+              <h1 className="hero-title type-title-bigger-size type-title-light pb-4 md:pb-6 w-full">
                 <span className="hero-title-mask">
                   <span
                     key={heroTitleIndex}
