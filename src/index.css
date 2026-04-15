@@ -375,7 +375,7 @@ select {
   }
 
   .hero-nav {
-    @apply mx-auto flex w-fit max-w-full items-center justify-between gap-6 rounded-[40px] border px-2 py-2 pl-6 pointer-events-auto backdrop-blur-[12px] max-[767px]:relative max-[767px]:w-full max-[767px]:overflow-visible max-[767px]:px-3 max-[767px]:py-[10px] max-[767px]:pl-[18px];
+    @apply mx-auto flex w-fit max-w-full items-center justify-between gap-6 rounded-[40px] border px-2 py-2 pl-6 pointer-events-auto backdrop-blur-[12px] max-[1024px]:relative max-[1024px]:w-full max-[1024px]:overflow-visible max-[1024px]:px-3 max-[1024px]:py-[10px] max-[1024px]:pl-[18px];
     border-color: rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.05);
   }
@@ -2838,7 +2838,7 @@ select {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 640px) {
   .workflow-card,
   .opportunity-shell,
   .delivery-shell,
@@ -2952,7 +2952,7 @@ select {
   .hero-mobile-title-ticker {
     display: block;
     width: 100%;
-    padding-bottom: 8px;
+    padding-bottom: 64px;
     overflow: visible;
   }
 
@@ -3000,7 +3000,7 @@ select {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
 
   :root {
     --logo-footer-height: min(24vh, 180px);
@@ -3363,7 +3363,7 @@ select {
 }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .hero-nav-toggle {
     display: inline-flex;
     align-items: center;

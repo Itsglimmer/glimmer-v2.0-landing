@@ -58,13 +58,13 @@ frameIndex = round(progress * (OPPORTUNITY_FRAME_COUNT - 1))
 La altura de la sección no es fija. Se define con:
 
 ```js
-getOpportunityScrollSpan(lineCount) => `${Math.max(lineCount * 55, 220)}vh`
+getOpportunityScrollSpan(lineCount) => `${Math.max(lineCount * 90, 360)}vh`
 ```
 
 Eso significa:
 
 - a más frases, más tramo de scroll
-- el mínimo actual es `220vh`
+- el mínimo actual es `360vh`
 
 ## Reparto de frases por frames
 
@@ -147,7 +147,7 @@ La sección tiene estas capas:
 Si quieres cambiar la sensación de la sección, estos son los puntos principales:
 
 - más duración por frase:
-  aumenta `lineCount * 55` o los tramos de permanencia
+  aumenta `lineCount * 90` o los tramos de permanencia
 - entrada más rápida:
   acorta el tramo `0.12 -> 0.32`
 - salida más lenta:

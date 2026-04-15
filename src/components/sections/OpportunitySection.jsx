@@ -7,7 +7,11 @@ import useSectionReveal from '../../hooks/useSectionReveal'
 import useViewportVideo from '../../hooks/useViewportVideo'
 import Button from '../Button'
 
-const getOpportunityScrollSpan = (lineCount) => `${Math.max(lineCount * 55, 220)}vh`
+const OPPORTUNITY_SCROLL_VH_PER_LINE = 90
+const OPPORTUNITY_MIN_SCROLL_VH = 360
+
+const getOpportunityScrollSpan = (lineCount) =>
+  `${Math.max(lineCount * OPPORTUNITY_SCROLL_VH_PER_LINE, OPPORTUNITY_MIN_SCROLL_VH)}vh`
 
 const getActiveOpportunityLine = (scrollProgress, opportunityLines) => {
   const lineCount = opportunityLines.length
