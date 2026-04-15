@@ -83,7 +83,7 @@ const createPerson = async ({ fullName, email, phone }) => {
   return payload.data?.id
 }
 
-const createLead = async ({ fullName, personId }) => {
+const createDeal = async ({ fullName, personId }) => {
   const body = {
     title: `Solicitud de demo - ${fullName}`,
     person_id: personId,
@@ -93,7 +93,15 @@ const createLead = async ({ fullName, personId }) => {
     body.owner_id = Number(process.env.PIPEDRIVE_OWNER_ID)
   }
 
-  const payload = await requestPipedrive('/v1/leads', {
+  if (process.env.PIPEDRIVE_PIPELINE_ID) {
+    body.pipeline_id = Number(process.env.PIPEDRIVE_PIPELINE_ID)
+  }
+
+  if (process.env.PIPEDRIVE_STAGE_ID) {
+    body.stage_id = Number(process.env.PIPEDRIVE_STAGE_ID)
+  }
+
+  const payload = await requestPipedrive('/v1/deals', {
     method: 'POST',
     body: JSON.stringify(body),
   })
@@ -134,15 +142,15 @@ exports.handler = async (event) => {
       throw new Error('Could not resolve Pipedrive person')
     }
 
-    const leadId = await createLead({ fullName, personId })
+    const dealId = await createDeal({ fullName, personId })
 
     return jsonResponse(200, {
       ok: true,
       personId,
-      leadId,
+      dealId,
     })
   } catch (error) {
     console.error('Demo request failed:', error.message)
-    return jsonResponse(502, { error: 'Could not create Pipedrive lead' })
+    return jsonResponse(502, { error: 'Could not create Pipedrive deal' })
   }
 }
