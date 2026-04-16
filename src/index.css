@@ -2911,6 +2911,7 @@ select {
       padding: 24px;
       border-radius: 24px;
     }
+
   }
 
   .hero-brand {
@@ -3480,7 +3481,7 @@ select {
   }
 
   .hero-language-switch__option {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .hero-nav-menu .hero-nav-cta {
