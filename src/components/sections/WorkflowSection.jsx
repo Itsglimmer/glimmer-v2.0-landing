@@ -5,9 +5,9 @@ import useSectionReveal from '../../hooks/useSectionReveal'
 import useViewportVideo from '../../hooks/useViewportVideo'
 
 const workflowMedia = [
-  { image: '/glimmer/deteccion.png', imageSide: 'right' },
-  { image: '/glimmer/interpretacion.png', imageSide: 'left' },
-  { image: '/glimmer/activacion.png', imageSide: 'right' },
+  { image: '/glimmer/deteccion.webp', imageSide: 'right' },
+  { image: '/glimmer/interpretacion.webp', imageSide: 'left' },
+  { image: '/glimmer/activacion.webp', imageSide: 'right' },
 ]
 
 function WorkflowCard({ item, delay }) {

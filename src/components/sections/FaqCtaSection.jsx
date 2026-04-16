@@ -8,10 +8,10 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import useViewportVideo from '../../hooks/useViewportVideo'
 
 const clientLogos = [
-  { name: 'avanade', src: '/assets/logos-partners/avanade.png' },
-  { name: 'enisa', src: '/assets/logos-partners/enisa.png' },
-  { name: 'LSTECHNOVA', src: '/assets/logos-partners/LSTECHNOVA.jpg' },
-  { name: 'Grupo wayra_logo', src: '/assets/logos-partners/wayra_logo.jpeg' },
+  { name: 'avanade', src: '/assets/logos-partners/avanade.webp' },
+  { name: 'enisa', src: '/assets/logos-partners/enisa.webp' },
+  { name: 'LSTECHNOVA', src: '/assets/logos-partners/LSTECHNOVA.webp' },
+  { name: 'Grupo wayra_logo', src: '/assets/logos-partners/wayra_logo.webp' },
 ]
 
 function FaqCtaSection({ onDemoRequest }) {
