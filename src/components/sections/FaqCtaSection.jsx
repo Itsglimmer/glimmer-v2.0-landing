@@ -4,7 +4,7 @@ import Button from '../Button'
 import HeroNavLink from '../HeroNavLink'
 import useInViewport from '../../hooks/useInViewport'
 import useSectionReveal from '../../hooks/useSectionReveal'
-import { useRef } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import useViewportVideo from '../../hooks/useViewportVideo'
 
 const clientLogos = [
@@ -18,11 +18,52 @@ function FaqCtaSection({ onDemoRequest }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
+  const logoRowRef = useRef(null)
+  const logoSetRef = useRef(null)
   const isSectionInViewport = useInViewport(sectionRef, { threshold: 0.15 })
   const footerLinks = t('faqCta.links', { returnObjects: true })
+  const [logoRepeatCount, setLogoRepeatCount] = useState(4)
+  const [logoSetWidth, setLogoSetWidth] = useState(0)
+  const logoCopies = useMemo(
+    () => Array.from({ length: logoRepeatCount }, (_, index) => index),
+    [logoRepeatCount],
+  )
 
   useSectionReveal(sectionRef)
   useViewportVideo(videoRef)
+
+  useEffect(() => {
+    const logoRow = logoRowRef.current
+    const logoSet = logoSetRef.current
+
+    if (!logoRow || !logoSet || typeof window === 'undefined') {
+      return undefined
+    }
+
+    const updateLogoTrackMetrics = () => {
+      const rowWidth = logoRow.getBoundingClientRect().width
+      const setWidth = logoSet.getBoundingClientRect().width
+
+      if (!rowWidth || !setWidth) {
+        return
+      }
+
+      setLogoSetWidth(setWidth)
+      setLogoRepeatCount(Math.max(4, Math.ceil(rowWidth / setWidth) + 2))
+    }
+
+    updateLogoTrackMetrics()
+
+    const resizeObserver = new ResizeObserver(updateLogoTrackMetrics)
+    resizeObserver.observe(logoRow)
+    resizeObserver.observe(logoSet)
+    window.addEventListener('resize', updateLogoTrackMetrics)
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', updateLogoTrackMetrics)
+    }
+  }, [])
 
   return (
     <section className="faq-cta-section" ref={sectionRef}>
@@ -53,13 +94,17 @@ function FaqCtaSection({ onDemoRequest }) {
               aria-label="Clientes"
             >
               <p className="type-description-size text-description-dark pb-4 text-center">{t('faqCta.partnersLabel')}</p>
-              <div className="faq-cta-logo-row">
-                <div className={`cta-logo-track  ${isSectionInViewport ? 'is-motion-active' : ''}`}>
-                  {[0, 1, 2].map((copyIndex) => (
+              <div className="faq-cta-logo-row" ref={logoRowRef}>
+                <div
+                  className={`cta-logo-track ${isSectionInViewport ? 'is-motion-active' : ''}`}
+                  style={{ '--hero-logo-shift': `${logoSetWidth}px` }}
+                >
+                  {logoCopies.map((copyIndex) => (
                     <span
                       key={`faq-cta-logo-set-${copyIndex}`}
                       className="hero-logo-set"
                       aria-hidden={copyIndex > 0}
+                      ref={copyIndex === 0 ? logoSetRef : undefined}
                     >
                       {clientLogos.map((logo) => (
                         <span

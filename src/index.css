@@ -1009,6 +1009,7 @@ select {
   white-space: nowrap;
   animation: hero-logo-marquee 24s linear infinite;
   animation-play-state: paused;
+  will-change: transform;
 }
 
 .cta-logo-track.is-motion-active {
