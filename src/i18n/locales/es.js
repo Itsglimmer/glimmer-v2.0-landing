@@ -275,32 +275,33 @@ const es = {
     items: [
       {
         quote:
-          'Glimmer nos permite detectar movimientos de competidores mucho antes y reaccionar a tiempo con nuevas estrategias de posicionamiento.',
-        role: 'Director de Estrategia',
+          'Glimmer nos permite monitorizar de cerca a nuestra competencia y detectar patrones y tendencias decorativas que impactan directamente en nuestras colecciones.',
+        role: 'Director General - Grupo Lamadrid',
       },
       {
         quote:
-          'Nos ayuda a identificar qué tecnologías pueden impactar realmente en nuestro negocio.',
-        role: 'Director de Tecnología',
+          'Antes dedicaba horas cada semana a analizar el mercado. Con Glimmer identificamos nuevos productos en UGC, AI Video y sectores clave para anticiparnos y mantenernos competitivos.',
+        role: 'CEO - Nexus Clips',
       },
       {
         quote:
-          'El valor está en el contexto y la personalización que antes solo podía aportar un consultor tradicional. Las señales ya llegan interpretadas para la toma de decisiones.',
-        role: 'Director de Operaciones e Innovación',
+          'El compliance siempre ha sido un proceso manual y tedioso. Creemos que glimmer nos permitirá reducir esa carga y gestionar el entorno regulatorio autonómico de forma mucho más eficiente.',
+        role: 'Director de Innovación - Incasòl',
       },
       {
         quote:
-          'Antes perseguíamos constantemente las tendencias que afectaban a nuestros clientes. Con Glimmer eliminamos ese proceso manual.',
-        role: 'Director de Marketing',
+          'Glimmer nos ha abierto oportunidades reales en licitaciones, partnerships y tecnología que antes no teníamos identificadas.',
+        role: 'CEO - TresIPunt',
       },
       {
         quote:
-          'Nos permite detectar cambios regulatorios relevantes con suficiente antelación para anticipar su impacto.',
-        role: 'Director de Compliance',
+          'Desde regulación y licitaciones hasta impacto arancelario, Glimmer nos ha permitido dar un salto en la gestión y control de nuestro entorno.',
+        role: 'Director Estratégico - Top Cable',
       },
       {
-        quote: 'Detectamos licitaciones relevantes antes que muchos competidores.',
-        role: 'Director de Desarrollo de Negocio',
+        quote:
+          'Detectamos eventos, controlamos lo que lanzan al mercado nuestros competidores, y seguimos de cerca la evolución del sector, asegurando además un cumplimiento normativo constante sin fricción.',
+        role: 'CEO - S4Gaming',
       },
     ],
   },

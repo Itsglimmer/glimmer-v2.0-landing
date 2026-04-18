@@ -271,31 +271,33 @@ const en = {
     items: [
       {
         quote:
-          'Glimmer allows us to detect competitor moves much earlier and react in time with new positioning strategies.',
-        role: 'Strategy Director',
-      },
-      {
-        quote: 'It helps us identify which technologies can truly impact our business.',
-        role: 'Technology Director',
+          'Glimmer allows us to closely monitor our competition and detect decorative patterns and trends that directly impact our collections.',
+        role: 'Managing Director - Grupo Lamadrid',
       },
       {
         quote:
-          'The value lies in the context and personalisation that previously only a traditional consultant could provide. Signals arrive already interpreted for decision making.',
-        role: 'Operations and Innovation Director',
+          'I used to spend hours every week analysing the market. With Glimmer, we identify new products in UGC, AI Video, and key sectors to stay ahead and remain competitive.',
+        role: 'CEO - Nexus Clips',
       },
       {
         quote:
-          'We used to constantly chase trends affecting our clients. With Glimmer we eliminated that manual process.',
-        role: 'Marketing Director',
+          'Compliance has always been a manual and tedious process. We believe Glimmer will help us reduce that burden and manage the regional regulatory environment far more efficiently.',
+        role: 'Innovation Director - Incasol',
       },
       {
         quote:
-          'It allows us to detect relevant regulatory changes early enough to anticipate impact.',
-        role: 'Compliance Director',
+          'Glimmer has opened up real opportunities in tenders, partnerships, and technology that we had not identified before.',
+        role: 'CEO - TresIPunt',
       },
       {
-        quote: 'We detect relevant tenders earlier than many competitors.',
-        role: 'Business Development Director',
+        quote:
+          'From regulation and tenders to tariff impact, Glimmer has helped us take a major step forward in managing and controlling our environment.',
+        role: 'Strategic Director - Top Cable',
+      },
+      {
+        quote:
+          'We detect events, track what our competitors are launching to market, and follow the sector closely, while also ensuring constant regulatory compliance without friction.',
+        role: 'CEO - S4Gaming',
       },
     ],
   },
