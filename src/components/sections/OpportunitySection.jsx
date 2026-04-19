@@ -42,39 +42,46 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
       const splitPhrases = splitOpportunityText(title, opportunityLines)
       let activeIndex = -1
 
+      const setActivePhrase = (progress) => {
+        const normalizedProgress = Math.min(Math.max(progress, 0), 0.999999)
+        const nextIndex = Math.min(
+          splitPhrases.length - 1,
+          Math.floor(normalizedProgress * splitPhrases.length),
+        )
+
+        if (nextIndex === activeIndex) {
+          return
+        }
+
+        activeIndex = nextIndex
+
+        gsap.to(splitPhrases, {
+          color: 'rgba(255, 255, 255, 0.16)',
+          duration: 0.2,
+          overwrite: 'auto',
+        })
+
+        gsap.to(splitPhrases[activeIndex], {
+          color: '#fff',
+          duration: 0.2,
+          overwrite: 'auto',
+        })
+      }
+
       gsap.set(splitPhrases, {
         color: 'rgba(255, 255, 255, 0.16)',
         willChange: 'color',
       })
 
+      setActivePhrase(0)
+
       ScrollTrigger.create({
-        trigger: title,
-        start: 'top center',
-        end: 'bottom center',
+        trigger: shell,
+        start: 'top 70%',
+        end: 'bottom 35%',
         scrub: true,
         onUpdate: ({ progress }) => {
-          const nextIndex = Math.min(
-            splitPhrases.length - 1,
-            Math.floor(progress * splitPhrases.length),
-          )
-
-          if (nextIndex === activeIndex) {
-            return
-          }
-
-          activeIndex = nextIndex
-
-          gsap.to(splitPhrases, {
-            color: 'rgba(255, 255, 255, 0.16)',
-            duration: 0.2,
-            overwrite: 'auto',
-          })
-
-          gsap.to(splitPhrases[activeIndex], {
-            color: '#fff',
-            duration: 0.2,
-            overwrite: 'auto',
-          })
+          setActivePhrase(progress)
         },
       })
     }, shell)
