@@ -83,7 +83,7 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
         scrub: true,
         invalidateOnRefresh: true,
         onUpdate: () => {
-          const rect = section.getBoundingClientRect()
+          const rect = shell.getBoundingClientRect()
           const viewportMidpoint = (window.innerHeight || 1) / 2
           const normalizedProgress = Math.min(
             Math.max((viewportMidpoint - rect.top) / Math.max(rect.height, 1), 0),
