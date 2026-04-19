@@ -82,10 +82,11 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
         end: 'bottom top',
         scrub: true,
         invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const scrollRange = Math.max(self.end - self.start, 1)
+        onUpdate: () => {
+          const rect = section.getBoundingClientRect()
+          const viewportMidpoint = (window.innerHeight || 1) / 2
           const normalizedProgress = Math.min(
-            Math.max((self.scroll() - self.start) / scrollRange, 0),
+            Math.max((viewportMidpoint - rect.top) / Math.max(rect.height, 1), 0),
             1,
           )
 
