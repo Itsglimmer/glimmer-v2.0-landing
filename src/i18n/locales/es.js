@@ -262,7 +262,7 @@ const es = {
     description: '',
     partnersLabel: 'Nuestros partners',
     links: [
-      { href: 'https://www.linkedin.com', label: 'LinkedIn' },
+      { href: 'https://www.linkedin.com/company/itsglimmer/', label: 'LinkedIn' },
       { href: '/aviso-legal', label: 'Aviso legal' },
       { href: '/privacidad-y-politica-de-cookies', label: 'Privacidad y política de cookies' },
       { href: '/politica-de-privacidad', label: 'Política de privacidad' },

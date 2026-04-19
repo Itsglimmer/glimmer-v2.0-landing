@@ -28,10 +28,11 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
   const isSectionInViewport = useInViewport(sectionRef, { threshold: 0.15 })
 
   useLayoutEffect(() => {
+    const section = sectionRef.current
     const shell = linesShellRef.current
     const title = linesRef.current
 
-    if (!shell || !title) {
+    if (!section || !shell || !title) {
       return undefined
     }
 
@@ -76,12 +77,16 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
       setActivePhrase(0)
 
       ScrollTrigger.create({
-        trigger: shell,
-        start: 'top 70%',
-        end: 'bottom 35%',
+        trigger: section,
+        start: 'top bottom',
+        end: 'bottom top',
         scrub: true,
+        invalidateOnRefresh: true,
         onUpdate: ({ progress }) => {
           setActivePhrase(progress)
+        },
+        onLeaveBack: () => {
+          setActivePhrase(0)
         },
       })
     }, shell)
