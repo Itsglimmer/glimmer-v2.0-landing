@@ -45,10 +45,7 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
 
       const setActivePhrase = (progress) => {
         const normalizedProgress = Math.min(Math.max(progress, 0), 0.999999)
-        const nextIndex = Math.min(
-          splitPhrases.length - 1,
-          Math.floor(normalizedProgress * splitPhrases.length),
-        )
+        const nextIndex = Math.round(normalizedProgress * (splitPhrases.length - 1))
 
         if (nextIndex === activeIndex) {
           return
@@ -85,8 +82,9 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
         onUpdate: () => {
           const rect = shell.getBoundingClientRect()
           const viewportMidpoint = (window.innerHeight || 1) / 2
+          const activationDistance = Math.max(rect.height - viewportMidpoint, 1)
           const normalizedProgress = Math.min(
-            Math.max((viewportMidpoint - rect.top) / Math.max(rect.height, 1), 0),
+            Math.max((viewportMidpoint - rect.top) / activationDistance, 0),
             1,
           )
 
