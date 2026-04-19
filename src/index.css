@@ -1985,7 +1985,6 @@ select {
   z-index: 1;
   overflow: clip;
   background: #010104;
-  padding: 128px 0;
 }
 
 .opportunity-media {
@@ -2000,7 +1999,6 @@ select {
   display: block;
   object-fit: cover;
   pointer-events: none;
-  transition: transform 160ms linear;
   -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%);
 }
@@ -2009,9 +2007,7 @@ select {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(1, 1, 4, 0.2) 0%, rgba(1, 1, 4, 0.52) 100%),
-    radial-gradient(circle at top, rgba(118, 142, 255, 0.14), transparent 48%);
+  background: linear-gradient(180deg, rgba(1, 1, 4, 0.18) 0%, rgba(1, 1, 4, 0.48) 100%);
 }
 
 .opportunity-shell {
@@ -2019,65 +2015,49 @@ select {
   z-index: 1;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 64px;
+  gap: 72px;
+  align-items: start;
+  padding-top: 128px;
+  padding-bottom: 128px;
 }
 
-.opportunity-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  width: 100%;
-  max-width: 920px;
-  text-align: center;
+.opportunity-meta {
+  position: relative;
 }
 
-.opportunity-header .ticker-logo {
+.opportunity-meta p {
+  margin-top: 8px;
+  color: #f8f9fc;
+  line-height: 1;
+}
+
+.opportunity-meta img {
   width: 48px;
-  height: 48px;
 }
 
-.opportunity-title {
-  width: 100%;
-  color: #fff;
-}
-
-.opportunity-cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-  width: 100%;
-}
-
-.opportunity-card {
+.opportunity-lines-shell {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 88px;
-  min-height: 340px;
-  padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 48px;
-  background: rgba(255, 255, 255, 0.034);
-  -webkit-backdrop-filter: blur(50px);
-  backdrop-filter: blur(50px);
+  align-items: flex-start;
+  gap: 32px;
 }
 
-.opportunity-card:last-child:nth-child(3n + 1) {
-  grid-column: 2 / 3;
+.opportunity-lines {
+  width: 100%;
 }
 
-.opportunity-card .ticker-logo {
-  width: 56px;
-  height: 56px;
-  opacity: 0.10;
-}
-
-.opportunity-card__text {
+.opportunity-line-text {
   margin: 0;
-  max-width: 14ch;
-  color: rgba(248, 249, 252, 0.92);
+  color: rgba(248, 249, 252, 0.16);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.opportunity-line-fragment {
+  display: inline;
 }
 
 .use-cases-section {
@@ -2911,26 +2891,8 @@ select {
     min-height: 0;
   }
 
-  .opportunity-section {
-    padding: 88px 0;
-  }
-
-  .opportunity-cards {
-    /* grid-template-columns: 1fr; */
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .opportunity-card {
-    min-height: 0;
-    gap: 56px;
-    padding: 32px;
-    border-radius: 36px;
-  }
-
-  .opportunity-card__text {
-    max-width: none;
+  .opportunity-meta {
+    position: static;
   }
 
   .delivery-visual {
@@ -3095,9 +3057,6 @@ select {
     display: none;
   }
 
-  .opportunity-header .ui-button {
-    width: auto;
-  }
 }
 
 @media (max-width: 1024px) {
@@ -3248,16 +3207,12 @@ select {
   }
 
   .opportunity-shell {
-    gap: 40px;
+    padding-top: 112px;
+    padding-bottom: 112px;
   }
 
-  .opportunity-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .opportunity-title {
-    /* max-width: 12ch; */
+  .opportunity-lines p {
+    font-size: 42px;
   }
 
   .use-cases-header-shell {

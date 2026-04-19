@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import useInViewport from '../../hooks/useInViewport'
@@ -6,48 +8,82 @@ import useSectionReveal from '../../hooks/useSectionReveal'
 import useViewportVideo from '../../hooks/useViewportVideo'
 import Button from '../Button'
 
+function splitOpportunityText(titleNode, lines) {
+  titleNode.innerHTML = lines
+    .map((line) => `<span class="opportunity-line-fragment">${line}</span>`)
+    .join(' ')
+
+  return titleNode.querySelectorAll('.opportunity-line-fragment')
+}
+
 function OpportunitySection({ opportunityLines, onDemoRequest }) {
   const { t } = useTranslation()
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
-  const [videoOffset, setVideoOffset] = useState(0)
+  const linesShellRef = useRef(null)
+  const linesRef = useRef(null)
 
   useSectionReveal(sectionRef, [opportunityLines])
   useViewportVideo(videoRef)
   const isSectionInViewport = useInViewport(sectionRef, { threshold: 0.15 })
 
-  useEffect(() => {
-    let animationFrameId = 0
+  useLayoutEffect(() => {
+    const shell = linesShellRef.current
+    const title = linesRef.current
 
-    const updateVideoOffset = () => {
-      const section = sectionRef.current
-      if (!section) {
-        return
-      }
-
-      const rect = section.getBoundingClientRect()
-      const viewportHeight = window.innerHeight || 1
-      const distanceToCenter = rect.top + rect.height / 2 - viewportHeight / 2
-      const nextOffset = Math.max(Math.min(distanceToCenter * -0.16, 96), -96)
-
-      setVideoOffset(nextOffset)
+    if (!shell || !title) {
+      return undefined
     }
 
-    const requestUpdate = () => {
-      window.cancelAnimationFrame(animationFrameId)
-      animationFrameId = window.requestAnimationFrame(updateVideoOffset)
-    }
+    gsap.registerPlugin(ScrollTrigger)
+    const originalTitle = title.textContent ?? ''
 
-    requestUpdate()
-    window.addEventListener('scroll', requestUpdate, { passive: true })
-    window.addEventListener('resize', requestUpdate)
+    const ctx = gsap.context(() => {
+      const splitPhrases = splitOpportunityText(title, opportunityLines)
+      let activeIndex = -1
+
+      gsap.set(splitPhrases, {
+        color: 'rgba(255, 255, 255, 0.16)',
+        willChange: 'color',
+      })
+
+      ScrollTrigger.create({
+        trigger: title,
+        start: 'top center',
+        end: 'bottom center',
+        scrub: true,
+        onUpdate: ({ progress }) => {
+          const nextIndex = Math.min(
+            splitPhrases.length - 1,
+            Math.floor(progress * splitPhrases.length),
+          )
+
+          if (nextIndex === activeIndex) {
+            return
+          }
+
+          activeIndex = nextIndex
+
+          gsap.to(splitPhrases, {
+            color: 'rgba(255, 255, 255, 0.16)',
+            duration: 0.2,
+            overwrite: 'auto',
+          })
+
+          gsap.to(splitPhrases[activeIndex], {
+            color: '#fff',
+            duration: 0.2,
+            overwrite: 'auto',
+          })
+        },
+      })
+    }, shell)
 
     return () => {
-      window.cancelAnimationFrame(animationFrameId)
-      window.removeEventListener('scroll', requestUpdate)
-      window.removeEventListener('resize', requestUpdate)
+      ctx.revert()
+      title.textContent = originalTitle
     }
-  }, [])
+  }, [opportunityLines, t])
 
   return (
     <section className="opportunity-section" ref={sectionRef}>
@@ -59,7 +95,6 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
           muted
           playsInline
           preload="metadata"
-          style={{ transform: `translate3d(0, ${videoOffset}px, 0) scale(1.14)` }}
         >
           <source src="/assets/video/opportunity-section.mp4" type="video/mp4" />
         </video>
@@ -67,41 +102,31 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
       </div>
 
       <div className="page-shell opportunity-shell">
-        <div className="opportunity-header">
+        <div className="opportunity-meta" data-reveal style={{ '--reveal-delay': '40ms' }}>
           <img
-            className={`ticker-logo spin-loop ${isSectionInViewport ? 'is-motion-active' : ''}`}
+            className={`ticker-logo spin-loop h-12 w-12 mb-8 ${isSectionInViewport ? 'is-motion-active' : ''}`}
             src="/assets/logos/isotipo.svg"
             alt=""
           />
           <span className="type-subheadline-size opacity-40">{t('opportunity.eyebrow')}</span>
-          <h2 className="opportunity-title type-title-big-size type-title-light">
-            {t('opportunity.lead')}
-          </h2>
-          <Button radius="full" background="white" className="w-fit" onClick={onDemoRequest}>
-            {t('nav.cta')}
-          </Button>
+          <p>{t('opportunity.lead')}</p>
         </div>
 
-        <div className="opportunity-cards">
-          {opportunityLines.map((line, index) => (
-            <article
-              className="opportunity-card"
-              data-reveal
-              key={line}
-              style={{ '--reveal-delay': `${120 + index * 70}ms` }}
+        <div className="opportunity-lines-shell" ref={linesShellRef}>
+          <div className="opportunity-lines">
+            <p
+              ref={linesRef}
+              className="opportunity-line-text text type-title-big-size type-title-light"
             >
-              <img
-                className={`ticker-logo spin-loop ${isSectionInViewport ? 'is-motion-active' : ''}`}
-                src="/assets/logos/isotipo.svg"
-                alt=""
-              />
-              <p className="opportunity-card__text type-title-regular-size type-title-light">
-                {line}
-              </p>
-            </article>
-          ))}
+              {opportunityLines.join(' ')}
+            </p>
+          </div>
+          
         </div>
-      </div>
+        <Button radius="full" background="white" className="w-fit" onClick={onDemoRequest}>
+            {t('nav.cta')}
+          </Button>
+      </div>      
     </section>
   )
 }
