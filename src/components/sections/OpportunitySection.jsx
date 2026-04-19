@@ -82,8 +82,17 @@ function OpportunitySection({ opportunityLines, onDemoRequest }) {
         end: 'bottom top',
         scrub: true,
         invalidateOnRefresh: true,
-        onUpdate: ({ progress }) => {
-          setActivePhrase(progress)
+        onUpdate: (self) => {
+          const sectionRect = section.getBoundingClientRect()
+          const viewportHeight = window.innerHeight || 1
+          const totalDistance = Math.max(sectionRect.height + viewportHeight, 1)
+          const traveledDistance = Math.min(
+            Math.max(viewportHeight - sectionRect.top, 0),
+            totalDistance,
+          )
+          const normalizedProgress = traveledDistance / totalDistance
+
+          setActivePhrase(normalizedProgress)
         },
         onLeaveBack: () => {
           setActivePhrase(0)
