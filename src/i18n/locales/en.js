@@ -273,31 +273,43 @@ const en = {
         quote:
           'Glimmer allows us to closely monitor our competition and detect decorative patterns and trends that directly impact our collections.',
         role: 'Managing Director - Grupo Lamadrid',
+        company: 'Grupo Lamadrid',
+        logo: '/assets/logos-testimonios/grupo-lamadrid.png',
       },
       {
         quote:
           'I used to spend hours every week analysing the market. With Glimmer, we identify new products in UGC, AI Video, and key sectors to stay ahead and remain competitive.',
         role: 'CEO - Nexus Clips',
+        company: 'Nexus Clips',
+        logo: '/assets/logos-testimonios/nexusclips.png',
       },
       {
         quote:
           'Compliance has always been a manual and tedious process. We believe Glimmer will help us reduce that burden and manage the regional regulatory environment far more efficiently.',
         role: 'Innovation Director - Incasol',
+        company: 'Incasol',
+        logo: '/assets/logos-testimonios/incasol.png',
       },
       {
         quote:
           'Glimmer has opened up real opportunities in tenders, partnerships, and technology that we had not identified before.',
         role: 'CEO - TresIPunt',
+        company: 'TresIPunt',
+        logo: '/assets/logos-testimonios/3IPunt.png',
       },
       {
         quote:
           'From regulation and tenders to tariff impact, Glimmer has helped us take a major step forward in managing and controlling our environment.',
         role: 'Strategic Director - Top Cable',
+        company: 'Top Cable',
+        logo: '/assets/logos-testimonios/top-cable.png',
       },
       {
         quote:
           'We detect events, track what our competitors are launching to market, and follow the sector closely, while also ensuring constant regulatory compliance without friction.',
         role: 'CEO - S4Gaming',
+        company: 'S4Gaming',
+        logo: '/assets/logos-testimonios/s4gaming.png',
       },
     ],
   },

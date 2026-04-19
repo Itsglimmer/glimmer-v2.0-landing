@@ -6,10 +6,15 @@ import useSectionReveal from '../../hooks/useSectionReveal'
 function TestimonialCard({ item, delay }) {
   return (
     <article className="testimonial-card" data-reveal style={{ '--reveal-delay': delay }}>
-      <img className="testimonial-quote" src="/assets/logos/quote.svg" alt="" />
-      <div className="testimonial-body">
-        <p>{item.quote}</p>
-        <span>{item.role}</span>
+      <div className="testimonial-card__header">
+        <img className="testimonial-quote" src="/assets/logos/quote.svg" alt="" />
+      </div>
+      <div className="flex flex-col gap-6">
+        <img className="testimonial-logo" src={item.logo} alt={item.company} />
+        <div className="testimonial-footer">
+          <p>{item.quote}</p>
+          <span>{item.role}</span>
+        </div>
       </div>
     </article>
   )
@@ -19,6 +24,8 @@ TestimonialCard.propTypes = {
   item: PropTypes.shape({
     quote: PropTypes.string.isRequired,
     role: PropTypes.string.isRequired,
+    company: PropTypes.string.isRequired,
+    logo: PropTypes.string.isRequired,
   }).isRequired,
   delay: PropTypes.string.isRequired,
 }
@@ -63,6 +70,8 @@ TestimonialsSection.propTypes = {
     PropTypes.shape({
       quote: PropTypes.string.isRequired,
       role: PropTypes.string.isRequired,
+      company: PropTypes.string.isRequired,
+      logo: PropTypes.string.isRequired,
     }),
   ).isRequired,
 }

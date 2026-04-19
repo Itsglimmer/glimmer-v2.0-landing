@@ -277,31 +277,43 @@ const es = {
         quote:
           'Glimmer nos permite monitorizar de cerca a nuestra competencia y detectar patrones y tendencias decorativas que impactan directamente en nuestras colecciones.',
         role: 'Director General - Grupo Lamadrid',
+        company: 'Grupo Lamadrid',
+        logo: '/assets/logos-testimonios/grupo-lamadrid.png',
       },
       {
         quote:
           'Antes dedicaba horas cada semana a analizar el mercado. Con Glimmer identificamos nuevos productos en UGC, AI Video y sectores clave para anticiparnos y mantenernos competitivos.',
         role: 'CEO - Nexus Clips',
+        company: 'Nexus Clips',
+        logo: '/assets/logos-testimonios/nexusclips.png',
       },
       {
         quote:
           'El compliance siempre ha sido un proceso manual y tedioso. Creemos que glimmer nos permitirá reducir esa carga y gestionar el entorno regulatorio autonómico de forma mucho más eficiente.',
         role: 'Director de Innovación - Incasòl',
+        company: 'Incasòl',
+        logo: '/assets/logos-testimonios/incasol.png',
       },
       {
         quote:
           'Glimmer nos ha abierto oportunidades reales en licitaciones, partnerships y tecnología que antes no teníamos identificadas.',
         role: 'CEO - TresIPunt',
+        company: 'TresIPunt',
+        logo: '/assets/logos-testimonios/3IPunt.png',
       },
       {
         quote:
           'Desde regulación y licitaciones hasta impacto arancelario, Glimmer nos ha permitido dar un salto en la gestión y control de nuestro entorno.',
         role: 'Director Estratégico - Top Cable',
+        company: 'Top Cable',
+        logo: '/assets/logos-testimonios/top-cable.png',
       },
       {
         quote:
           'Detectamos eventos, controlamos lo que lanzan al mercado nuestros competidores, y seguimos de cerca la evolución del sector, asegurando además un cumplimiento normativo constante sin fricción.',
         role: 'CEO - S4Gaming',
+        company: 'S4Gaming',
+        logo: '/assets/logos-testimonios/s4gaming.png',
       },
     ],
   },
