@@ -99,7 +99,7 @@ const es = {
           'Reputación de marca: Noticias, rankings o menciones que impactan en la percepción y posicionamiento de tu empresa.',
           'Regulación: Cambios regulatorios, normativas o políticas que impactan tu industria.',
           'Licitaciones: Concursos públicos o privados relevantes para tu sector.',
-          'Financiación: Rondas de inversión, ayudas públicas, subvenciones u oportunidades de financiación.',
+          'Financiación: Detección de ayudas públicas, subvenciones u oportunidades de financiación.',
           'Eventos: Eventos relevantes de tu sector o de tus clientes para detectar oportunidades y posicionarte.',
           'Herramientas digitales: Nuevas funcionalidades, cambios o lanzamientos en herramientas clave para tu operativa.',
         ],
