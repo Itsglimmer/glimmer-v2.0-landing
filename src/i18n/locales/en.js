@@ -100,7 +100,7 @@ const en = {
           'Brand reputation: News, rankings, or mentions that impact your company’s perception and positioning.',
           'Regulation: Regulatory changes, rules or policies impacting your industry.',
           'Tenders: Public or private tenders relevant to your sector.',
-          'Funding: Investment rounds, public funding, grants or financing opportunities.',
+          'Funding: Public funding, grants or financing opportunities detection',
           'Events: Key industry or client events to identify opportunities and position your company.',
           'Digital tools: New features, changes, or launches in tools critical to your operations.',
         ],
