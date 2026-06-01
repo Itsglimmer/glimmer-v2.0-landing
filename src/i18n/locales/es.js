@@ -64,7 +64,7 @@ const es = {
           'Los perfiles con alta responsabilidad dedican hasta un 19% de su tiempo a buscar, supervisar, interpretar y analizar información de mercado. Un día a la semana.',
       },
       {
-        value: '125.000 EUR',
+        value: '+225.000 EUR',
         description:
           'Coste visible por empresa generado por procesos manuales, genéricos y fragmentados de inteligencia de mercado.',
       },
