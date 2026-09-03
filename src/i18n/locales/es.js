@@ -1,8 +1,8 @@
 const es = {
   meta: {
-    title: 'Glimmer | Sistema de Inteligencia de Mercado impulsado por Inteligencia Artificial',
+    title: 'Glimmer | Sistema de Inteligencia de Mercado con IA',
     description:
-      'Plataforma de inteligencia de mercado impulsada por IA que detecta señales críticas de tu industria. Monitoriza competidores, regulación, tecnología y oportunidades.',
+      'Plataforma de inteligencia de mercado con IA que monitoriza competidores, regulación, licitaciones y tendencias y convierte señales críticas en decisiones accionables.',
   },
   nav: {
     solution: 'La solución',
@@ -41,7 +41,7 @@ const es = {
       ['Sin cambiar de', 'herramientas.'],
     ],
     description:
-      'Glimmer es una plataforma de inteligencia de mercado impulsada por IA que detecta señales críticas del mercado, las interpreta para tu empresa y las convierte en decisiones accionables.',
+      'Glimmer es una plataforma de inteligencia de mercado con IA que detecta señales críticas sobre competidores, regulación, licitaciones, tecnología y tendencias, las interpreta en el contexto de tu empresa y las convierte en inteligencia accionable para anticiparte al mercado y tomar mejores decisiones.',
     trust: 'Empresas que ya utilizan Glimmer',
     secondaryCta: 'Ver cómo funciona',
   },
@@ -49,7 +49,7 @@ const es = {
     copy: '',
     ariaLabel: 'Señales',
     cta: 'Solicitar demo',
-    words: ['Competidores', 'Regulación', 'Licitaciones', 'Riesgos', 'Oportunidades', 'Tendencias', 'Eventos'],
+    words: ['Competidores', 'Regulación', 'Licitaciones', 'Riesgos', 'Oportunidades', 'Tendencias', 'Clientes'],
   },
   stats: {
     eyebrow: 'El coste oculto',
@@ -96,10 +96,9 @@ const es = {
           'Detectamos las señales que afectan a la dirección de tu negocio.',
         bullets: [
           'Competidores y empresas a seguir: Movimientos estratégicos, adquisiciones, lanzamientos o cambios de posicionamiento.',
-          'Reputación de marca: Noticias, rankings o menciones que impactan en la percepción y posicionamiento de tu empresa.',
           'Regulación: Cambios regulatorios, normativas o políticas que impactan tu industria.',
           'Licitaciones: Concursos públicos o privados relevantes para tu sector.',
-          'Financiación: Detección de ayudas públicas, subvenciones u oportunidades de financiación.',
+          'Tendencias: Cambios de mercado, nuevas tecnologías, patrones emergentes y oportunidades sectoriales.',
           'Eventos: Eventos relevantes de tu sector o de tus clientes para detectar oportunidades y posicionarte.',
           'Herramientas digitales: Nuevas funcionalidades, cambios o lanzamientos en herramientas clave para tu operativa.',
         ],
