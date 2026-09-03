@@ -4,7 +4,7 @@
 
 **Title tag:** Glimmer | AI powered Market Intelligence System
 
-**Meta description:** Market intelligence platform powered by AI that detects critical signals in your industry. Monitor competitors, regulation, technology, opportunities & risks.
+**Meta description:** AI powered market intelligence platform that detects critical market signals, interprets them in your business context and turns them into actionable decisions.
 
 ## Hero
 
@@ -22,7 +22,8 @@ Glimmer is a market intelligence platform powered by AI that detects critical ma
 
 - Competitors
 - Regulation
-- Technology
+- Trends
+- Tenders
 - Risks
 - Opportunities 
 
@@ -86,8 +87,8 @@ We continuously monitor sources, databases and market signals in real time.
 - **Clients:** Strategy changes, new projects, expansion or emerging needs.
 - **Regulation:** Regulatory changes, rules or policies impacting your industry.
 - **Technology:** Innovations that reduce costs, change processes or redefine business models.
-- **Funding:** Investment rounds, public funding, grants or financing opportunities.
-- **Ecosystem:** Startups, partnerships, investments and market trends.
+- **Trends:** Market shifts, new technologies, emerging patterns and industry opportunities.
+- **Ecosystem:** Startups, partnerships, suppliers.
 - **Tenders:** Public or private tenders relevant to your sector.
 
 We detect the signals that affect the direction of your business.
