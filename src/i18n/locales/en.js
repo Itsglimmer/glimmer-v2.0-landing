@@ -49,7 +49,7 @@ const en = {
     copy: '',
     ariaLabel: 'Signals',
     cta: 'Request demo',
-    words: ['Competitors', 'Regulation', 'Technology', 'Risks', 'Opportunities', 'Trends', 'Events'],
+    words: ['Competitors', 'Regulation', 'Technology', 'Risks', 'Opportunities', 'Trends', 'Clients'],
   },
   stats: {
     eyebrow: 'The hidden cost',
@@ -97,10 +97,9 @@ const en = {
         highlight: 'We detect the signals that affect the direction of your business.',
         bullets: [
           'Competitors and companies to follow: Strategic moves, acquisitions, launches, or positioning changes.',
-          'Brand reputation: News, rankings, or mentions that impact your company’s perception and positioning.',
           'Regulation: Regulatory changes, rules or policies impacting your industry.',
           'Tenders: Public or private tenders relevant to your sector.',
-          'Funding: Public funding, grants or financing opportunities detection',
+          'Trends: Market shifts, new technologies, emerging patterns, and industry opportunities.',
           'Events: Key industry or client events to identify opportunities and position your company.',
           'Digital tools: New features, changes, or launches in tools critical to your operations.',
         ],
