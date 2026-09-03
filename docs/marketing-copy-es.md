@@ -2,9 +2,9 @@
 
 ## SEO
 
-**Title tag:** Glimmer | Sistema de Inteligencia de Mercado impulsado por Inteligencia Artificial
+**Title tag:** Glimmer | Sistema de Inteligencia de Mercado con IA
 
-**Meta descripción:** Plataforma de inteligencia de mercado impulsada por IA que detecta señales críticas de tu industria. Monitoriza competidores, regulación, tecnología y oportunidades.
+**Meta descripción:** Plataforma de inteligencia de mercado con IA que monitoriza competidores, regulación, licitaciones y tendencias y convierte señales críticas en decisiones accionables.
 
 ## Hero
 
@@ -16,13 +16,14 @@ Sin cambiar de herramientas.
 
 ### Body
 
-Glimmer es una plataforma de inteligencia de mercado impulsada por IA que detecta señales críticas del mercado, las interpreta para tu empresa y las convierte en decisiones accionables.
+Glimmer es una plataforma de inteligencia de mercado con IA que detecta señales críticas sobre competidores, regulación, licitaciones, tecnología y tendencias, las interpreta en el contexto de tu empresa y las convierte en inteligencia accionable para anticiparte al mercado y tomar mejores decisiones.
 
 ### Signal themes Tikker section
 
 - Competidores
 - Regulación
-- Tecnología
+- Licitaciones
+- Tendencias
 - Riesgos
 - Oportunidades
 
@@ -86,8 +87,8 @@ Monitorizamos continuamente fuentes, bases de datos y señales del mercado en ti
 - **Clientes:** Cambios en estrategia, nuevos proyectos, expansión o necesidades emergentes.
 - **Regulación:** Cambios regulatorios, normativas o políticas que impactan tu industria.
 - **Tecnología:** Innovaciones que reducen costes, cambian procesos o redefinen modelos de negocio.
-- **Financiación:** Rondas de inversión, ayudas públicas, subvenciones u oportunidades de financiación.
-- **Ecosistema:** Startups, alianzas, inversiones y tendencias del mercado.
+- **Tendencias:** Cambios de mercado, nuevas tecnologías, patrones emergentes y oportunidades sectoriales.
+- **Ecosistema:** Startups, proveedores alianzas, inversiones.
 - **Licitaciones:** Concursos públicos o privados relevantes para tu sector.
 
 Detectamos las señales que afectan a la dirección de tu negocio.
